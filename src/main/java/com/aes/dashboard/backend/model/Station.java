@@ -14,6 +14,9 @@ public class Station {
     private String description;
 
     @Column(nullable = false)
+    private String type;
+
+    @Column(nullable = false)
     private int latitude;
 
     @Column(nullable = false)
@@ -38,19 +41,27 @@ public class Station {
         this.description = description;
     }
 
-    public Integer getLatitude() {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Integer latitude) {
+    public void setLatitude(int latitude) {
         this.latitude = latitude;
     }
 
-    public Integer getLongitude() {
+    public int getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Integer longitude) {
+    public void setLongitude(int longitude) {
         this.longitude = longitude;
     }
 
