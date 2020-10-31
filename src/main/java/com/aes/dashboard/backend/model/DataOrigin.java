@@ -1,10 +1,8 @@
 package com.aes.dashboard.backend.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class DataOrigin {
 
     @Id

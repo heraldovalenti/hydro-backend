@@ -2,6 +2,7 @@ package com.aes.dashboard.backend.model;
 
 import javax.persistence.*;
 
+@Entity
 public class StationDataOrigin {
 
     @Id
@@ -9,7 +10,7 @@ public class StationDataOrigin {
     private long id;
 
     @Column(nullable = false)
-    private String stationId;
+    private String externalStationId;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Station station;
@@ -31,12 +32,12 @@ public class StationDataOrigin {
         this.id = id;
     }
 
-    public String getStationId() {
-        return stationId;
+    public String getExternalStationId() {
+        return externalStationId;
     }
 
-    public void setStationId(String stationId) {
-        this.stationId = stationId;
+    public void setExternalStationId(String externalStationId) {
+        this.externalStationId = externalStationId;
     }
 
     public Station getStation() {
