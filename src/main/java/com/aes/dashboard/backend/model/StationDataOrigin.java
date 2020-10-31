@@ -1,32 +1,26 @@
 package com.aes.dashboard.backend.model;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
-@Entity
-public class Observation {
+public class StationDataOrigin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
     private long id;
 
     @Column(nullable = false)
-    private LocalDateTime time;
+    private String stationId;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Station station;
 
-    @Column(nullable = false)
-    private double value;
-
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private MeasurementUnit unit;
-
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private MeasurementDimension dimension;
 
-    public Observation() {
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private DataOrigin dataOrigin;
+
+    public StationDataOrigin() {
     }
 
     public long getId() {
@@ -37,12 +31,12 @@ public class Observation {
         this.id = id;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public String getStationId() {
+        return stationId;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setStationId(String stationId) {
+        this.stationId = stationId;
     }
 
     public Station getStation() {
@@ -53,27 +47,19 @@ public class Observation {
         this.station = station;
     }
 
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    public MeasurementUnit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(MeasurementUnit unit) {
-        this.unit = unit;
-    }
-
     public MeasurementDimension getDimension() {
         return dimension;
     }
 
     public void setDimension(MeasurementDimension dimension) {
         this.dimension = dimension;
+    }
+
+    public DataOrigin getDataOrigin() {
+        return dataOrigin;
+    }
+
+    public void setDataOrigin(DataOrigin dataOrigin) {
+        this.dataOrigin = dataOrigin;
     }
 }

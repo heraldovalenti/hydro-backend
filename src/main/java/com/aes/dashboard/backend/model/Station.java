@@ -7,14 +7,12 @@ import java.util.List;
 public class Station {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private long id;
 
     @Column(nullable = false)
     private String description;
-
-    @Column(nullable = false)
-    private String type;
 
     @Column(nullable = false)
     private double latitude;
@@ -23,7 +21,13 @@ public class Station {
     private double longitude;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "station")
+    private List<StationDataOrigin> stationDataOriginList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "station")
     private List<Observation> observationList;
+
+    public Station() {
+    }
 
     public long getId() {
         return id;
@@ -41,14 +45,6 @@ public class Station {
         this.description = description;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public double getLatitude() {
         return latitude;
     }
@@ -63,6 +59,14 @@ public class Station {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public List<StationDataOrigin> getStationDataOriginList() {
+        return stationDataOriginList;
+    }
+
+    public void setStationDataOriginList(List<StationDataOrigin> stationDataOriginList) {
+        this.stationDataOriginList = stationDataOriginList;
     }
 
     public List<Observation> getObservationList() {
