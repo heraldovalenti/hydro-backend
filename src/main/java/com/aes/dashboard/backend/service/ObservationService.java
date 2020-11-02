@@ -8,6 +8,10 @@ import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationDataOriginRepository;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
 import com.aes.dashboard.backend.service.aesLatestData.DataItem;
+import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundDataService;
+import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +22,13 @@ import java.util.Optional;
 @Service
 public class ObservationService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ObservationService.class);
+
     @Autowired
     private AESDataService aesDataService;
+
+    @Autowired
+    private WeatherUndergroundDataService weatherUndergroundDataService;
 
     @Autowired
     private StationDataOriginRepository stationDataOriginRepository;
@@ -59,6 +68,28 @@ public class ObservationService {
     }
 
     @Transactional
+    public void updateWeatherUndergroundObservations() {
+        DataOrigin WUDataOrigin = dataOriginService.getWeatherUndergroundDataOrigin();
+        List<StationDataOrigin> WUStationDataOriginList = stationDataOriginRepository.findByDataOrigin(WUDataOrigin);
+        for (StationDataOrigin WUStationDataOrigin : WUStationDataOriginList) {
+            Optional<WeatherUndergroundResult> wuResult = weatherUndergroundDataService.getObservationData(
+                    WUStationDataOrigin.getExternalStationId());
+            if (wuResult.isEmpty()) continue;
+            Observation observation = new Observation();
+            observation.setDimension(WUStationDataOrigin.getDimension());
+            observation.setStation(WUStationDataOrigin.getStation());
+
+            if (wuResult.get().getObservationTime().isEmpty()
+                    || wuResult.get().getObservationValue().isEmpty()) continue;
+            observation.setTime(weatherUndergroundDataService.roundDateTime(
+                    wuResult.get().getObservationTime().get()));
+            observation.setValue(wuResult.get().getObservationValue().get());
+            observation.setUnit(WUStationDataOrigin.getDefaultUnit());
+            this.updateOrCreateObservation(observation);
+        }
+    }
+
+    @Transactional
     public void updateOrCreateObservation(Observation observation) {
         List<Observation> existingObservations = observationRepository.findByStationAndDimensionAndTime(
                 observation.getStation(), observation.getDimension(), observation.getTime()
@@ -68,11 +99,11 @@ public class ObservationService {
                 existing.setUnit(observation.getUnit());
                 existing.setValue(observation.getValue());
                 observationRepository.save(existing);
-                System.out.println("updated observation: " + existing.toString());
+                LOGGER.info("Updated observation: {}", existing.toString());
             });
         } else {
             observationRepository.save(observation);
-            System.out.println("created observation: " + observation.toString());
+            LOGGER.info("Created observation: {}", observation.toString());
         }
     }
 

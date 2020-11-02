@@ -1,9 +1,9 @@
 INSERT INTO station (id,longitude,latitude,description) VALUES
 (1, -65.567772429,   -25.4723965124, 'INTA - La Viña'),
-(2, -65.4755009893,  -24.7657954885, 'UCASAL - El Tipal'),
-(3, -65.3917714195,  -24.7404422829, 'UCASAL - Fac. Ingeniería'),
-(4, -65.409907539,   -24.7810795278, 'UCASAL - Colegio Belgrano'),
-(5, -65.39,          -24.61,         'UCASAL - La Caldera'),
+(2, -65.4755009893,  -24.7657954885, 'UCASAL - El Tipal'), --Familia Guillen
+(3, -65.3917714195,  -24.7404422829, 'UCASAL - Fac. Ingeniería'), --ISALTA11
+(4, -65.409907539,   -24.7810795278, 'UCASAL - Colegio Belgrano'), --ISALTA7
+(5, -65.39,          -24.61,         'UCASAL - La Caldera'), --ILACAL8
 (6, -65.3339166667,  -25.2700277778, 'AES - Cabra Corral'),
 (7, -65.5641075318,  -25.4646389836, 'AES - La Viña'),
 (8, -65.5004368533,  -25.0730600581, 'AES - El Carril'),
@@ -19,7 +19,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (18, -64.78,         -25.45, 'Weather Underground - Sala Guanaco'), --IMETND1
 (19, -65.64,         -24.91, 'Weather Underground - Campo Quijano'), --IROSARIO12
 (20, -65.4,          -24.89, 'Weather Underground - La Isla'), -- ISALTACE3
-(21, -65.4,          -24.78, 'Weather Underground - Cerro San Bernardo'), --ISALTA7
+(21, -65.4,          -24.78, 'Weather Underground - Cerro San Bernardo'), --ISALTA10
 (22, -65.49,         -24.74, 'Weather Underground - San Lorenzo'), --ISALTA17
 (23, -64.95,         -25.8,  'Weather Underground - R. de la Frontera'), --IROSARIO32
 (24, -65.47,         -23.74, 'Weather Underground - Santa Rosa de Chuschuyoc'), --ITUMBA11
@@ -41,4 +41,6 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (36, -64.5924836627, -25.3857815773, 'AES - Medina' ),
 (37, -64.4771146654, -25.2287507835, 'AES - ET' ),
 (38, -64.85,         -25.31,         'AES - Miraflores' ),
-(39, -65.33,         -25.27,         'AES - CC' );
+(39, -65.33,         -25.27,         'AES - CC' ),
+
+(40, -64.69,         -26.01,          'Weather Underground - Daza Copo Quile'); --IROSAR45

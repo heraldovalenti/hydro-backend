@@ -1,18 +1,22 @@
 package com.aes.dashboard.backend.service;
 
 import com.aes.dashboard.backend.model.DataOrigin;
+import com.aes.dashboard.backend.repository.DataOriginRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class DataOriginService {
 
-    private static final String AES_DATA_ORIGIN = "AES";
+    @Autowired
+    private DataOriginRepository dataOriginRepository;
 
     public DataOrigin getAesDataOrigin() {
-        DataOrigin aesDataOrigin = new DataOrigin();
-        aesDataOrigin.setId(1);
-        aesDataOrigin.setDescription(AES_DATA_ORIGIN);
-        return aesDataOrigin;
+        return dataOriginRepository.findById(1L).get();
+    }
+
+    public DataOrigin getWeatherUndergroundDataOrigin() {
+        return dataOriginRepository.findById(2L).get();
     }
 }

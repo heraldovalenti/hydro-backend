@@ -15,4 +15,9 @@ class ObservationServiceTest {
         service.updateAesObservations();
     }
 
+    @Test
+    public void testUpdateWeatherUnderObservationsTest() {
+        service.updateWeatherUndergroundObservations();
+    }
+
 }

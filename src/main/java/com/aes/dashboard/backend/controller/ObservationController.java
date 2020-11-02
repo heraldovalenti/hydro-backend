@@ -60,5 +60,10 @@ public class ObservationController {
     public void updateAesObservations() {
         observationService.updateAesObservations();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/updateWeatherUndergroundObservations")
+    public void updateWeatherUndergroundObservations() {
+        observationService.updateWeatherUndergroundObservations();
+    }
 }
 
