@@ -68,7 +68,7 @@ public class ObservationService {
                 existing.setUnit(observation.getUnit());
                 existing.setValue(observation.getValue());
                 observationRepository.save(existing);
-                System.out.println("updated observation: " + observation.toString());
+                System.out.println("updated observation: " + existing.toString());
             });
         } else {
             observationRepository.save(observation);
