@@ -15,13 +15,11 @@ class AESDataServiceTest {
 
     @Test
     public void basicTest() {
-        List<LatestDataItem> result = service.getLatestData();
-        Assertions.assertEquals(16, result.size());
-        result.stream()
-                .filter(item -> item.getFileName().startsWith("cachi_"))
-                .forEach(item -> item.getData().stream()
-                        .forEach(data -> System.out.println(data.getValue()))
-                );
+        List<DataItem> result = service.getLatestData();
+        for(DataItem item : result) {
+            System.out.println(item.toString());
+        }
+        Assertions.assertEquals(341, result.size());
     }
 
 }

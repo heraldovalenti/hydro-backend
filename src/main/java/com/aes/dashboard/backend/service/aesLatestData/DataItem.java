@@ -12,8 +12,8 @@ public class DataItem {
     private String dimension;
     private double value;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AESDataService.DATE_FORMAT)
-    private LocalDateTime modified;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private LocalDateTime date;
 
     private String unit;
     private String other;
@@ -45,12 +45,12 @@ public class DataItem {
         this.value = value;
     }
 
-    public LocalDateTime getModified() {
-        return modified;
+    public LocalDateTime getDate() {
+        return date;
     }
 
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     public String getUnit() {
@@ -67,5 +67,17 @@ public class DataItem {
 
     public void setOther(String other) {
         this.other = other;
+    }
+
+    @Override
+    public String toString() {
+        return "DataItem{" +
+                "id='" + id + '\'' +
+                ", dimension='" + dimension + '\'' +
+                ", value=" + value +
+                ", date=" + date +
+                ", unit='" + unit + '\'' +
+                ", other='" + other + '\'' +
+                '}';
     }
 }

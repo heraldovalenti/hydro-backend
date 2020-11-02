@@ -1,5 +1,7 @@
 package com.aes.dashboard.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,7 +14,8 @@ public class StationDataOrigin {
     @Column(nullable = false)
     private String externalStationId;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @ManyToOne( optional = false, fetch = FetchType.EAGER)
     private Station station;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
@@ -20,6 +23,9 @@ public class StationDataOrigin {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private DataOrigin dataOrigin;
+
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
+    private MeasurementUnit defaultUnit;
 
     public StationDataOrigin() {
     }
@@ -62,5 +68,13 @@ public class StationDataOrigin {
 
     public void setDataOrigin(DataOrigin dataOrigin) {
         this.dataOrigin = dataOrigin;
+    }
+
+    public MeasurementUnit getDefaultUnit() {
+        return defaultUnit;
+    }
+
+    public void setDefaultUnit(MeasurementUnit defaultUnit) {
+        this.defaultUnit = defaultUnit;
     }
 }

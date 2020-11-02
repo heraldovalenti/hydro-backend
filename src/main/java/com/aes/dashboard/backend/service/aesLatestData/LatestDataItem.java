@@ -13,7 +13,7 @@ public class LatestDataItem {
     private String fileName;
     private Long size;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = AESDataService.DATE_FORMAT)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime modified;
 
     private String rawData;

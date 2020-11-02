@@ -1,5 +1,7 @@
 package com.aes.dashboard.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -14,6 +16,7 @@ public class Observation {
     @Column(nullable = false)
     private LocalDateTime time;
 
+    @JsonManagedReference
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Station station;
 
@@ -75,5 +78,17 @@ public class Observation {
 
     public void setDimension(MeasurementDimension dimension) {
         this.dimension = dimension;
+    }
+
+    @Override
+    public String toString() {
+        return "Observation{" +
+                "id=" + id +
+                ", time=" + time +
+                ", station=" + station +
+                ", value=" + value +
+                ", unit=" + unit +
+                ", dimension=" + dimension +
+                '}';
     }
 }

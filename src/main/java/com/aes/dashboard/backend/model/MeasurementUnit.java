@@ -10,6 +10,9 @@ public class MeasurementUnit {
     private long id;
 
     @Column(nullable = false)
+    private String alias;
+
+    @Column(nullable = false)
     private String description;
 
     public MeasurementUnit() {
@@ -29,5 +32,13 @@ public class MeasurementUnit {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 }

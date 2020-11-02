@@ -5,14 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 @Service
 public class AESDataService {
-
-    protected static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
     private String url;
     private RestTemplate restTemplate;
@@ -22,12 +20,12 @@ public class AESDataService {
         this.url = url;
     }
 
-    public List<LatestDataItem> getLatestData() {
+    public List<DataItem> getLatestData() {
         ResponseEntity<LatestDataItem[]> response = this.restTemplate.getForEntity(
                 this.url,
                 LatestDataItem[].class);
-        List<LatestDataItem> result = new LinkedList<>();
-        Collections.addAll(result, response.getBody());
+        List<DataItem> result = new LinkedList<>();
+        Arrays.stream(response.getBody()).forEach(latestDataItem -> result.addAll(latestDataItem.getData()));
         return result;
     }
 
