@@ -1,0 +1,4 @@
+cron:
+- description: "Update AES observations"
+  url: /api/observations/updateAesObservations
+  schedule: every 30 minutes
