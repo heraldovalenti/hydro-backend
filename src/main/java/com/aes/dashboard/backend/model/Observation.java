@@ -1,6 +1,6 @@
 package com.aes.dashboard.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,7 +16,7 @@ public class Observation {
     @Column(nullable = false)
     private LocalDateTime time;
 
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Station station;
 

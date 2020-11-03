@@ -1,6 +1,6 @@
 package com.aes.dashboard.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -14,7 +14,7 @@ public class StationDataOrigin {
     @Column(nullable = false)
     private String externalStationId;
 
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToOne( optional = false, fetch = FetchType.EAGER)
     private Station station;
 

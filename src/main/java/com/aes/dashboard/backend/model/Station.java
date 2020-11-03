@@ -1,6 +1,6 @@
 package com.aes.dashboard.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,11 +22,10 @@ public class Station {
     @Column(nullable = false)
     private double longitude;
 
-    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "station")
     private List<StationDataOrigin> stationDataOriginList;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "station")
     private List<Observation> observationList;
 
