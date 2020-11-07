@@ -5,6 +5,7 @@ import com.aes.dashboard.backend.model.Station;
 import com.aes.dashboard.backend.exception.StationNotFound;
 import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationRepository;
+import com.aes.dashboard.backend.service.MeasurementUnitService;
 import com.aes.dashboard.backend.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,6 +36,9 @@ public class ObservationController {
     @Autowired
     private ObservationService observationService;
 
+    @Autowired
+    private MeasurementUnitService measurementUnitService;
+
     @RequestMapping(method = RequestMethod.GET)
     public Page<Observation> listAll(
             @PageableDefault(value = 20, page = 0)
@@ -52,8 +56,10 @@ public class ObservationController {
             @SortDefault(sort = "time", direction = Sort.Direction.DESC)
                     Pageable pageable) {
         Optional<Station> station = stationRepository.findById(stationId);
-        return observationRepository.findByStation(
+        Page<Observation> results = observationRepository.findByStation(
                 station.orElseThrow(StationNotFound::new), pageable);
+        measurementUnitService.normalizeMeasurementUnits(results);
+        return results;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateAesObservations")
