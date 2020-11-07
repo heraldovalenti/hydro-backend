@@ -57,6 +57,7 @@ public class ObservationService {
                         Observation observation = new Observation();
                         observation.setDimension(aesStationDataOrigin.getDimension());
                         observation.setStation(aesStationDataOrigin.getStation());
+                        observation.setDataOrigin(aesDataOrigin);
                         observation.setTime(dataItem.getDate());
                         observation.setValue(dataItem.getValue());
                         Optional<MeasurementUnit> unit = measurementUnitService.getByAlias(dataItem.getUnit());
@@ -78,6 +79,7 @@ public class ObservationService {
             Observation observation = new Observation();
             observation.setDimension(WUStationDataOrigin.getDimension());
             observation.setStation(WUStationDataOrigin.getStation());
+            observation.setDataOrigin(WUDataOrigin);
 
             if (wuResult.get().getObservationTime().isEmpty()
                     || wuResult.get().getObservationValue().isEmpty()) continue;

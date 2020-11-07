@@ -29,6 +29,9 @@ public class Observation {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private MeasurementDimension dimension;
 
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
+    private DataOrigin dataOrigin;
+
     public Observation() {
     }
 
@@ -80,6 +83,14 @@ public class Observation {
         this.dimension = dimension;
     }
 
+    public DataOrigin getDataOrigin() {
+        return dataOrigin;
+    }
+
+    public void setDataOrigin(DataOrigin dataOrigin) {
+        this.dataOrigin = dataOrigin;
+    }
+
     @Override
     public String toString() {
         return "Observation{" +
@@ -89,6 +100,7 @@ public class Observation {
                 ", value=" + value +
                 ", unit=" + unit +
                 ", dimension=" + dimension +
+                ", dataOrigin=" + dataOrigin +
                 '}';
     }
 }
