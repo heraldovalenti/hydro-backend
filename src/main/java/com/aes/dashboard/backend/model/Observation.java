@@ -29,7 +29,7 @@ public class Observation {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private MeasurementDimension dimension;
 
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private DataOrigin dataOrigin;
 
     public Observation() {
