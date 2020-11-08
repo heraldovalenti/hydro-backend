@@ -8,11 +8,11 @@ INSERT INTO data_origin (id, description) VALUES
 (3, 'INTA'),
 (4, 'SMG');
 
-INSERT INTO measurement_dimension (id, description) VALUES
-(1, 'nivel'),
-(2, 'caudal'),
-(3, 'lluvia'),
-(4, 'bateria');
+INSERT INTO measurement_dimension (id, description, preferred_unit_id) VALUES
+(1, 'nivel', 2),
+(2, 'caudal', 5),
+(3, 'lluvia', 3),
+(4, 'bateria', 1);
 
 INSERT INTO measurement_unit (id, description, alias) VALUES
 (1, 'voltage', 'V'),

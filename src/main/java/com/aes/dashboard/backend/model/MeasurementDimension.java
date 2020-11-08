@@ -13,6 +13,9 @@ public class MeasurementDimension {
     @Column(nullable = false)
     private String description;
 
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private MeasurementUnit preferredUnit;
+
     public MeasurementDimension() {
     }
 
@@ -30,6 +33,14 @@ public class MeasurementDimension {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public MeasurementUnit getPreferredUnit() {
+        return preferredUnit;
+    }
+
+    public void setPreferredUnit(MeasurementUnit preferredUnit) {
+        this.preferredUnit = preferredUnit;
     }
 
     @Override
