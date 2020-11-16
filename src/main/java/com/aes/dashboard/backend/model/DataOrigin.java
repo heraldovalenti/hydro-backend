@@ -12,6 +12,10 @@ public class DataOrigin {
     @Column(nullable = false)
     private String description;
 
+    public DataOrigin(long id) {
+        this.id = id;
+    }
+
     public DataOrigin() {
     }
 

@@ -62,6 +62,9 @@ public class ObservationController {
         return results;
     }
 
+
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/updateAesObservations")
     public void updateAesObservations() {
         observationService.updateAesObservations();

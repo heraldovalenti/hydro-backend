@@ -36,7 +36,7 @@ public class MeasurementUnitService {
             conversions.stream()
                     .filter(c -> o.getUnit().equals(c.getOrigin()))
                     .forEach(c -> {
-                        o.setValue( o.getValue() * c.getConversionFactor());
+                        o.setValue( o.getValue() * c.getConversionFactor() );
                         o.setUnit(c.getTarget());
                     });
         }
