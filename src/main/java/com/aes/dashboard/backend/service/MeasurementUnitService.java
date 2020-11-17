@@ -31,7 +31,7 @@ public class MeasurementUnitService {
         return measurementUnitRepository.findByAlias(sanitizedAlias).stream().findAny();
     }
 
-    public void normalizeMeasurementUnits(Page<Observation> observations) {
+    public void normalizeMeasurementUnits(List<Observation> observations) {
         for(Observation o : observations) {
             conversions.stream()
                     .filter(c -> o.getUnit().equals(c.getOrigin()))
@@ -40,6 +40,10 @@ public class MeasurementUnitService {
                         o.setUnit(c.getTarget());
                     });
         }
+    }
+
+    public void normalizeMeasurementUnits(Page<Observation> observations) {
+        this.normalizeMeasurementUnits(observations.toList());
     }
 
 

@@ -96,11 +96,11 @@ public class Observation {
         return "Observation{" +
                 "id=" + id +
                 ", time=" + time +
-                ", station=" + station +
+                ", station=" + station.getDescription() +
                 ", value=" + value +
-                ", unit=" + unit +
-                ", dimension=" + dimension +
-                ", dataOrigin=" + dataOrigin +
+                ", unit=" + unit.getDescription() +
+                ", dimension=" + dimension.getDescription() +
+                ", dataOrigin=" + dataOrigin.getDescription() +
                 '}';
     }
 }
