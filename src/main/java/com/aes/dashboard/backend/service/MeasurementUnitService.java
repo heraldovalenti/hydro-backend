@@ -32,6 +32,10 @@ public class MeasurementUnitService {
     }
 
     public void normalizeMeasurementUnits(List<Observation> observations) {
+        conversions.stream().forEach(c -> {
+            c.setOrigin(measurementUnitRepository.findById(c.getOriginId()).get());
+            c.setTarget(measurementUnitRepository.findById(c.getTargetId()).get());
+        });
         for(Observation o : observations) {
             conversions.stream()
                     .filter(c -> o.getUnit().equals(c.getOrigin()))

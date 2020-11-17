@@ -2,27 +2,41 @@ package com.aes.dashboard.backend.model;
 
 public class MeasurementUnitConversion {
 
-    private long origin;
-    private long target;
+    private long originId;
+    private long targetId;
+    private MeasurementUnit origin;
+    private MeasurementUnit target;
     private double conversionFactor;
 
 
     public MeasurementUnitConversion(long originId, long targetId, double conversionFactor) {
-        this.origin = originId;
-        this.target = targetId;
+        this.originId = originId;
+        this.targetId = targetId;
         this.conversionFactor = conversionFactor;
     }
 
+    public long getOriginId() {
+        return originId;
+    }
+
+    public long getTargetId() {
+        return targetId;
+    }
+
     public MeasurementUnit getOrigin() {
-        MeasurementUnit measurementUnit = new MeasurementUnit();
-        measurementUnit.setId(this.origin);
-        return measurementUnit;
+        return origin;
+    }
+
+    public void setOrigin(MeasurementUnit origin) {
+        this.origin = origin;
     }
 
     public MeasurementUnit getTarget() {
-        MeasurementUnit measurementUnit = new MeasurementUnit();
-        measurementUnit.setId(this.target);
-        return measurementUnit;
+        return target;
+    }
+
+    public void setTarget(MeasurementUnit target) {
+        this.target = target;
     }
 
     public double getConversionFactor() {
