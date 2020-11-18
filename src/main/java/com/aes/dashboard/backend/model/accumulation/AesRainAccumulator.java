@@ -8,11 +8,11 @@ public class AesRainAccumulator extends RainAccumulator {
 
     @Override
     public double accumulate(List<Observation> observations) {
-        double min = observations.stream()
-                .map(o -> o.getValue())
-                .min(Double::compare).get();
-        return observations.stream()
-                .map(o -> o.getValue() - min)
-                .reduce(0.0, (x,y) -> x + y);
+        if (observations.size() == 1) return 0;
+        List<Observation> sorted = this.sortObservations(observations);
+        double firstObservation = sorted.get(0).getValue();
+        double lastObservation = sorted.get(observations.size() - 1).getValue();
+        double diff = lastObservation - firstObservation;
+        return (diff < 0) ? 0.0 : diff;
     }
 }
