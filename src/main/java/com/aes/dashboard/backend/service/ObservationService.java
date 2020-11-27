@@ -1,6 +1,9 @@
 package com.aes.dashboard.backend.service;
 
-import com.aes.dashboard.backend.model.*;
+import com.aes.dashboard.backend.model.DataOrigin;
+import com.aes.dashboard.backend.model.MeasurementUnit;
+import com.aes.dashboard.backend.model.Observation;
+import com.aes.dashboard.backend.model.StationDataOrigin;
 import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationDataOriginRepository;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
@@ -13,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,17 +41,6 @@ public class ObservationService {
 
     @Autowired
     private ObservationRepository observationRepository;
-
-    @Autowired
-    private MeasurementDimensionService measurementDimensionService;
-
-    public List<Observation> rainObservationsForStation(Station station, long hours) {
-        LocalDateTime now = LocalDateTime.now(ZoneId.of("UTC"));
-        LocalDateTime from = now.minusHours(hours);
-        MeasurementDimension rain = measurementDimensionService.getRainDimension();
-        LOGGER.debug("time period for {} hours is from {} to {}", hours, from, now);
-        return observationRepository.findByStationAndDimensionAndBetweenTime(station, rain, from, now);
-    }
 
     @Transactional
     public void updateAesObservations() {

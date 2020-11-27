@@ -2,18 +2,18 @@ package com.aes.dashboard.backend.model.accumulation;
 
 import com.aes.dashboard.backend.model.DataOrigin;
 import com.aes.dashboard.backend.model.Observation;
-//import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class RainObservationAccumulation {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RainObservationAccumulation.class);
 
-//    @JsonIgnore
     private List<Observation> observationSeries;
 
     private List<RainAccumulation> rainAccumulations;

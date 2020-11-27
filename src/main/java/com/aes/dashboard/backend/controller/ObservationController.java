@@ -1,13 +1,17 @@
 package com.aes.dashboard.backend.controller;
 
+import com.aes.dashboard.backend.controller.entities.RequestTimePeriod;
+import com.aes.dashboard.backend.model.MeasurementDimension;
 import com.aes.dashboard.backend.model.Observation;
 import com.aes.dashboard.backend.model.Station;
-import com.aes.dashboard.backend.exception.StationNotFound;
+import com.aes.dashboard.backend.exception.EntityNotFound;
 import com.aes.dashboard.backend.model.accumulation.RainObservationAccumulation;
+import com.aes.dashboard.backend.repository.MeasurementDimensionRepository;
 import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationRepository;
 import com.aes.dashboard.backend.service.MeasurementUnitService;
 import com.aes.dashboard.backend.service.ObservationService;
+import com.aes.dashboard.backend.service.RainAccumulationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/observations")
@@ -42,6 +47,12 @@ public class ObservationController {
     @Autowired
     private MeasurementUnitService measurementUnitService;
 
+    @Autowired
+    private MeasurementDimensionRepository measurementDimensionRepository;
+
+    @Autowired
+    private RainAccumulationService rainAccumulationService;
+
     @RequestMapping(method = RequestMethod.GET)
     public Page<Observation> listAll(
             @PageableDefault(value = 20, page = 0)
@@ -60,7 +71,43 @@ public class ObservationController {
                     Pageable pageable) {
         Optional<Station> station = stationRepository.findById(stationId);
         Page<Observation> results = observationRepository.findByStation(
-                station.orElseThrow(StationNotFound::new), pageable);
+                station.orElseThrow(() -> new EntityNotFound(stationId, Station.class)), pageable);
+        measurementUnitService.normalizeMeasurementUnits(results);
+        return results;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/{stationId}")
+    public Page<Observation> listByStationAndPeriod(
+            @PathVariable
+                    Long stationId,
+            @PageableDefault(value = 20, page = 0)
+            @SortDefault(sort = "time", direction = Sort.Direction.DESC)
+                    Pageable pageable,
+            @RequestBody RequestTimePeriod requestTimePeriod) {
+        Optional<Station> station = stationRepository.findById(stationId);
+        Page<Observation> results = observationRepository.findByStationAndBetweenTime(
+                station.orElseThrow(() -> new EntityNotFound(stationId, Station.class)),
+                requestTimePeriod.getFrom(), requestTimePeriod.getTo(), pageable);
+        measurementUnitService.normalizeMeasurementUnits(results);
+        return results;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/{stationId}/{dimensionId}")
+    public Page<Observation> listByStationAndDimensionAndPeriod(
+            @PathVariable
+                    Long stationId,
+            @PathVariable
+                    Long dimensionId,
+            @PageableDefault(value = 20, page = 0)
+            @SortDefault(sort = "time", direction = Sort.Direction.DESC)
+                    Pageable pageable,
+            @RequestBody RequestTimePeriod requestTimePeriod) {
+        Optional<Station> station = stationRepository.findById(stationId);
+        Optional<MeasurementDimension> dimension = measurementDimensionRepository.findById(dimensionId);
+        Page<Observation> results = observationRepository.findByStationAndDimensionAndBetweenTime(
+                station.orElseThrow(() -> new EntityNotFound(stationId, Station.class)),
+                dimension.orElseThrow(() -> new EntityNotFound(dimensionId, MeasurementDimension.class)),
+                requestTimePeriod.getFrom(), requestTimePeriod.getTo(), pageable);
         measurementUnitService.normalizeMeasurementUnits(results);
         return results;
     }
@@ -75,8 +122,8 @@ public class ObservationController {
                     Long hours) {
         LOGGER.debug("{} hours accumulated rain for station {}", hours, stationId);
         Optional<Station> stationOpt = stationRepository.findById(stationId);
-        Station station = stationOpt.orElseThrow(StationNotFound::new);
-        List<Observation> observationList = observationService.rainObservationsForStation(station, hours);
+        Station station = stationOpt.orElseThrow(() -> new EntityNotFound(stationId, Station.class));
+        List<Observation> observationList = rainAccumulationService.rainObservationsForStation(station, hours);
         measurementUnitService.normalizeMeasurementUnits(observationList);
         LOGGER.debug("observations for accumulation: {}", observationList.size());
         RainObservationAccumulation result = new RainObservationAccumulation(observationList);

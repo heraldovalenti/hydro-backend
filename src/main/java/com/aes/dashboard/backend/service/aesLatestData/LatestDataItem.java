@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.aes.dashboard.backend.config.GlobalConfigs.DEFAULT_DATE_TIME_FORMAT;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LatestDataItem {
 
@@ -13,7 +15,7 @@ public class LatestDataItem {
     private String fileName;
     private Long size;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DEFAULT_DATE_TIME_FORMAT)
     private LocalDateTime modified;
 
     private String rawData;

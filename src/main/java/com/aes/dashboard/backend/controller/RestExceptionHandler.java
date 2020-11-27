@@ -1,6 +1,6 @@
 package com.aes.dashboard.backend.controller;
 
-import com.aes.dashboard.backend.exception.StationNotFound;
+import com.aes.dashboard.backend.exception.EntityNotFound;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({ StationNotFound.class })
+    @ExceptionHandler({ EntityNotFound.class})
     public ResponseEntity<Object> handleNotFound(
-            StationNotFound ex, WebRequest request) {
-        return handleExceptionInternal(ex, "Station ID not found",
+            EntityNotFound ex, WebRequest request) {
+        String message = String.format("%s with ID %s was not found",
+                ex.getEntity().getName(), ex.getId());
+        return handleExceptionInternal(ex, message,
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 

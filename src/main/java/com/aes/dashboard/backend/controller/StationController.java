@@ -1,6 +1,6 @@
 package com.aes.dashboard.backend.controller;
 
-import com.aes.dashboard.backend.exception.StationNotFound;
+import com.aes.dashboard.backend.exception.EntityNotFound;
 import com.aes.dashboard.backend.model.Station;
 import com.aes.dashboard.backend.repository.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class StationController {
             @NotBlank(message = "Station ID is required")
                     Long stationId) {
         Optional<Station> station = stationRepository.findById(stationId);
-        return station.orElseThrow(StationNotFound::new);
+        return station.orElseThrow(() -> new EntityNotFound(stationId, Station.class));
     }
 
 }
