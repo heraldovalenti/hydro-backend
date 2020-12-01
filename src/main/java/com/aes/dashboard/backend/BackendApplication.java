@@ -32,7 +32,6 @@ public class BackendApplication {
 						.allowedMethods(
 								HttpMethod.GET.name(),
 								HttpMethod.POST.name());
-				;
 			}
 		};
 	}

@@ -23,7 +23,9 @@ INSERT INTO station_data_origin
 (12, 1, 1, 34, 'PenasBlancas', 2), --dimension: nivel, default unit: metro
 
 (13, 1, 1, 37, 'Tunal', 2), --dimension: nivel, default unit: metro
-(14, 1, 2, 37, 'Tunal', 5); --dimension: caudal, default unit: m3/sec
+(14, 1, 2, 37, 'Tunal', 5), --dimension: caudal, default unit: m3/sec
+
+(28, 1, 3, 11, 'Termoandes', 3); --dimension: lluvia, default unit: mm
 
 --data origin: WeatherUndeground
 INSERT INTO station_data_origin
@@ -41,3 +43,13 @@ INSERT INTO station_data_origin
 (25, 2, 3, 5,  'ILACAL8', 4), --dimension: lluvia
 (26, 2, 3, 3,  'ISALTA11', 4), --dimension: lluvia
 (27, 2, 3, 40, 'IROSAR45', 4); --dimension: lluvia
+
+--data origin: INTA
+INSERT INTO station_data_origin
+(id,data_origin_id,dimension_id,station_id,external_station_id,default_unit_id) VALUES
+(29, 3, 3, 29, '352', 3), --dimension: lluvia, default unit: mm
+(30, 3, 3, 41, '488', 3), --dimension: lluvia, default unit: mm
+(31, 3, 3, 42, '395', 3), --dimension: lluvia, default unit: mm
+(32, 3, 3, 43, '415', 3), --dimension: lluvia, default unit: mm
+(33, 3, 3, 44, '393', 3), --dimension: lluvia, default unit: mm
+(34, 3, 3, 45, '348', 3); --dimension: lluvia, default unit: mm

@@ -8,6 +8,8 @@ import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationDataOriginRepository;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
 import com.aes.dashboard.backend.service.aesLatestData.DataItem;
+import com.aes.dashboard.backend.service.intaData.INTADataItem;
+import com.aes.dashboard.backend.service.intaData.INTADataService;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundDataService;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundResult;
 import org.slf4j.Logger;
@@ -29,6 +31,9 @@ public class ObservationService {
 
     @Autowired
     private WeatherUndergroundDataService weatherUndergroundDataService;
+
+    @Autowired
+    private INTADataService intaDataService;
 
     @Autowired
     private StationDataOriginRepository stationDataOriginRepository;
@@ -88,6 +93,27 @@ public class ObservationService {
             observation.setValue(wuResult.get().getObservationValue().get());
             observation.setUnit(WUStationDataOrigin.getDefaultUnit());
             this.updateOrCreateObservation(observation);
+        }
+    }
+
+    @Transactional
+    public void updateINTAObservations() {
+        DataOrigin intaDataOrigin = dataOriginService.getINTADataOrigin();
+        List<StationDataOrigin> intaStationDataOriginList = stationDataOriginRepository.findByDataOrigin(intaDataOrigin);
+        for (StationDataOrigin intaStationDataOrigin : intaStationDataOriginList) {
+            List<INTADataItem> intaDataItems = intaDataService.getObservationData(
+                    intaStationDataOrigin.getExternalStationId());
+            intaDataItems.stream()
+                    .forEach(dataItem -> {
+                        Observation observation = new Observation();
+                        observation.setDimension(intaStationDataOrigin.getDimension());
+                        observation.setStation(intaStationDataOrigin.getStation());
+                        observation.setDataOrigin(intaDataOrigin);
+                        observation.setTime(dataItem.getFecha());
+                        observation.setValue(dataItem.getPrecipitacion());
+                        observation.setUnit(intaStationDataOrigin.getDefaultUnit());
+                        this.updateOrCreateObservation(observation);
+                    });
         }
     }
 

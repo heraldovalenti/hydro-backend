@@ -140,5 +140,10 @@ public class ObservationController {
     public void updateWeatherUndergroundObservations() {
         observationService.updateWeatherUndergroundObservations();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/updateINTAObservations")
+    public void updateINTAObservations() {
+        observationService.updateINTAObservations();
+    }
 }
 

@@ -19,4 +19,8 @@ public class DataOriginService {
     public DataOrigin getWeatherUndergroundDataOrigin() {
         return dataOriginRepository.findById(2L).get();
     }
+
+    public DataOrigin getINTADataOrigin() {
+        return dataOriginRepository.findById(3L).get();
+    }
 }

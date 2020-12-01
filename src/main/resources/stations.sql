@@ -1,5 +1,5 @@
 INSERT INTO station (id,longitude,latitude,description) VALUES
-(1, -65.567772429,   -25.4723965124, 'INTA - La Viña'),
+
 (2, -65.4755009893,  -24.7657954885, 'UCASAL - El Tipal'), --Familia Guillen
 (3, -65.3917714195,  -24.7404422829, 'UCASAL - Fac. Ingeniería'), --ISALTA11
 (4, -65.409907539,   -24.7810795278, 'UCASAL - Colegio Belgrano'), --ISALTA7
@@ -27,9 +27,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (26, -66.33,         -27.55, 'Weather Underground - Daza Chaquiago'), -- IANDAL3
 (27, -66.1836409237, -25.1816021766, 'AES - Cachi'),
 (28, -65.614427294,  -25.6235940086, 'AES - Alemanía'),
-(29, -66.25,         -25.33, 'INTA - Seclantás'),
 
--- [-66.33, -27.55, 'INTA - Andalgalá'), -- overlapped with IANDAL3
 -- AES future: la viña, cerrillos y hornillos
 
 (30, -65.3746297723, -24.8421690677, 'AES - Arenales'),
@@ -43,4 +41,13 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (38, -64.85,         -25.31,         'AES - Miraflores' ),
 (39, -65.33,         -25.27,         'AES - CC' ),
 
-(40, -64.69,         -26.01,          'Weather Underground - Daza Copo Quile'); --IROSAR45
+(40, -64.69,         -26.01,          'Weather Underground - Daza Copo Quile'), --IROSAR45
+
+-- INTA
+(1, -65.567772429,   -25.4723965124, 'INTA - La Viña'), --N/A
+(29, -66.25,         -25.33, 'INTA - Seclantás'), --352
+(41, -65.43,         -23.66, 'INTA - Hornillos'), --488
+(42, -64.30,         -23.98, 'INTA - Palma Sola'), --395
+(43, -64.38,         -23.47, 'INTA - El Potrero'), --415
+(44, -66.33,         -27.61, 'INTA - Andalgala'), --393
+(45, -65.38,         -27.02, 'INTA - Famailla'), --348
