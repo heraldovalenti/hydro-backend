@@ -31,7 +31,10 @@ public class RainObservationAccumulation {
                 .collect(Collectors.toList());
         LOGGER.debug("dataOrigins={}", dataOrigins);
         for (DataOrigin dataOrigin : dataOrigins) {
-            Optional<RainAccumulator> accumulator = RainAccumulator.accumulatorForDataOrigin(dataOrigin);
+            Optional<RainAccumulator> accumulator = RainAccumulator.accumulatorForObservations(this.observationSeries);
+            if (accumulator.isEmpty()) {
+                accumulator = RainAccumulator.accumulatorForDataOrigin(dataOrigin);
+            }
             LOGGER.debug("accumulator for dataOrigin {} found?: {}", dataOrigin, accumulator.isPresent());
             List<Observation> observations = this.observationSeries.stream()
                     .filter(x -> x.getDataOrigin().equals(dataOrigin))
