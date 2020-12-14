@@ -52,4 +52,5 @@ INSERT INTO station_data_origin
 (31, 3, 3, 42, '395', 3), --dimension: lluvia, default unit: mm
 (32, 3, 3, 43, '415', 3), --dimension: lluvia, default unit: mm
 (33, 3, 3, 44, '393', 3), --dimension: lluvia, default unit: mm
-(34, 3, 3, 45, '348', 3); --dimension: lluvia, default unit: mm
+(34, 3, 3, 45, '348', 3), --dimension: lluvia, default unit: mm
+(35, 3, 3, 46, '516', 3); --dimension: lluvia, default unit: mm
