@@ -4,7 +4,7 @@
 INSERT INTO station_data_origin
 (id,data_origin_id,dimension_id,station_id,external_station_id,default_unit_id) VALUES
 (1, 1, 1, 27, 'Cachi', null), --dimension: nivel
-(2, 1, 3, 27, 'Cachi', null), --dimension: lluvia
+(2, 1, 3, 47, 'Cachi', null), --dimension: lluvia
 
 (3, 1, 3, 13, 'CampoQuijano', null), --dimension: lluvia
 

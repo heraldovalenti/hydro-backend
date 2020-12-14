@@ -14,7 +14,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (13, -65.6621666667, -24.9006666667, 'AES - Campo Quijano'),
 (14, -65.4765851694, -24.844154066,  'SMN-Aeropuerto Salta'),
 (15, -64.8550277778, -25.3121666667, 'AES - Miraflores'),
-(16, -64.5925,       -25.3858333333, 'AES - Medina'),
+(16, -64.5927,       -25.3858,       'AES - Medina'),
 (17, -64.4760555556, -25.2265,       'AES - El Tunal'),
 (18, -64.78,         -25.45, 'Weather Underground - Sala Guanaco'), --IMETND1
 (19, -65.64,         -24.91, 'Weather Underground - Campo Quijano'), --IROSARIO12
@@ -25,7 +25,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (24, -65.47,         -23.74, 'Weather Underground - Santa Rosa de Chuschuyoc'), --ITUMBA11
 (25, -65.66,         -27.23, 'Weather Underground - Sargento Moya'), -- IMONTE19
 (26, -66.33,         -27.55, 'Weather Underground - Daza Chaquiago'), -- IANDAL3
-(27, -66.1836409237, -25.1816021766, 'AES - Cachi'),
+(27, -66.1834,       -25.1816, 'AES - Cachi'),
 (28, -65.614427294,  -25.6235940086, 'AES - Alemanía'),
 
 -- AES future: la viña, cerrillos y hornillos
@@ -36,10 +36,11 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (33, -65.6146007827, -25.6235023877, 'AES - Alemania' ),
 (34, -65.2911257226, -25.2958435193, 'AES - PB' ),
 (35, -65.82,         -26.01,         'AES - Punilla' ),
-(36, -64.5924836627, -25.3857815773, 'AES - Medina' ),
+(36, -64.5922,       -25.3859,       'AES - Medina' ),
 (37, -64.4771146654, -25.2287507835, 'AES - ET' ),
 (38, -64.85,         -25.31,         'AES - Miraflores' ),
 (39, -65.33,         -25.27,         'AES - CC' ),
+(47, -66.1838,       -25.1816,       'AES - Cachi'),
 
 (40, -64.69,         -26.01,          'Weather Underground - Daza Copo Quile'), --IROSAR45
 
@@ -52,3 +53,5 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (44, -66.33,         -27.61, 'INTA - Andalgala'), --393
 (45, -65.38,         -27.02, 'INTA - Famailla'), --348
 (46, -65.83,         -22.8,  'INTA - Abra Pampa'); --516
+
+-- last ID: 47 (cachi)
