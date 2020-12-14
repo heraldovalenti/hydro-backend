@@ -7,3 +7,7 @@ cron:
 - description: "Update WeatherUnderground observations"
   url: /api/observations/updateWeatherUndergroundObservations
   schedule: every 15 minutes
+
+- description: "Update INTA observations"
+  url: /api/observations/updateINTAObservations
+  schedule: every 15 minutes
