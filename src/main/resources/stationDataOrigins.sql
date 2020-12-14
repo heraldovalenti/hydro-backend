@@ -42,7 +42,8 @@ INSERT INTO station_data_origin
 (24, 2, 3, 4,  'ISALTA7', 4), --dimension: lluvia
 (25, 2, 3, 5,  'ILACAL8', 4), --dimension: lluvia
 (26, 2, 3, 3,  'ISALTA11', 4), --dimension: lluvia
-(27, 2, 3, 40, 'IROSAR45', 4); --dimension: lluvia
+(27, 2, 3, 40, 'IROSAR45', 4), --dimension: lluvia
+(36, 2, 3, 48, 'ISALTA13', 4); --dimension: lluvia
 
 --data origin: INTA
 INSERT INTO station_data_origin
@@ -54,3 +55,5 @@ INSERT INTO station_data_origin
 (33, 3, 3, 44, '393', 3), --dimension: lluvia, default unit: mm
 (34, 3, 3, 45, '348', 3), --dimension: lluvia, default unit: mm
 (35, 3, 3, 46, '516', 3); --dimension: lluvia, default unit: mm
+
+-- last ID: 36 (ISALTA13)

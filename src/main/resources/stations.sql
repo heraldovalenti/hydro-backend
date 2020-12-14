@@ -43,6 +43,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (47, -66.1838,       -25.1816,       'AES - Cachi'),
 
 (40, -64.69,         -26.01,          'Weather Underground - Daza Copo Quile'), --IROSAR45
+(48, -65.42,         -24.79,          'Weather Underground - Dante Alighieri UCASAL MATTEO'), --ISALTA13
 
 -- INTA
 (1, -65.567772429,   -25.4723965124, 'INTA - La Viña'), --N/A
@@ -54,4 +55,4 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (45, -65.38,         -27.02, 'INTA - Famailla'), --348
 (46, -65.83,         -22.8,  'INTA - Abra Pampa'); --516
 
--- last ID: 47 (cachi)
+-- last ID: 48 (ISALTA13)
