@@ -4,3 +4,4 @@ Pass in `dev` profile with:
 
 # Deploy to gcloud
 `gcloud app deploy`
+`gcloud app deploy src/main/appengine/cron.yaml`
