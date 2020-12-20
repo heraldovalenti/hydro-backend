@@ -8,6 +8,10 @@ cron:
   url: /api/observations/updateWeatherUndergroundObservations
   schedule: every 15 minutes
 
-- description: "Update INTA observations"
-  url: /api/observations/updateINTAObservations
+- description: "Update INTA observations (Siga2)"
+  url: /api/observations/updateINTASiga2Observations
+  schedule: every 15
+
+- description: "Update INTA observations (Anterior)"
+  url: /api/observations/updateINTAAnteriorObservations
   schedule: every 15 minutes
