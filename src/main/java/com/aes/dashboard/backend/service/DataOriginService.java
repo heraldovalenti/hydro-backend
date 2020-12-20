@@ -20,7 +20,11 @@ public class DataOriginService {
         return dataOriginRepository.findById(2L).get();
     }
 
-    public DataOrigin getINTADataOrigin() {
+    public DataOrigin getINTASiga2DataOrigin() {
         return dataOriginRepository.findById(3L).get();
+    }
+
+    public DataOrigin getINTAAnteriorDataOrigin() {
+        return dataOriginRepository.findById(5L).get();
     }
 }

@@ -9,12 +9,15 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.aes.dashboard.backend.config.GlobalConfigs.*;
+
 public abstract class RainAccumulator {
 
     private static final Map<DataOrigin, RainAccumulator> dataOriginAccumulatorMap = Map.of(
-            new DataOrigin(1), new AesRainAccumulator(),
-            new DataOrigin(2), new WURainAccumulator(),
-            new DataOrigin(3), new SimpleRainAccumulator()
+            new DataOrigin(DATA_ORIGIN_AES), new AesRainAccumulator(),
+            new DataOrigin(DATA_ORIGIN_WU), new WURainAccumulator(),
+            new DataOrigin(DATA_ORIGIN_INTA_SIGA), new SimpleRainAccumulator(),
+            new DataOrigin(DATA_ORIGIN_INTA_ANTERIOR), new SimpleRainAccumulator()
     );
 
     private static final Map<Station, RainAccumulator> stationAccumulatorMap = Map.of(

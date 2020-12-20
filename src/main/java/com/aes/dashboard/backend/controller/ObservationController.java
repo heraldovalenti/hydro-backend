@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/observations")
@@ -141,9 +140,14 @@ public class ObservationController {
         observationService.updateWeatherUndergroundObservations();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/updateINTAObservations")
-    public void updateINTAObservations() {
-        observationService.updateINTAObservations();
+    @RequestMapping(method = RequestMethod.GET, value = "/updateINTASiga2Observations")
+    public void updateINTASiga2Observations() {
+        observationService.updateINTASiga2Observations();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/updateINTAAnteriorObservations")
+    public void updateINTAAnteriorObservations() {
+        observationService.updateINTAAnteriorObservations();
     }
 }
 

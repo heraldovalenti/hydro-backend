@@ -8,8 +8,10 @@ import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationDataOriginRepository;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
 import com.aes.dashboard.backend.service.aesLatestData.DataItem;
-import com.aes.dashboard.backend.service.intaData.INTADataItem;
-import com.aes.dashboard.backend.service.intaData.INTADataService;
+import com.aes.dashboard.backend.service.intaData.INTAAnteriorDataItem;
+import com.aes.dashboard.backend.service.intaData.INTAAnteriorDataService;
+import com.aes.dashboard.backend.service.intaData.INTASiga2DataItem;
+import com.aes.dashboard.backend.service.intaData.INTASiga2DataService;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundDataService;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundResult;
 import org.slf4j.Logger;
@@ -33,7 +35,10 @@ public class ObservationService {
     private WeatherUndergroundDataService weatherUndergroundDataService;
 
     @Autowired
-    private INTADataService intaDataService;
+    private INTASiga2DataService intaSiga2DataService;
+
+    @Autowired
+    private INTAAnteriorDataService intaAnteriorDataService;
 
     @Autowired
     private StationDataOriginRepository stationDataOriginRepository;
@@ -97,11 +102,11 @@ public class ObservationService {
     }
 
     @Transactional
-    public void updateINTAObservations() {
-        DataOrigin intaDataOrigin = dataOriginService.getINTADataOrigin();
+    public void updateINTASiga2Observations() {
+        DataOrigin intaDataOrigin = dataOriginService.getINTASiga2DataOrigin();
         List<StationDataOrigin> intaStationDataOriginList = stationDataOriginRepository.findByDataOrigin(intaDataOrigin);
         for (StationDataOrigin intaStationDataOrigin : intaStationDataOriginList) {
-            List<INTADataItem> intaDataItems = intaDataService.getObservationData(
+            List<INTASiga2DataItem> intaDataItems = intaSiga2DataService.getObservationData(
                     intaStationDataOrigin.getExternalStationId());
             intaDataItems.stream()
                     .forEach(dataItem -> {
@@ -111,6 +116,27 @@ public class ObservationService {
                         observation.setDataOrigin(intaDataOrigin);
                         observation.setTime(dataItem.getFecha());
                         observation.setValue(dataItem.getPrecipitacion());
+                        observation.setUnit(intaStationDataOrigin.getDefaultUnit());
+                        this.updateOrCreateObservation(observation);
+                    });
+        }
+    }
+
+    @Transactional
+    public void updateINTAAnteriorObservations() {
+        DataOrigin intaDataOrigin = dataOriginService.getINTAAnteriorDataOrigin();
+        List<StationDataOrigin> intaStationDataOriginList = stationDataOriginRepository.findByDataOrigin(intaDataOrigin);
+        for (StationDataOrigin intaStationDataOrigin : intaStationDataOriginList) {
+            List<INTAAnteriorDataItem> intaDataItems = intaAnteriorDataService.getObservationData(
+                    intaStationDataOrigin.getExternalStationId());
+            intaDataItems.stream()
+                    .forEach(dataItem -> {
+                        Observation observation = new Observation();
+                        observation.setDimension(intaStationDataOrigin.getDimension());
+                        observation.setStation(intaStationDataOrigin.getStation());
+                        observation.setDataOrigin(intaDataOrigin);
+                        observation.setTime(dataItem.getDate());
+                        observation.setValue(dataItem.getLluvia());
                         observation.setUnit(intaStationDataOrigin.getDefaultUnit());
                         this.updateOrCreateObservation(observation);
                     });

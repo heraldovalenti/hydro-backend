@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class INTADataItem {
+public class INTASiga2DataItem {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime fecha;
 
     private double precipitacion;
 
-    public INTADataItem() {
+    public INTASiga2DataItem() {
     }
 
     public LocalDateTime getFecha() {

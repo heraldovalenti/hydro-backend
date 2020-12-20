@@ -9,20 +9,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @SpringBootTest
-public class INTADataServiceTest {
+public class INTASiga2DataServiceTest {
 
     @Autowired
-    private INTADataService intaDataService;
+    private INTASiga2DataService intaSiga2DataService;
 
     @Test
     public void testRetrieveVars() {
-        String vars = intaDataService.retrieveStationBaseUrl();
+        String vars = intaSiga2DataService.retrieveStationBaseUrl();
         System.out.println(vars);
     }
 
     @Test
     public void seclantasStationTest() {
-        List<INTADataItem> result = intaDataService.getObservationData("352");
+        List<INTASiga2DataItem> result = intaSiga2DataService.getObservationData("352");
         Assertions.assertEquals(135, result.size());
     }
 

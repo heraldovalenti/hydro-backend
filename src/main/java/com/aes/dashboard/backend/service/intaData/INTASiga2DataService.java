@@ -9,12 +9,9 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,16 +20,16 @@ import static com.aes.dashboard.backend.config.GlobalConfigs.SALTA_ZONE_ID;
 import static com.aes.dashboard.backend.config.GlobalConfigs.UTC_ZONE_ID;
 
 @Service
-public class INTADataService {
+public class INTASiga2DataService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(INTADataService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(INTASiga2DataService.class);
 
     private final String baseUrl;
     private final String varsKey;
     private final String varsPath;
     private final RestTemplate restTemplate;
 
-    public INTADataService(
+    public INTASiga2DataService(
             RestTemplate restTemplate,
             @Value("${INTA-data.baseUrl}") String baseUrl,
             @Value("${INTA-data.varsKey}") String varsKey,
@@ -61,13 +58,13 @@ public class INTADataService {
         return lineParts[1];
     }
 
-    public List<INTADataItem> getObservationData(String stationId) {
+    public List<INTASiga2DataItem> getObservationData(String stationId) {
         String stationBaseUrl = baseUrl + "/" + retrieveStationBaseUrl() + stationId;
-        List<INTADataItem> result = new LinkedList<>();
+        List<INTASiga2DataItem> result = new LinkedList<>();
         try {
-            ResponseEntity<INTADataItem[]> response = this.restTemplate.getForEntity(
+            ResponseEntity<INTASiga2DataItem[]> response = this.restTemplate.getForEntity(
                     stationBaseUrl,
-                    INTADataItem[].class);
+                    INTASiga2DataItem[].class);
             Arrays.stream(response.getBody()).forEach(intaDataItem -> {
                 ZonedDateTime saltaTime = ZonedDateTime.of(intaDataItem.getFecha(), ZoneId.of(SALTA_ZONE_ID));
                 ZonedDateTime utcTime = saltaTime.withZoneSameInstant(ZoneId.of(UTC_ZONE_ID));
