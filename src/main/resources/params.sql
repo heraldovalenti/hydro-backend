@@ -5,8 +5,9 @@ DELETE FROM measurement_unit;
 INSERT INTO data_origin (id, description) VALUES
 (1, 'AES'),
 (2, 'WeatherUnderground'),
-(3, 'INTA'),
-(4, 'SMG');
+(3, 'INTA_siga2'),
+(4, 'SMG'),
+(5, 'INTA_Anterior');
 
 INSERT INTO measurement_dimension (id, description, preferred_unit_id) VALUES
 (1, 'nivel', 2),

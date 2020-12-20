@@ -53,6 +53,12 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (43, -64.38,         -23.47, 'INTA - El Potrero'), --415
 (44, -66.33,         -27.61, 'INTA - Andalgala'), --393
 (45, -65.38,         -27.02, 'INTA - Famailla'), --348
-(46, -65.83,         -22.8,  'INTA - Abra Pampa'); --516
+(46, -65.83,         -22.8,  'INTA - Abra Pampa'), --516
 
--- last ID: 48 (ISALTA13)
+(49, -65.416111,     -24.73,      'INTA - Parque del Bicentenario'), --ema_bicentenario
+(50, -64.225277,     -25.1163889, 'INTA - Olleros'), --ema_olleros
+(51, -65.183333,     -24.2372222, 'INTA - El Brete - SPMF'), --ema_spmf
+(52, -65.567777,     -25.4725,    'INTA - La Viña'), --ema_lavina
+(53, -63.515555,     -22.5313889, 'INTA - DESDELSUR'); --ema_desdeelsur
+
+-- last ID: 53 (ema_desdeelsur)
