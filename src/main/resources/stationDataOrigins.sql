@@ -62,6 +62,13 @@ INSERT INTO station_data_origin
 (38, 5, 3, 50, 'ema_olleros', 3), --dimension: lluvia, default unit: mm
 (39, 5, 3, 51, 'ema_spmf', 3), --dimension: lluvia, default unit: mm
 (40, 5, 3, 52, 'ema_lavina', 3), --dimension: lluvia, default unit: mm
-(41, 5, 3, 53, 'ema_desdeelsur', 3); --dimension: lluvia, default unit: mm
+(41, 5, 3, 53, 'ema_desdeelsur', 3), --dimension: lluvia, default unit: mm
 
--- last ID: 36 (ISALTA13)
+(42, 5, 3, 54, 'ema_yatasto', 3), --dimension: lluvia, default unit: mm
+(43, 5, 3, 55, 'ema_cerrillos', 3), --dimension: lluvia, default unit: mm
+(44, 5, 3, 56, 'ema_esca3167', 3), --dimension: lluvia, default unit: mm
+(45, 5, 3, 57, 'ema_elgalpon', 3), --dimension: lluvia, default unit: mm
+(46, 5, 3, 58, 'ema_rlerma', 3), --dimension: lluvia, default unit: mm
+(47, 5, 3, 59, 'ema_etchart', 3); --dimension: lluvia, default unit: mm
+
+-- last ID: 47 (ema_etchart)

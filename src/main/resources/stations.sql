@@ -59,6 +59,13 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (50, -64.225277,     -25.1163889, 'INTA - Olleros'), --ema_olleros
 (51, -65.183333,     -24.2372222, 'INTA - El Brete - SPMF'), --ema_spmf
 (52, -65.567777,     -25.4725,    'INTA - La Viña'), --ema_lavina
-(53, -63.515555,     -22.5313889, 'INTA - DESDELSUR'); --ema_desdeelsur
+(53, -63.515555,     -22.5313889, 'INTA - DESDELSUR'), --ema_desdeelsur
 
--- last ID: 53 (ema_desdeelsur)
+(54, -64.968888,     -25.6019444, 'INTA - Yatasto'), --ema_yatasto
+(55, -65.470833,     -24.8941667, 'INTA - Cerrillos'), --ema_cerrillos
+(56, -64.249444,     -24.7438889, 'INTA - Escuela de Educación Técnica Nro. 3167'), --ema_esca3167
+(57, -64.638888,     -25.3797222, 'INTA - El Galpón'), --ema_elgalpon
+(58, -65.585833,     -24.9880556, 'INTA - UC6-CDA Rosario de Lerma'), --ema_rlerma
+(59, -65.973888,     -26.1,       'INTA - Bodegas Etchart'); --ema_etchart
+
+-- last ID: 59 (ema_etchart)
