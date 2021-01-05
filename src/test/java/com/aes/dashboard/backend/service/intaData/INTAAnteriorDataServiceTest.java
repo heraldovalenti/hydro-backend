@@ -49,4 +49,42 @@ public class INTAAnteriorDataServiceTest {
 
     }
 
+    @Test
+    public void ema_yatastoStationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_yatasto");
+        Assertions.assertFalse(result.isEmpty());
+
+    }
+
+    @Test
+    public void ema_cerrillosStationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_cerrillos");
+        Assertions.assertFalse(result.isEmpty());
+
+    }
+
+    @Test
+    public void ema_esca3167StationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_esca3167");
+        Assertions.assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void ema_elgalponStationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_elgalpon");
+        Assertions.assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void ema_rlermaStationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_rlerma");
+        Assertions.assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void ema_etchartStationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_etchart");
+        Assertions.assertFalse(result.isEmpty());
+    }
+
 }

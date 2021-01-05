@@ -54,7 +54,7 @@ public class INTAAnteriorParser {
 
     public static Optional<LocalDateTime> parseDate(String date, String time) {
         try {
-            LocalDate resultDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yy"));
+            LocalDate resultDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("d/MM/yy"));
             String timeFormat = "H:mm";
             if (time.contains("a") || time.contains("p")) {
                 time = time.replace("p", " PM").replace("a", " AM");
