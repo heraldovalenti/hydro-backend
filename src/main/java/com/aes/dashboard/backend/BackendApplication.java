@@ -29,6 +29,7 @@ public class BackendApplication {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedOrigins("*")
+						.allowCredentials(true)
 						.allowedMethods(
 								HttpMethod.GET.name(),
 								HttpMethod.POST.name());

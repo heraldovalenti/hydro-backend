@@ -22,7 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").hasRole("USER")
                 .and()
             .httpBasic()
-        ;
+                .and()
+            .cors();
     }
 
     @Autowired
