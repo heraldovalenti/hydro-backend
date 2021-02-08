@@ -150,10 +150,14 @@ public class ObservationService {
         );
         if (!existingObservations.isEmpty()) {
             existingObservations.stream().forEach(existing -> {
-                existing.setUnit(observation.getUnit());
-                existing.setValue(observation.getValue());
-                LOGGER.info("Updating observation: {}", existing.toString());
-                observationRepository.save(existing);
+                if (existing.getValue() == observation.getValue()) {
+                    LOGGER.info("Skipping observation update: {}", existing.toString());
+                } else {
+                    existing.setUnit(observation.getUnit());
+                    existing.setValue(observation.getValue());
+                    LOGGER.info("Updating observation: {}", existing.toString());
+                    observationRepository.save(existing);
+                }
             });
         } else {
             LOGGER.info("Creating observation: {}", observation.toString());

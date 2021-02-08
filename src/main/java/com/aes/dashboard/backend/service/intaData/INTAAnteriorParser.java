@@ -5,10 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.aes.dashboard.backend.config.GlobalConfigs.SALTA_ZONE_ID;
@@ -25,6 +22,10 @@ public class INTAAnteriorParser {
             String line = lines[i];
             Optional<INTAAnteriorDataItem> itemOpt = parseLine(line);
             if (itemOpt.isPresent()) result.add(itemOpt.get());
+        }
+        Collections.sort(result, Comparator.comparing(INTAAnteriorDataItem::getDate));
+        if (result.size() > 150) {
+            result = result.subList(result.size() - 150, result.size() - 1);
         }
         return result;
     }
