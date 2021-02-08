@@ -1,17 +1,17 @@
 cron:
 
-- description: "Update AES observations"
-  url: /api/observations/updateAesObservations
-  schedule: every 30 minutes
-
-- description: "Update WeatherUnderground observations"
-  url: /api/observations/updateWeatherUndergroundObservations
-  schedule: every 15 minutes
-
-- description: "Update INTA observations (Siga2)"
-  url: /api/observations/updateINTASiga2Observations
-  schedule: every 15 minutes
-
-- description: "Update INTA observations (Anterior)"
-  url: /api/observations/updateINTAAnteriorObservations
-  schedule: every 15 minutes
+#- description: "Update AES observations"
+#  url: /api/observations/updateAesObservations
+#  schedule: every 30 minutes
+#
+#- description: "Update WeatherUnderground observations"
+#  url: /api/observations/updateWeatherUndergroundObservations
+#  schedule: every 15 minutes
+#
+#- description: "Update INTA observations (Siga2)"
+#  url: /api/observations/updateINTASiga2Observations
+#  schedule: every 15 minutes
+#
+#- description: "Update INTA observations (Anterior)"
+#  url: /api/observations/updateINTAAnteriorObservations
+#  schedule: every 15 minutes
