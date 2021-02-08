@@ -18,7 +18,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/api/health-check").hasRole("HEALTH_CHECK")
                 .antMatchers("/**").hasRole("USER")
                 .and()
             .httpBasic()
@@ -34,11 +33,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .password(passwordEncoder()
                         .encode("SaltaLaLinda01"))
                     .roles("USER");
-        auth.inMemoryAuthentication()
-                .withUser("healthChecker")
-                    .password(passwordEncoder()
-                        .encode("h_C01"))
-                    .roles("HEALTH_CHECK", "USER");
     }
 
     @Bean
