@@ -25,7 +25,10 @@ INSERT INTO station_data_origin
 (13, 1, 1, 37, 'Tunal', 2), --dimension: nivel, default unit: metro
 (14, 1, 2, 37, 'Tunal', 5), --dimension: caudal, default unit: m3/sec
 
-(28, 1, 3, 11, 'Termoandes', 3); --dimension: lluvia, default unit: mm
+(28, 1, 3, 11, 'Termoandes', 3) --dimension: lluvia, default unit: mm
+
+(48, 1, 1, 28, 'Alemania', null), --dimension: nivel
+(49, 1, 3, 33, 'Alemania', null); --dimension: lluvia
 
 --data origin: WeatherUndeground
 INSERT INTO station_data_origin
@@ -71,4 +74,4 @@ INSERT INTO station_data_origin
 (46, 5, 3, 58, 'ema_rlerma', 3), --dimension: lluvia, default unit: mm
 (47, 5, 3, 59, 'ema_etchart', 3); --dimension: lluvia, default unit: mm
 
--- last ID: 47 (ema_etchart)
+-- last ID: 49 (Alemania - AES)
