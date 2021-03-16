@@ -66,6 +66,24 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (56, -64.249444,     -24.7438889, 'INTA - Escuela de Educación Técnica Nro. 3167'), --ema_esca3167
 (57, -64.638888,     -25.3797222, 'INTA - El Galpón'), --ema_elgalpon
 (58, -65.585833,     -24.9880556, 'INTA - UC6-CDA Rosario de Lerma'), --ema_rlerma
-(59, -65.973888,     -26.1,       'INTA - Bodegas Etchart'); --ema_etchart
+(59, -65.973888,     -26.1,       'INTA - Bodegas Etchart'), --ema_etchart
 
--- last ID: 59 (ema_etchart)
+(60, -66.012908,     -26.092266,  'Weather Underground - Escuela S Agustín UCASAL MATTEO'), --ICAFAY1
+
+(61, -65.043638,     -24.687527,  'SNIH - Güemes'), --10687
+(62, -64.808055,     -23.909444,  'SNIH - Fraile Pintado - RN 34'), --10036
+(63, -66.159161,     -25.120525,  'SNIH - Cachi'), --10646
+(64, -65.59325,      -24.842305,  'SNIH - El Encon'), --10701
+(65, -65.42,         -25.153888,  'SNIH - La Maroma'), --10706
+(66, -65.329722,     -25.271944,  'SNIH - Cabra Corral'), --10622
+(67, -64.592222,     -25.393333,  'SNIH - Metán - Desembocadura'), --10705
+(68, -64.476944,     -25.226666,  'SNIH - El Tunal'), --10626
+(69, -64.106011,     -25.160811,  'SNIH - Canal Finca Agropecuaria'), --10684
+(70, -64.106166,     -25.161388,  'SNIH - Finca Agropecuaria'), --10686
+(71, -64.045555,     -25.343888,  'SNIH - Juramento - El Quebrachal'), --10695
+(72, -64.022402,     -25.360688,  'SNIH - Canal Liag - El Quebrachal'), --10696
+(73, -63.976155,     -25.413480,  'SNIH - Canal Macapillo'), --10699
+(74, -63.948058,     -25.610777,  'SNIH - Canal de Dios'), --10815
+(75, -65.823113,     -26.011919,  'SNIH - La Punilla'); --10611
+
+-- last ID: 75 (10611)

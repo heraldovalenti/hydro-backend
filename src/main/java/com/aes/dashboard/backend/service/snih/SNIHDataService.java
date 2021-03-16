@@ -1,6 +1,5 @@
 package com.aes.dashboard.backend.service.snih;
 
-import com.aes.dashboard.backend.service.AppConfigService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,32 +17,28 @@ import static com.aes.dashboard.backend.config.GlobalConfigs.SALTA_ZONE_ID;
 @Service
 public class SNIHDataService {
 
-    public static final Integer HEIGHT_CODE = 1;
-    public static final Integer RAIN_CODE = 20;
-
     private String url;
     private RestTemplate restTemplate;
 
     public SNIHDataService(
             RestTemplate restTemplate,
-            @Value("${snih.url.latest}") String url,
-            AppConfigService appConfigService) {
+            @Value("${snih.url.latest}") String url) {
         this.restTemplate = restTemplate;
         this.url = url;
     }
 
-    public List<SNIHObservation> getLatestData(Integer stationId, Integer code) {
+    public List<SNIHObservation> getLatestData(String stationId, SNIHDataCode code) {
         LocalDateTime now = LocalDateTime.now(ZoneId.of(SALTA_ZONE_ID));
         return getLatestData(stationId, code, now, now);
     }
 
-    public List<SNIHObservation> getLatestData(Integer stationId, Integer code, LocalDateTime from, LocalDateTime to) {
+    public List<SNIHObservation> getLatestData(String stationId, SNIHDataCode code, LocalDateTime from, LocalDateTime to) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Map<String, String> body = Map.of(
                 "fechaDesde", from.format(dtf),
                 "fechaHasta", to.format(dtf),
                 "estacion", stationId.toString(),
-                "codigo", code.toString() );
+                "codigo", code.code.toString() );
         ResponseEntity<SNIHDataRoot> response = this.restTemplate.postForEntity(
                 this.url, body, SNIHDataRoot.class);
         List<SNIHObservation> result = new LinkedList<>();

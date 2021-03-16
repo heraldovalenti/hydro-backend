@@ -27,4 +27,8 @@ public class DataOriginService {
     public DataOrigin getINTAAnteriorDataOrigin() {
         return dataOriginRepository.findById(5L).get();
     }
+
+    public DataOrigin getSNIHDataOrigin() {
+        return dataOriginRepository.findById(6L).get();
+    }
 }

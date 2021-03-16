@@ -6,6 +6,10 @@ import java.util.Objects;
 @Entity
 public class MeasurementDimension {
 
+    public static final MeasurementDimension LEVEL = new MeasurementDimension(1L);
+    public static final MeasurementDimension FLOW = new MeasurementDimension(2L);
+    public static final MeasurementDimension RAIN = new MeasurementDimension(3L);
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -17,6 +21,10 @@ public class MeasurementDimension {
     private MeasurementUnit preferredUnit;
 
     public MeasurementDimension() {
+    }
+
+    public MeasurementDimension(long id) {
+        this.id = id;
     }
 
     public long getId() {

@@ -149,5 +149,10 @@ public class ObservationController {
     public void updateINTAAnteriorObservations() {
         observationService.updateINTAAnteriorObservations();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/updateSNIHObservations")
+    public void updateSNIHObservations() {
+        observationService.updateSNIHObservations();
+    }
 }
 

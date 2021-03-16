@@ -46,7 +46,8 @@ INSERT INTO station_data_origin
 (25, 2, 3, 5,  'ILACAL8', 4), --dimension: lluvia
 (26, 2, 3, 3,  'ISALTA11', 4), --dimension: lluvia
 (27, 2, 3, 40, 'IROSAR45', 4), --dimension: lluvia
-(36, 2, 3, 48, 'ISALTA13', 4); --dimension: lluvia
+(36, 2, 3, 48, 'ISALTA13', 4), --dimension: lluvia
+(50, 2, 3, 60, 'ICAFAY1', 4); --dimension: lluvia
 
 --data origin: INTA
 INSERT INTO station_data_origin
@@ -74,4 +75,24 @@ INSERT INTO station_data_origin
 (46, 5, 3, 58, 'ema_rlerma', 3), --dimension: lluvia, default unit: mm
 (47, 5, 3, 59, 'ema_etchart', 3); --dimension: lluvia, default unit: mm
 
--- last ID: 49 (Alemania - AES)
+-- data origin: SNIH
+INSERT INTO station_data_origin
+(id,data_origin_id,dimension_id,default_unit_id,station_id,external_station_id) VALUES
+(51, 6, 3, 3, 61, '10687'), --Güemes', 10687, dimension: lluvia, default unit: mm
+(52, 6, 1, 2, 61, '10687'), --Güemes', 10687, dimension: nivel, default unit: m
+(53, 6, 1, 2, 62, '10036'), --Fraile Pintado - RN 34', --10036, dimension: nivel, default unit: m
+(54, 6, 1, 2, 63, '10646'), --Cachi', --10646, dimension: nivel, default unit: m
+(55, 6, 1, 2, 64, '10701'), --El Encon'), --10701, dimension: nivel, default unit: m
+(56, 6, 1, 2, 65, '10706'), --La Maroma'), --10706, dimension: nivel, default unit: m
+(57, 6, 1, 2, 66, '10622'), --Cabra Corral'), --10622, dimension: nivel, default unit: m
+(58, 6, 1, 2, 67, '10705'), --Metán - Desembocadura'), --10705, dimension: nivel, default unit: m
+(59, 6, 1, 2, 68, '10626'), --El Tunal'), --10626, dimension: nivel, default unit: m
+(60, 6, 1, 2, 69, '10684'), --Canal Finca Agropecuaria I'), --10684, dimension: nivel, default unit: m
+(61, 6, 1, 2, 70, '10686'), --Finca Agropecuaria'), --10686, dimension: nivel, default unit: m
+(62, 6, 1, 2, 71, '10695'), --Juramento - El Quebrachal'), --10695, dimension: nivel, default unit: m
+(63, 6, 1, 2, 72, '10696'), --Canal Liag - El Quebrachal'), --10696, dimension: nivel, default unit: m
+(64, 6, 1, 2, 73, '10699'), --Canal Macapillo'), --10699, dimension: nivel, default unit: m
+(65, 6, 1, 2, 74, '10815'), --Canal de Dios'), --10815, dimension: nivel, default unit: m
+(66, 6, 1, 2, 75, '10611'); --La Punilla'); --10611, dimension: nivel, default unit: m
+
+-- last ID: 66 (10611 - la punilla - SNIH)

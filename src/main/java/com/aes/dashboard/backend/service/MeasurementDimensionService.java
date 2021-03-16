@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class MeasurementDimensionService {
 
     @Autowired
-    MeasurementDimensionRepository measurementDimensionRepository;
+    private MeasurementDimensionRepository measurementDimensionRepository;
 
     public MeasurementDimension getLevelDimension() {
         return measurementDimensionRepository.findById(1L).get();

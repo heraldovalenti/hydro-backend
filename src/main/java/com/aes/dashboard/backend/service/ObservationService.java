@@ -1,9 +1,6 @@
 package com.aes.dashboard.backend.service;
 
-import com.aes.dashboard.backend.model.DataOrigin;
-import com.aes.dashboard.backend.model.MeasurementUnit;
-import com.aes.dashboard.backend.model.Observation;
-import com.aes.dashboard.backend.model.StationDataOrigin;
+import com.aes.dashboard.backend.model.*;
 import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationDataOriginRepository;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
@@ -12,6 +9,9 @@ import com.aes.dashboard.backend.service.intaData.INTAAnteriorDataItem;
 import com.aes.dashboard.backend.service.intaData.INTAAnteriorDataService;
 import com.aes.dashboard.backend.service.intaData.INTASiga2DataItem;
 import com.aes.dashboard.backend.service.intaData.INTASiga2DataService;
+import com.aes.dashboard.backend.service.snih.SNIHDataCode;
+import com.aes.dashboard.backend.service.snih.SNIHDataService;
+import com.aes.dashboard.backend.service.snih.SNIHObservation;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundDataService;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundResult;
 import org.slf4j.Logger;
@@ -39,6 +39,9 @@ public class ObservationService {
 
     @Autowired
     private INTAAnteriorDataService intaAnteriorDataService;
+
+    @Autowired
+    private SNIHDataService snihDataService;
 
     @Autowired
     private StationDataOriginRepository stationDataOriginRepository;
@@ -141,6 +144,33 @@ public class ObservationService {
                         this.updateOrCreateObservation(observation);
                     });
         }
+    }
+
+    @Transactional
+    public void updateSNIHObservations() {
+        LOGGER.info("Starting update for SNIH observations...");
+        DataOrigin snihDataOrigin = dataOriginService.getSNIHDataOrigin();
+        List<StationDataOrigin> snihStationDataOriginList = stationDataOriginRepository.findByDataOrigin(snihDataOrigin);
+        for (StationDataOrigin snihStationDataOrigin : snihStationDataOriginList) {
+            Optional<SNIHDataCode> aux = SNIHDataCode.codeForMeasurementDimension(snihStationDataOrigin.getDimension());
+            if (aux.isEmpty()) {
+                LOGGER.warn("SNIHDataCode not found for MeasurementDimension {}", snihStationDataOrigin.getDimension());
+                continue;
+            }
+            List<SNIHObservation> snihDataItems = snihDataService.getLatestData(
+                    snihStationDataOrigin.getExternalStationId(), aux.get());
+            for (SNIHObservation dataItem : snihDataItems) {
+                Observation observation = new Observation();
+                observation.setDimension(snihStationDataOrigin.getDimension());
+                observation.setStation(snihStationDataOrigin.getStation());
+                observation.setDataOrigin(snihDataOrigin);
+                observation.setTime(dataItem.getDateTime());
+                observation.setValue(dataItem.getValue());
+                observation.setUnit(snihStationDataOrigin.getDefaultUnit());
+                this.updateOrCreateObservation(observation);
+            }
+        }
+        LOGGER.info("Update for SNIH observations completed");
     }
 
     @Transactional
