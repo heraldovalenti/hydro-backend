@@ -37,7 +37,7 @@ public class SNIHDataService {
         Map<String, String> body = Map.of(
                 "fechaDesde", from.format(dtf),
                 "fechaHasta", to.format(dtf),
-                "estacion", stationId.toString(),
+                "estacion", stationId,
                 "codigo", code.code.toString() );
         ResponseEntity<SNIHDataRoot> response = this.restTemplate.postForEntity(
                 this.url, body, SNIHDataRoot.class);
