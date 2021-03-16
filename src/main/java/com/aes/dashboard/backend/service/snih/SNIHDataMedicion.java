@@ -7,7 +7,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-import static com.aes.dashboard.backend.config.GlobalConfigs.SALTA_ZONE_ID;
+import static com.aes.dashboard.backend.config.GlobalConfigs.UTC_ZONE_ID;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SNIHDataMedicion {
@@ -42,7 +42,7 @@ public class SNIHDataMedicion {
                 FechaHora.indexOf(")")
         );
         Long dateMillis = Long.parseLong(dateMilisRaw);
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(dateMillis), ZoneId.of(SALTA_ZONE_ID));
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(dateMillis), ZoneId.of(UTC_ZONE_ID));
     }
 
     public Integer parseCodigo() {
