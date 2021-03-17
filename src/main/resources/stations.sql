@@ -16,6 +16,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (15, -64.8550277778, -25.3121666667, 'AES - Miraflores'),
 (16, -64.5927,       -25.3858,       'AES - Medina'),
 (17, -64.4760555556, -25.2265,       'AES - El Tunal'),
+(76, -64.47        , -25.22,         'AES - El Tunal'),
 (18, -64.78,         -25.45, 'Weather Underground - Sala Guanaco'), --IMETND1
 (19, -65.64,         -24.91, 'Weather Underground - Campo Quijano'), --IROSARIO12
 (20, -65.4,          -24.89, 'Weather Underground - La Isla'), -- ISALTACE3
@@ -86,4 +87,4 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (74, -63.948058,     -25.610777,  'SNIH - Canal de Dios'), --10815
 (75, -65.823113,     -26.011919,  'SNIH - La Punilla'); --10611
 
--- last ID: 75 (10611)
+-- last ID: 76 (El Tunal)

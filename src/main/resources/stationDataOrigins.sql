@@ -19,11 +19,13 @@ INSERT INTO station_data_origin
 
 (10, 1, 1, 39, 'CabraCorral', 2), --dimension: nivel, default unit: metro
 (11, 1, 2, 39, 'CabraCorral', 5), --dimension: caudal, default unit: m3/sec
+(67, 1, 3, 6,  'CabraCorral', 3), --dimension: lluvia, default unit: mm
 
 (12, 1, 1, 34, 'PenasBlancas', 2), --dimension: nivel, default unit: metro
 
 (13, 1, 1, 37, 'Tunal', 2), --dimension: nivel, default unit: metro
 (14, 1, 2, 37, 'Tunal', 5), --dimension: caudal, default unit: m3/sec
+(68, 1, 3, 76, 'Tunal', 3), --dimension: lluvia, default unit: mm
 
 (28, 1, 3, 11, 'Termoandes', 3) --dimension: lluvia, default unit: mm
 
@@ -95,4 +97,4 @@ INSERT INTO station_data_origin
 (65, 6, 1, 2, 74, '10815'), --Canal de Dios'), --10815, dimension: nivel, default unit: m
 (66, 6, 1, 2, 75, '10611'); --La Punilla'); --10611, dimension: nivel, default unit: m
 
--- last ID: 66 (10611 - la punilla - SNIH)
+-- last ID: 68 (Tunal)
