@@ -51,7 +51,7 @@ INSERT INTO station_data_origin
 (36, 2, 3, 48, 'ISALTA13', 4), --dimension: lluvia
 (50, 2, 3, 60, 'ICAFAY1', 4); --dimension: lluvia
 
---data origin: INTA
+--data origin: INTA_Siga2
 INSERT INTO station_data_origin
 (id,data_origin_id,dimension_id,station_id,external_station_id,default_unit_id) VALUES
 (29, 3, 3, 29, '352', 3), --dimension: lluvia, default unit: mm
@@ -62,6 +62,7 @@ INSERT INTO station_data_origin
 (34, 3, 3, 45, '348', 3), --dimension: lluvia, default unit: mm
 (35, 3, 3, 46, '516', 3); --dimension: lluvia, default unit: mm
 
+--data origin: INTA_Anterior
 INSERT INTO station_data_origin
 (id,data_origin_id,dimension_id,station_id,external_station_id,default_unit_id) VALUES
 (37, 5, 3, 49, 'ema_bicentenario', 3), --dimension: lluvia, default unit: mm
