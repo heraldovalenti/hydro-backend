@@ -154,5 +154,19 @@ public class ObservationController {
     public void updateSNIHObservations() {
         observationService.updateSNIHObservations();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/lastObservation/{stationId}/{dimensionId}")
+    public Observation lastObservation(
+            @PathVariable Long stationId,
+            @PathVariable Long dimensionId) {
+        Optional<Station> station = stationRepository.findById(stationId);
+        Optional<MeasurementDimension> dimension = measurementDimensionRepository.findById(dimensionId);
+        Optional<Observation> result = observationRepository.findFirstByStationAndDimensionOrderByTimeDesc(
+                station.orElseThrow(() -> new EntityNotFound(stationId, Station.class)),
+                dimension.orElseThrow(() -> new EntityNotFound(dimensionId, MeasurementDimension.class))
+        );
+        LOGGER.info("Last observation for station {} and dimension {} found? {}", stationId, dimensionId, result.isPresent());
+        return result.orElse(null);
+    }
 }
 
