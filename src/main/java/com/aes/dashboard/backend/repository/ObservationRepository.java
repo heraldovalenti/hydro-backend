@@ -51,6 +51,14 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
             @Param("from") LocalDateTime from,
             @Param("to") LocalDateTime to);
 
+    @Query("SELECT o FROM Observation o " +
+            "WHERE o.dimension = :rain " +
+            "AND o.time >= :from AND o.time <= :to")
+    List<Observation> findByDimensionAndBetweenTime(
+            MeasurementDimension rain,
+            @Param("from") LocalDateTime from,
+            @Param("to") LocalDateTime to);
+
     Optional<Observation> findFirstByStationAndDimensionOrderByTimeDesc(
             Station station,
             MeasurementDimension rain);
