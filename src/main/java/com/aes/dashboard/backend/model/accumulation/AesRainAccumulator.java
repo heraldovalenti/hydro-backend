@@ -10,8 +10,8 @@ public class AesRainAccumulator extends RainAccumulator {
     public double accumulate(List<Observation> observations) {
         if (observations.size() == 1) return 0;
         List<Observation> sorted = this.sortObservations(observations);
-        double firstObservation = sorted.get(0).getValue();
-        double lastObservation = sorted.get(observations.size() - 1).getValue();
+        double firstObservation = Math.max(0, sorted.get(0).getValue());
+        double lastObservation = Math.max(0, sorted.get(observations.size() - 1).getValue());
         double diff = lastObservation - firstObservation;
         return (diff < 0) ? 0.0 : diff;
     }

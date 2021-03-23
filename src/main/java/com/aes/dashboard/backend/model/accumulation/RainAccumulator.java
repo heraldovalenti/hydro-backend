@@ -21,10 +21,10 @@ public abstract class RainAccumulator {
     );
 
     private static final Map<Station, RainAccumulator> stationAccumulatorMap = Map.of(
-            new Station(11), new SimpleRainAccumulator(),
-            new Station(16), new SimpleRainAccumulator(),
-            new Station(76), new SimpleRainAccumulator(),
-            new Station(6), new SimpleRainAccumulator()
+            new Station(11), new SimpleRainAccumulator(), // AES - Termoandes
+            new Station(16), new SimpleRainAccumulator(),// AES - Medina
+            new Station(76), new SimpleRainAccumulator(), // AES - El Tunal
+            new Station(6), new SimpleRainAccumulator() // AES - Cabra Corral
     );
 
     public static Optional<RainAccumulator> accumulatorForObservations(List<Observation> observationList) {
