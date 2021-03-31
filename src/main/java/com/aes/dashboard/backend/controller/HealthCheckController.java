@@ -33,6 +33,7 @@ public class HealthCheckController {
             aesDataService.getLatestData();
             return ResponseEntity.ok().build();
         } catch (RestClientException e) {
+            LOGGER.warn("Exception during health check for /latestData", e);
             return ResponseEntity.status(403).build();
         }
     }
