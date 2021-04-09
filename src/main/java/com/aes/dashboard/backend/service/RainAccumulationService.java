@@ -67,6 +67,7 @@ public class RainAccumulationService {
         for (Station s : stations) {
             List<Observation> stationObservations = rainObservations
                     .stream().filter(o -> s.equals(o.getStation())).collect(Collectors.toList());
+            measurementUnitService.normalizeMeasurementUnits(stationObservations);
             RainObservationAccumulation rainObservationAccumulation = new RainObservationAccumulation(stationObservations);
             StationRainAccumulation stationRainAccumulation =
                     new StationRainAccumulation(s.getId(), rainObservationAccumulation.getRainAccumulations());
