@@ -21,9 +21,20 @@ public class DataExportService {
     public String getContentDispositionHeader(Station station, RequestTimePeriod requestTimePeriod) {
         DateTimeFormatter outDTF = DateTimeFormatter.ofPattern(EXPORT_FILE_NAME_DATE_OUTPUT_FORMAT);
         return String.format("attachment; filename=%s_%s_%s.csv",
-                station.getDescription(),
+                purgeString(station.getDescription()),
                 requestTimePeriod.getFrom().format(outDTF),
                 requestTimePeriod.getTo().format(outDTF));
+    }
+
+    private String purgeString(String s) {
+        s = s.replace('á', 'a').replace('Á','A');
+        s = s.replace('é', 'e').replace('É', 'E');
+        s = s.replace('í', 'i').replace('Í', 'I');
+        s = s.replace('ó', 'o').replace('O', 'O');
+        s = s.replace('ú', 'u').replace('Ú', 'U');
+        s = s.replace('ü', 'u').replace('Ü', 'U');
+        s = s.replace('ñ', 'n').replace('Ñ', 'N');
+        return s;
     }
 
     public RequestTimePeriod parseRequestTimePeriod(String from, String to) {
