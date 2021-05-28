@@ -1,6 +1,7 @@
 package com.aes.dashboard.backend.service;
 
 import com.aes.dashboard.backend.controller.entities.RequestTimePeriod;
+import com.aes.dashboard.backend.model.MeasurementDimension;
 import com.aes.dashboard.backend.model.Station;
 import com.aes.dashboard.backend.repository.StationRepository;
 import org.junit.jupiter.api.Assertions;
@@ -21,15 +22,19 @@ class DataExportServiceTest {
     @Autowired
     private StationRepository stationRepository;
 
+    @Autowired
+    private MeasurementDimensionService dimensionService;
+
     @Test
     public void testStationsNameForExport() {
         RequestTimePeriod rtp = new RequestTimePeriod(
                 LocalDateTime.of(2021,1,1,0,0),
                 LocalDateTime.of(2021,1,1,0,0));
         List<Station> stations = stationRepository.findAll();
+        MeasurementDimension rainDimension = dimensionService.getRainDimension();
         for (Station s : stations) {
             if (!Normalizer.isNormalized(s.getDescription(), Normalizer.Form.NFD)) {
-                String header = service.getContentDispositionHeader(s, rtp);
+                String header = service.getContentDispositionHeader(s, rainDimension, rtp);
                 boolean result = Normalizer.isNormalized(header, Normalizer.Form.NFD);
                 Assertions.assertTrue(result);
             }

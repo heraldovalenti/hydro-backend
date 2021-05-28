@@ -1,6 +1,7 @@
 package com.aes.dashboard.backend.service;
 
 import com.aes.dashboard.backend.controller.entities.RequestTimePeriod;
+import com.aes.dashboard.backend.model.MeasurementDimension;
 import com.aes.dashboard.backend.model.Observation;
 import com.aes.dashboard.backend.model.Station;
 import org.springframework.data.domain.Page;
@@ -18,10 +19,12 @@ import static com.aes.dashboard.backend.config.GlobalConfigs.*;
 @Service
 public class DataExportService {
 
-    public String getContentDispositionHeader(Station station, RequestTimePeriod requestTimePeriod) {
+    public String getContentDispositionHeader(
+            Station station, MeasurementDimension dimension, RequestTimePeriod requestTimePeriod) {
         DateTimeFormatter outDTF = DateTimeFormatter.ofPattern(EXPORT_FILE_NAME_DATE_OUTPUT_FORMAT);
-        return String.format("attachment; filename=%s_%s_%s.csv",
+        return String.format("attachment; filename=%s_%s_%s_%s.csv",
                 purgeString(station.getDescription()),
+                purgeString(dimension.getDescription()),
                 requestTimePeriod.getFrom().format(outDTF),
                 requestTimePeriod.getTo().format(outDTF));
     }

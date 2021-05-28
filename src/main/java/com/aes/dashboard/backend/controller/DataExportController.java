@@ -2,8 +2,10 @@ package com.aes.dashboard.backend.controller;
 
 import com.aes.dashboard.backend.controller.entities.RequestTimePeriod;
 import com.aes.dashboard.backend.exception.EntityNotFound;
+import com.aes.dashboard.backend.model.MeasurementDimension;
 import com.aes.dashboard.backend.model.Observation;
 import com.aes.dashboard.backend.model.Station;
+import com.aes.dashboard.backend.repository.MeasurementDimensionRepository;
 import com.aes.dashboard.backend.repository.StationRepository;
 import com.aes.dashboard.backend.service.DataExportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +30,20 @@ public class DataExportController {
     private StationRepository stationRepository;
 
     @Autowired
+    private MeasurementDimensionRepository dimensionRepository;
+
+    @Autowired
     private ObservationController observationController;
 
     @Autowired
     private DataExportService dataExportService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/observations/{stationId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/observations/{stationId}/{dimensionId}")
     public void exportByStation(
             @PathVariable
                     Long stationId,
+            @PathVariable
+                    Long dimensionId,
             @PageableDefault(value = Integer.MAX_VALUE, page = 0)
             @SortDefault(sort = "time", direction = Sort.Direction.DESC)
                     Pageable pageable,
@@ -45,11 +52,13 @@ public class DataExportController {
             HttpServletResponse response) throws IOException {
         Optional<Station> stationOpt = stationRepository.findById(stationId);
         Station station = stationOpt.orElseThrow(() -> new EntityNotFound(stationId, Station.class));
+        Optional<MeasurementDimension> dimensionOpt = dimensionRepository.findById(dimensionId);
+        MeasurementDimension dimension = dimensionOpt.orElseThrow(() -> new EntityNotFound(dimensionId, MeasurementDimension.class));
         RequestTimePeriod requestTimePeriod = dataExportService.parseRequestTimePeriod(from, to);
-        Page<Observation> result = observationController.listByStationAndPeriod(
-                stationId, pageable, requestTimePeriod);
+        Page<Observation> result = observationController.listByStationAndDimensionAndPeriod(
+                stationId, dimensionId, pageable, requestTimePeriod);
         response.setContentType("text/csv");
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, dataExportService.getContentDispositionHeader(station, requestTimePeriod));
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, dataExportService.getContentDispositionHeader(station, dimension, requestTimePeriod));
         PrintWriter pw = response.getWriter();
         dataExportService.writeExportData(pw, result);
         pw.close();
