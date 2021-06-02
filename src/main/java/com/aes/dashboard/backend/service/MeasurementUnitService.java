@@ -51,4 +51,7 @@ public class MeasurementUnitService {
     }
 
 
+    public MeasurementUnit getM3PerSecondMeasurementUnit() {
+        return measurementUnitRepository.findById(5L).get();
+    }
 }

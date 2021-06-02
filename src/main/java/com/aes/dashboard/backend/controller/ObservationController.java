@@ -97,16 +97,17 @@ public class ObservationController {
                     Long stationId,
             @PathVariable
                     Long dimensionId,
+            @RequestParam(defaultValue = "false", name = "useHQModel") boolean useHQModel,
             @PageableDefault(value = 20, page = 0)
             @SortDefault(sort = "time", direction = Sort.Direction.DESC)
-                    Pageable pageable,
+            Pageable pageable,
             @RequestBody RequestTimePeriod requestTimePeriod) {
         Optional<Station> station = stationRepository.findById(stationId);
         Optional<MeasurementDimension> dimension = measurementDimensionRepository.findById(dimensionId);
-        Page<Observation> results = observationRepository.findByStationAndDimensionAndBetweenTime(
+        Page<Observation> results = observationService.listByStationAndDimensionAndPeriod(
                 station.orElseThrow(() -> new EntityNotFound(stationId, Station.class)),
                 dimension.orElseThrow(() -> new EntityNotFound(dimensionId, MeasurementDimension.class)),
-                requestTimePeriod.getFrom(), requestTimePeriod.getTo(), pageable);
+                useHQModel, requestTimePeriod.getFrom(), requestTimePeriod.getTo(), pageable);
         measurementUnitService.normalizeMeasurementUnits(results);
         return results;
     }

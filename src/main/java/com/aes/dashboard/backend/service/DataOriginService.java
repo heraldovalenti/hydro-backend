@@ -31,4 +31,8 @@ public class DataOriginService {
     public DataOrigin getSNIHDataOrigin() {
         return dataOriginRepository.findById(6L).get();
     }
+
+    public DataOrigin getHQModelDataOrigin() {
+        return dataOriginRepository.findById(7L).get();
+    }
 }

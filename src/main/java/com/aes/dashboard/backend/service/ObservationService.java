@@ -17,14 +17,15 @@ import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergrou
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ObservationService {
@@ -229,6 +230,49 @@ public class ObservationService {
             LOGGER.info("Creating observation: {}", observation.toString());
             observationRepository.save(observation);
         }
+    }
+
+    @Autowired
+    private MeasurementDimensionService measurementDimensionService;
+
+    public Page<Observation> listByStationAndDimensionAndPeriod(
+            Station station,
+            MeasurementDimension measurementDimension,
+            boolean useHQModel,
+            LocalDateTime from, LocalDateTime to,
+            Pageable pageable) {
+        Page<Observation> results;
+        if (useHQModel) {
+            results = generateHQModel(station, measurementDimension, from, to, pageable);
+        } else {
+            results = observationRepository.findByStationAndDimensionAndBetweenTime(
+                    station, measurementDimension, from, to, pageable);
+        }
+        measurementUnitService.normalizeMeasurementUnits(results);
+        return results;
+    }
+
+    private Page<Observation> generateHQModel(
+            Station station,
+            MeasurementDimension measurementDimension,
+            LocalDateTime from, LocalDateTime to,
+            Pageable pageable) {
+        MeasurementDimension flow = measurementDimensionService.getFlowDimension();
+        if (!flow.equals(measurementDimension)) return Page.empty();
+        MeasurementDimension levelMeasurementDimension = measurementDimensionService.getLevelDimension();
+        DataOrigin hqModelDataOrigin = dataOriginService.getHQModelDataOrigin();
+        MeasurementUnit m3PerSecondMeasurementUnit = measurementUnitService.getM3PerSecondMeasurementUnit();
+        Page<Observation> hObservations = observationRepository.findByStationAndDimensionAndBetweenTime(
+                station, levelMeasurementDimension, from, to, pageable);
+        return hObservations.map(o -> {
+            double hValue = o.getValue();
+            double qValue = station.getHqModel().q(hValue);
+            o.setDimension(flow);
+            o.setDataOrigin(hqModelDataOrigin);
+            o.setUnit(m3PerSecondMeasurementUnit);
+            o.setValue(qValue);
+            return o;
+        });
     }
 
 }

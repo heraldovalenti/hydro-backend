@@ -30,6 +30,10 @@ public class Station {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "station")
     private List<Observation> observationList;
 
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "station")
+    private HQModel hqModel;
+
     public Station() {
     }
 
@@ -83,6 +87,14 @@ public class Station {
 
     public void setObservationList(List<Observation> observationList) {
         this.observationList = observationList;
+    }
+
+    public HQModel getHqModel() {
+        return hqModel;
+    }
+
+    public void setHqModel(HQModel hqModel) {
+        this.hqModel = hqModel;
     }
 
     @Override

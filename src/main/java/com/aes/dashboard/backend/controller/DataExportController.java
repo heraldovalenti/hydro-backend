@@ -49,6 +49,7 @@ public class DataExportController {
                     Pageable pageable,
             @RequestParam(defaultValue = "") String from,
             @RequestParam(defaultValue = "") String to,
+            @RequestParam(defaultValue = "false", name = "useHQModel") boolean useHQModel,
             HttpServletResponse response) throws IOException {
         Optional<Station> stationOpt = stationRepository.findById(stationId);
         Station station = stationOpt.orElseThrow(() -> new EntityNotFound(stationId, Station.class));
@@ -56,7 +57,7 @@ public class DataExportController {
         MeasurementDimension dimension = dimensionOpt.orElseThrow(() -> new EntityNotFound(dimensionId, MeasurementDimension.class));
         RequestTimePeriod requestTimePeriod = dataExportService.parseRequestTimePeriod(from, to);
         Page<Observation> result = observationController.listByStationAndDimensionAndPeriod(
-                stationId, dimensionId, pageable, requestTimePeriod);
+                stationId, dimensionId, useHQModel, pageable, requestTimePeriod);
         response.setContentType("text/csv");
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, dataExportService.getContentDispositionHeader(station, dimension, requestTimePeriod));
         PrintWriter pw = response.getWriter();

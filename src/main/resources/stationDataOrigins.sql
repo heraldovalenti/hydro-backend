@@ -98,4 +98,15 @@ INSERT INTO station_data_origin
 (65, 6, 1, 2, 74, '10815'), --Canal de Dios'), --10815, dimension: nivel, default unit: m
 (66, 6, 1, 2, 75, '10611'); --La Punilla'); --10611, dimension: nivel, default unit: m
 
--- last ID: 68 (Tunal)
+-- data origin: HQ Model
+INSERT INTO station_data_origin
+(id,data_origin_id,dimension_id,default_unit_id,station_id,external_station_id) VALUES
+(69, 7, 2, 5, 35, ''), --Punilla
+(70, 7, 2, 5, 36, ''), --Medina
+(71, 7, 2, 5, 38, ''), --Miraflores
+(72, 7, 2, 5, 65, ''), --SNIH - La Maroma
+(73, 7, 2, 5, 67, ''), --SNIH - Metán - Desembocadura
+(74, 7, 2, 5, 75, ''), --SNIH - La Punilla
+(75, 7, 2, 5, 68, ''); --SNIH - El Tunal
+
+-- last ID: 75 (SNIH - El Tunal)
