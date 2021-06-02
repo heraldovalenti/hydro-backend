@@ -131,9 +131,16 @@ public class HQModel {
 
     public double q(double hSensor) {
         double h = hSensor + hOffset;
-        double q = 0;
-        if (h < hLimit) q = lowPassFactor * Math.pow(h + lowPassOffset, lowPassExponent);
-        else if (h >= hLimit) q = highPassFactor * Math.pow(h + highPassOffset, highPassExponent);
+        double q = 0,
+                qFactor = lowPassFactor,
+                base = h + lowPassOffset,
+                exp = lowPassExponent;
+        if (h >= hLimit) {
+            qFactor = highPassFactor;
+            base = h + highPassOffset;
+            exp = highPassExponent;
+        }
+        if (base > 0) q = qFactor * Math.pow(base, exp);
         return q;
     }
 }
