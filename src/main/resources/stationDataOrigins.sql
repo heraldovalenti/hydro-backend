@@ -18,9 +18,9 @@ INSERT INTO station_data_origin
 (9, 1, 3, 12, 'Punilla', null), --dimension: lluvia
 
 (10, 1, 1, 39, 'CabraCorral', 2), --dimension: nivel, default unit: metro
-(11, 1, 2, 39, 'CabraCorral', 5), --dimension: caudal, default unit: m3/sec
 (67, 1, 3, 6,  'CabraCorral', 3), --dimension: lluvia, default unit: mm
 
+(11, 1, 2, 34, 'PenasBlancas', 5), --dimension: caudal, default unit: m3/sec
 (12, 1, 1, 34, 'PenasBlancas', 2), --dimension: nivel, default unit: metro
 
 (13, 1, 1, 37, 'Tunal', 2), --dimension: nivel, default unit: metro
