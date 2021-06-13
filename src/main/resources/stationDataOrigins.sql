@@ -32,24 +32,24 @@ INSERT INTO station_data_origin
 (48, 1, 1, 28, 'Alemania', null), --dimension: nivel
 (49, 1, 3, 33, 'Alemania', null); --dimension: lluvia
 
---data origin: WeatherUndeground
+--data origin: WeatherUnderground
 INSERT INTO station_data_origin
 (id,data_origin_id,dimension_id,station_id,external_station_id,default_unit_id) VALUES
 (15, 2, 3, 19, 'IROSARIO12', 4), --dimension: lluvia
-(16, 2, 3, 20, 'ISALTACE3', 4), --dimension: lluvia
-(17, 2, 3, 18, 'IMETND1', 4), --dimension: lluvia
+(16, 2, 3, 20, 'ISALTACE3', 4), --dimension: lluvia     NO_DATA
+(17, 2, 3, 18, 'IMETND1', 4), --dimension: lluvia       NO_DATA
 (18, 2, 3, 21, 'ISALTA10', 4), --dimension: lluvia
 (19, 2, 3, 22, 'ISALTA17', 4), --dimension: lluvia
 (20, 2, 3, 23, 'IROSARIO32', 4), --dimension: lluvia
-(21, 2, 3, 24, 'ITUMBA11', 4), --dimension: lluvia
+(21, 2, 3, 24, 'ITUMBA11', 4), --dimension: lluvia      NO_DATA
 (22, 2, 3, 25, 'IMONTE19', 4), --dimension: lluvia
-(23, 2, 3, 26, 'IANDAL3', 4), --dimension: lluvia
+(23, 2, 3, 26, 'IANDAL3', 4), --dimension: lluvia       NO_DATA
 (24, 2, 3, 4,  'ISALTA7', 4), --dimension: lluvia
 (25, 2, 3, 5,  'ILACAL8', 4), --dimension: lluvia
 (26, 2, 3, 3,  'ISALTA11', 4), --dimension: lluvia
 (27, 2, 3, 40, 'IROSAR45', 4), --dimension: lluvia
-(36, 2, 3, 48, 'ISALTA13', 4), --dimension: lluvia
-(50, 2, 3, 60, 'ICAFAY1', 4); --dimension: lluvia
+(36, 2, 3, 48, 'ISALTA13', 4), --dimension: lluvia      NO_DATA
+(50, 2, 3, 60, 'ICAFAY1', 4); --dimension: lluvia       NO_DATA
 
 --data origin: INTA_Siga2
 INSERT INTO station_data_origin
