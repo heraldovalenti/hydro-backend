@@ -40,13 +40,6 @@ public class DataExportService {
         return s;
     }
 
-    public RequestTimePeriod parseRequestTimePeriod(String from, String to) {
-        DateTimeFormatter inDTF = DateTimeFormatter.ofPattern(REQUEST_PARAM_DATE_INPUT_FORMAT);
-        LocalDateTime fromDate = LocalDateTime.parse(from, inDTF),
-                toDate = LocalDateTime.parse(to, inDTF);
-        return new RequestTimePeriod(fromDate, toDate);
-    }
-
     public void writeExportData(Writer pw, Page<Observation> data) throws IOException {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(EXPORT_FILE_CONTENT_DATE_OUTPUT_FORMAT);
         pw.write(String.format("Fecha y hora, Valor observado, Unidad"));

@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static com.aes.dashboard.backend.config.GlobalConfigs.DEFAULT_DATE_TIME_FORMAT;
+import static com.aes.dashboard.backend.config.GlobalConfigs.REQUEST_PARAM_DATE_INPUT_FORMAT;
 
 public class RequestTimePeriod {
 
@@ -44,5 +46,12 @@ public class RequestTimePeriod {
                 "from=" + from +
                 ", to=" + to +
                 '}';
+    }
+
+    public static RequestTimePeriod of(String from, String to) {
+        DateTimeFormatter inDTF = DateTimeFormatter.ofPattern(REQUEST_PARAM_DATE_INPUT_FORMAT);
+        LocalDateTime fromDate = LocalDateTime.parse(from, inDTF),
+                toDate = LocalDateTime.parse(to, inDTF);
+        return new RequestTimePeriod(fromDate, toDate);
     }
 }

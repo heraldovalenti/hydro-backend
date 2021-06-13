@@ -55,7 +55,7 @@ public class DataExportController {
         Station station = stationOpt.orElseThrow(() -> new EntityNotFound(stationId, Station.class));
         Optional<MeasurementDimension> dimensionOpt = dimensionRepository.findById(dimensionId);
         MeasurementDimension dimension = dimensionOpt.orElseThrow(() -> new EntityNotFound(dimensionId, MeasurementDimension.class));
-        RequestTimePeriod requestTimePeriod = dataExportService.parseRequestTimePeriod(from, to);
+        RequestTimePeriod requestTimePeriod = RequestTimePeriod.of(from, to);
         Page<Observation> result = observationController.listByStationAndDimensionAndPeriod(
                 stationId, dimensionId, useHQModel, pageable, requestTimePeriod);
         response.setContentType("text/csv");
