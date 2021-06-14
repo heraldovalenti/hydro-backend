@@ -107,4 +107,11 @@ public class Observation {
                 ", dataOrigin=" + dataOrigin.getDescription() +
                 '}';
     }
+
+    public Observation latest(Observation o) {
+        if (o != null && o.getTime().isAfter(this.time)) {
+            return o;
+        }
+        return this;
+    }
 }

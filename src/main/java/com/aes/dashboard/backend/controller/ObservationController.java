@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.controller;
 
+import com.aes.dashboard.backend.controller.entities.ObservationWithStation;
 import com.aes.dashboard.backend.controller.entities.RequestTimePeriod;
 import com.aes.dashboard.backend.exception.EntityNotFound;
 import com.aes.dashboard.backend.model.MeasurementDimension;
@@ -24,8 +25,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/observations")
@@ -177,6 +178,21 @@ public class ObservationController {
         );
         LOGGER.info("Last observation for station {} and dimension {} found? {}", stationId, dimensionId, result.isPresent());
         return result.orElse(null);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/latestObservations/{dimensionId}")
+    public List<ObservationWithStation> latestObservations(
+            @PathVariable Long dimensionId,
+            @RequestParam(defaultValue = "") String from,
+            @RequestParam(defaultValue = "") String to) {
+        RequestTimePeriod period = RequestTimePeriod.of(from, to);
+        Optional<MeasurementDimension> station = measurementDimensionRepository.findById(dimensionId);
+        List<Observation> observations = observationService.latestObservations(
+                station.orElseThrow(() -> new EntityNotFound(dimensionId, MeasurementDimension.class)),
+                period.getFrom(), period.getTo());
+        return observations.stream()
+                .map(o -> ObservationWithStation.fromObservation(o))
+                .collect(Collectors.toList());
     }
 }
 

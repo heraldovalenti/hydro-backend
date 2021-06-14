@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service;
 
+import com.aes.dashboard.backend.exception.EntityNotFound;
 import com.aes.dashboard.backend.model.*;
 import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationDataOriginRepository;
@@ -23,9 +24,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ObservationService {
@@ -123,7 +122,7 @@ public class ObservationService {
             List<Observation> observations = new LinkedList<>();
             List<INTASiga2DataItem> intaDataItems = intaSiga2DataService.getObservationData(
                     intaStationDataOrigin.getExternalStationId());
-            for(INTASiga2DataItem dataItem : intaDataItems) {
+            for (INTASiga2DataItem dataItem : intaDataItems) {
                 Observation observation = new Observation();
                 observation.setDimension(intaStationDataOrigin.getDimension());
                 observation.setStation(intaStationDataOrigin.getStation());
@@ -275,4 +274,16 @@ public class ObservationService {
         });
     }
 
+    public List<Observation> latestObservations(MeasurementDimension dimension, LocalDateTime from, LocalDateTime to) {
+        List<Observation> observations = observationRepository.findByDimensionAndBetweenTime(dimension, from, to);
+        Map<Station, Observation> lastObservations = new HashMap<>();
+        for (Observation o : observations) {
+            lastObservations.putIfAbsent(o.getStation(), o);
+            lastObservations.compute(o.getStation(), (k, v) -> v.latest(o));
+        }
+        List<Observation> result = new LinkedList<>();
+        result.addAll(lastObservations.values());
+        measurementUnitService.normalizeMeasurementUnits(result);
+        return result;
+    }
 }
