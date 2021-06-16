@@ -19,6 +19,13 @@ public class StationService {
     @Autowired
     private MeasurementDimensionService measurementDimensionService;
 
+    public List<Station> stationsWithDimension(MeasurementDimension dimension) {
+        List<StationDataOrigin> dataOriginsForRain = stationDataOriginRepository
+                .findByDimension(dimension);
+        List<Station> result = dataOriginsForRain.stream().map(x -> x.getStation()).collect(Collectors.toList());
+        return result;
+    }
+
     public List<Station> stationsWithRainOrigin() {
         MeasurementDimension rainDimension = measurementDimensionService.getRainDimension();
         List<StationDataOrigin> dataOriginsForRain = stationDataOriginRepository

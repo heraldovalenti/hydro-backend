@@ -58,6 +58,12 @@ public class ObservationService {
     @Autowired
     private ObservationRepository observationRepository;
 
+    @Autowired
+    private StationService stationService;
+
+    @Autowired
+    private MeasurementDimensionService measurementDimensionService;
+
     @Transactional
     public void updateAesObservations() {
         LOGGER.info("Starting update for AES observations...");
@@ -231,9 +237,6 @@ public class ObservationService {
         }
     }
 
-    @Autowired
-    private MeasurementDimensionService measurementDimensionService;
-
     public Page<Observation> listByStationAndDimensionAndPeriod(
             Station station,
             MeasurementDimension measurementDimension,
@@ -275,14 +278,13 @@ public class ObservationService {
     }
 
     public List<Observation> latestObservations(MeasurementDimension dimension, LocalDateTime from, LocalDateTime to) {
-        List<Observation> observations = observationRepository.findByDimensionAndBetweenTime(dimension, from, to);
-        Map<Station, Observation> lastObservations = new HashMap<>();
-        for (Observation o : observations) {
-            lastObservations.putIfAbsent(o.getStation(), o);
-            lastObservations.compute(o.getStation(), (k, v) -> v.latest(o));
-        }
+        List<Station> stations = stationService.stationsWithDimension(dimension);
         List<Observation> result = new LinkedList<>();
-        result.addAll(lastObservations.values());
+        for (Station station : stations) {
+            List<Observation> latestObservation = observationRepository
+                    .findByStationAndDimensionAndBetweenTime(station, dimension, from, to);
+            if (!latestObservation.isEmpty()) result.add(latestObservation.get(0));
+        }
         measurementUnitService.normalizeMeasurementUnits(result);
         return result;
     }

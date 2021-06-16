@@ -185,14 +185,18 @@ public class ObservationController {
             @PathVariable Long dimensionId,
             @RequestParam(defaultValue = "") String from,
             @RequestParam(defaultValue = "") String to) {
+        Long start = System.currentTimeMillis();
         RequestTimePeriod period = RequestTimePeriod.of(from, to);
         Optional<MeasurementDimension> station = measurementDimensionRepository.findById(dimensionId);
         List<Observation> observations = observationService.latestObservations(
                 station.orElseThrow(() -> new EntityNotFound(dimensionId, MeasurementDimension.class)),
                 period.getFrom(), period.getTo());
-        return observations.stream()
+        List<ObservationWithStation> result = observations.stream()
                 .map(o -> ObservationWithStation.fromObservation(o))
                 .collect(Collectors.toList());
+        Long end = System.currentTimeMillis();
+        LOGGER.debug("latestObservations execution time: {}", (end - start));
+        return result;
     }
 }
 
