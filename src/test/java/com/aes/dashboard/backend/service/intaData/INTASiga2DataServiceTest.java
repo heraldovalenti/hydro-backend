@@ -26,4 +26,10 @@ public class INTASiga2DataServiceTest {
         Assertions.assertEquals(135, result.size());
     }
 
+    @Test
+    public void palmaSolaStationTest() {
+        List<INTASiga2DataItem> result = intaSiga2DataService.getObservationData("395");
+        Assertions.assertEquals(0, result.size());
+    }
+
 }

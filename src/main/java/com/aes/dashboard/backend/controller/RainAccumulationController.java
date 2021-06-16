@@ -67,4 +67,12 @@ public class RainAccumulationController {
         return results;
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public List<StationRainAccumulation> accumulations(
+        @RequestParam(defaultValue = "") String from,
+        @RequestParam(defaultValue = "") String to) {
+        RequestTimePeriod period = RequestTimePeriod.of(from, to);
+        return accumulations(period);
+    }
+
 }
