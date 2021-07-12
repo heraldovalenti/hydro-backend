@@ -280,11 +280,17 @@ public class ObservationService {
     public List<Observation> latestObservations(MeasurementDimension dimension, LocalDateTime from, LocalDateTime to) {
         List<Station> stations = stationService.stationsWithDimension(dimension);
         List<Observation> result = new LinkedList<>();
+        Long start = System.currentTimeMillis();
         for (Station station : stations) {
+            Long startStation = System.currentTimeMillis();
             List<Observation> latestObservation = observationRepository
                     .findByStationAndDimensionAndBetweenTime(station, dimension, from, to);
             if (!latestObservation.isEmpty()) result.add(latestObservation.get(0));
+            Long endStation = System.currentTimeMillis();
+            LOGGER.debug("took {} millis for station {}", endStation-startStation, station.getId());
         }
+        Long end = System.currentTimeMillis();
+        LOGGER.debug("took {} millis", end - start);
         measurementUnitService.normalizeMeasurementUnits(result);
         return result;
     }

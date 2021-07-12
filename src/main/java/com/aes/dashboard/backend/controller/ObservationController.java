@@ -187,9 +187,9 @@ public class ObservationController {
             @RequestParam(defaultValue = "") String to) {
         Long start = System.currentTimeMillis();
         RequestTimePeriod period = RequestTimePeriod.of(from, to);
-        Optional<MeasurementDimension> station = measurementDimensionRepository.findById(dimensionId);
+        Optional<MeasurementDimension> dimension = measurementDimensionRepository.findById(dimensionId);
         List<Observation> observations = observationService.latestObservations(
-                station.orElseThrow(() -> new EntityNotFound(dimensionId, MeasurementDimension.class)),
+                dimension.orElseThrow(() -> new EntityNotFound(dimensionId, MeasurementDimension.class)),
                 period.getFrom(), period.getTo());
         List<ObservationWithStation> result = observations.stream()
                 .map(o -> ObservationWithStation.fromObservation(o))
