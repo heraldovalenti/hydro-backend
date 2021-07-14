@@ -1,5 +1,5 @@
-*/30 * * * * curl --user monitor:SaltaLaLinda01 https://hydro-dashboard-283320.uc.r.appspot.com/api/observations/updateAesObservations
-*/15 * * * * curl --user monitor:SaltaLaLinda01 https://hydro-dashboard-283320.uc.r.appspot.com/api/observations/updateWeatherUndergroundObservations
-*/15 * * * * curl --user monitor:SaltaLaLinda01 https://hydro-dashboard-283320.uc.r.appspot.com/api/observations/updateINTASiga2Observations
-*/15 * * * * curl --user monitor:SaltaLaLinda01 https://hydro-dashboard-283320.uc.r.appspot.com/api/observations/updateINTAAnteriorObservations
-*/15 * * * * curl --user monitor:SaltaLaLinda01 https://hydro-dashboard-283320.uc.r.appspot.com/api/observations/updateSNIHObservations
+*/30 * * * * curl --user monitor:SaltaLaLinda01 https://hydro-dashboard-2021-q3.uc.r.appspot.com/api/observations/updateAesObservations
+*/15 * * * * curl --user monitor:SaltaLaLinda01 https://hydro-dashboard-2021-q3.uc.r.appspot.com/api/observations/updateWeatherUndergroundObservations
+*/15 * * * * curl --user monitor:SaltaLaLinda01 https://hydro-dashboard-2021-q3.uc.r.appspot.com/api/observations/updateINTASiga2Observations
+*/15 * * * * curl --user monitor:SaltaLaLinda01 https://hydro-dashboard-2021-q3.uc.r.appspot.com/api/observations/updateINTAAnteriorObservations
+*/15 * * * * curl --user monitor:SaltaLaLinda01 https://hydro-dashboard-2021-q3.uc.r.appspot.com/api/observations/updateSNIHObservations
