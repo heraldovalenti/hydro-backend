@@ -9,8 +9,9 @@ services:
     volumes:
       - postgres-db:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: aes
-      POSTGRES_PASSWORD: Aes#123
+      POSTGRES_DB: $PG_DATABASE
+      POSTGRES_USERNAME: $PG_USERNAME
+      POSTGRES_PASSWORD: $PG_PASSWORD
     logging:
       driver: "json-file"
       options:
