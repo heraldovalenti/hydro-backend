@@ -6,7 +6,8 @@ INSERT INTO station_data_origin
 (1, 1, 1, 27, 'Cachi', null), --dimension: nivel
 (2, 1, 3, 47, 'Cachi', null), --dimension: lluvia
 
-(3, 1, 3, 13, 'CampoQuijano', null), --dimension: lluvia
+(76, 1, 1, 32, 'CampoQuijano', null), --dimension: nivel
+(3,  1, 3, 13, 'CampoQuijano', null), --dimension: lluvia
 
 (4, 1, 1, 38, 'Miraflores', null), --dimension: nivel
 (5, 1, 3, 15, 'Miraflores', null), --dimension: lluvia
@@ -109,4 +110,4 @@ INSERT INTO station_data_origin
 (74, 7, 2, 5, 75, ''), --SNIH - La Punilla
 (75, 7, 2, 5, 68, ''); --SNIH - El Tunal
 
--- last ID: 75 (SNIH - El Tunal)
+-- last ID: 76 (AES - CampoQuijano)
