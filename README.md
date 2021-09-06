@@ -3,7 +3,9 @@
 Pass in `dev` profile with:  
 `spring-boot:run -Dspring-boot.run.arguments=--spring.profiles.active=dev`
 
-with a built JAR:
+With IntelliJ add the program argument `--spring.profiles.active=dev` to the Run Configuration.
+
+With a built JAR:
 `java -jar -Dspring.profiles.active=dev backend-0.0.1-SNAPSHOT.jar`
 
 # Deploy to gcloud
