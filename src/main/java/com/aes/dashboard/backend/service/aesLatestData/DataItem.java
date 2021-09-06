@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service.aesLatestData;
 
+import com.aes.dashboard.backend.config.GlobalConfigs;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -12,7 +13,7 @@ public class DataItem {
     private String dimension;
     private double value;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = GlobalConfigs.ISO_DATE_TIME_FORMAT)
     private LocalDateTime date;
 
     private String unit;
