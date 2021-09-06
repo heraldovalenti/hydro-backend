@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/health-check")
@@ -30,8 +32,12 @@ public class HealthCheckController {
     public ResponseEntity latestData() {
         LOGGER.info("health check for latestData");
         try {
-            aesDataService.getLatestData();
-            return ResponseEntity.ok().build();
+            int latestDataSize = aesDataService.getLatestData().size();
+            return ResponseEntity.ok().body(
+                    Map.of(
+                            "latestDataCheck", "ok",
+                            "latestDataSize", latestDataSize
+                    ));
         } catch (RestClientException e) {
             LOGGER.warn("Exception during health check for /latestData", e);
             return ResponseEntity.status(403).build();
