@@ -31,7 +31,7 @@ public class AESDataService {
 
     public AESDataService(
             RestTemplate restTemplate,
-            @Value("${aes.latest-data.url}") String url,
+            @Value("${aes.one-drive.url}") String url,
             AppConfigService appConfigService) {
         this.restTemplate = restTemplate;
         this.url = url;

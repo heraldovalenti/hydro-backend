@@ -1,6 +1,5 @@
 package com.aes.dashboard.backend.service;
 
-import com.aes.dashboard.backend.exception.EntityNotFound;
 import com.aes.dashboard.backend.model.*;
 import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationDataOriginRepository;
