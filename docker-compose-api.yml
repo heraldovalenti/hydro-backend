@@ -5,7 +5,7 @@ services:
     image: aes-api
     restart: always
     ports:
-      - 80:8080
+      - 8080:8080
     environment:
       PG_ADDRESS: $PG_ADDRESS
       PG_PORT: $PG_PORT
