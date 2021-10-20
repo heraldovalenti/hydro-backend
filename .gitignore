@@ -2,4 +2,4 @@
 target/
 *.iml
 env.yaml
-LOAD_ENV
+env.sh
