@@ -16,6 +16,9 @@ public class Forecast {
     @Column(nullable = false)
     private String provider;
 
+    @Column(nullable = false)
+    private String city;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "forecast", cascade = CascadeType.ALL)
     private List<ForecastDetail> details;
 
@@ -39,6 +42,14 @@ public class Forecast {
 
     public void setProvider(String provider) {
         this.provider = provider;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public List<ForecastDetail> getDetails() {
