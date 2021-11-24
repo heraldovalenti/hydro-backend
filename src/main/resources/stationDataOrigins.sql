@@ -50,7 +50,11 @@ INSERT INTO station_data_origin
 (26, 2, 3, 3,  'ISALTA11', 4), --dimension: lluvia
 (27, 2, 3, 40, 'IROSAR45', 4), --dimension: lluvia
 (36, 2, 3, 48, 'ISALTA13', 4), --dimension: lluvia      NO_DATA
-(50, 2, 3, 60, 'ICAFAY1', 4); --dimension: lluvia       NO_DATA
+(50, 2, 3, 60, 'ICAFAY1', 4), --dimension: lluvia       NO_DATA
+(77, 2, 3, 77, 'IMOLIN34', 4), --dimension: lluvia
+(78, 2, 3, 78, 'ISALTA17', 4), --dimension: lluvia
+(79, 2, 3, 79, 'ISALTA14', 4), --dimension: lluvia
+(80, 2, 3, 80, 'ISALTA30', 4); --dimension: lluvia
 
 --data origin: INTA_Siga2
 INSERT INTO station_data_origin
@@ -110,4 +114,4 @@ INSERT INTO station_data_origin
 (74, 7, 2, 5, 75, ''), --SNIH - La Punilla
 (75, 7, 2, 5, 68, ''); --SNIH - El Tunal
 
--- last ID: 76 (AES - CampoQuijano)
+-- last ID: 80 (weather underground - cruz del sur)

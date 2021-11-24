@@ -85,6 +85,11 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (72, -64.022402,     -25.360688,  'SNIH - Canal Liag - El Quebrachal'), --10696
 (73, -63.976155,     -25.413480,  'SNIH - Canal Macapillo'), --10699
 (74, -63.948058,     -25.610777,  'SNIH - Canal de Dios'), --10815
-(75, -65.823113,     -26.011919,  'SNIH - La Punilla'); --10611
+(75, -65.823113,     -26.011919,  'SNIH - La Punilla'), --10611
 
--- last ID: 76 (El Tunal)
+(77, -66.24, -25.32, 'Weather Underground - Seclantas'), --IMOLIN34
+(78, -65.49, -24.74, 'Weather Underground - sanlo-sla-ar'), --ISALTA17
+(79, -65.40, -24.73, 'Weather Underground - San Jose UCASAL MATTEO'), --ISALTA14
+(80, -65.42, -24.78, 'Weather Underground - CruzDelSur'); --ISALTA30
+
+-- last ID: 80 (CruzDelSur)
