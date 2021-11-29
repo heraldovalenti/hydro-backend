@@ -54,7 +54,8 @@ INSERT INTO station_data_origin
 (77, 2, 3, 77, 'IMOLIN34', 4), --dimension: lluvia
 (78, 2, 3, 78, 'ISALTA17', 4), --dimension: lluvia
 (79, 2, 3, 79, 'ISALTA14', 4), --dimension: lluvia
-(80, 2, 3, 80, 'ISALTA30', 4); --dimension: lluvia
+(80, 2, 3, 80, 'ISALTA30', 4), --dimension: lluvia
+(81, 2, 3, 81, 'ISALTA34', 4); --dimension: lluvia
 
 --data origin: INTA_Siga2
 INSERT INTO station_data_origin
@@ -114,4 +115,4 @@ INSERT INTO station_data_origin
 (74, 7, 2, 5, 75, ''), --SNIH - La Punilla
 (75, 7, 2, 5, 68, ''); --SNIH - El Tunal
 
--- last ID: 80 (weather underground - cruz del sur)
+-- last ID: 81 (weather underground - Estacion San Lorenzo)
