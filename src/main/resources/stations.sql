@@ -88,7 +88,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (75, -65.823113,     -26.011919,  'SNIH - La Punilla'), --10611
 
 (77, -66.24, -25.32, 'Weather Underground - Seclantas'), --IMOLIN34
-(78, -65.49, -24.74, 'Weather Underground - sanlo-sla-ar'), --ISALTA17
+--(78, -65.49, -24.74, 'Weather Underground - sanlo-sla-ar'), --ISALTA17
 (79, -65.40, -24.73, 'Weather Underground - San Jose UCASAL MATTEO'), --ISALTA14
 (80, -65.42, -24.78, 'Weather Underground - CruzDelSur'), --ISALTA30
 (81, -65.48, -24.73, 'Weather Underground - Estacion San Lorenzo'); --ISALTA34

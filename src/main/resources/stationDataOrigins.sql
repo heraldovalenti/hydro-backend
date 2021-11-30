@@ -52,7 +52,7 @@ INSERT INTO station_data_origin
 (36, 2, 3, 48, 'ISALTA13', 4), --dimension: lluvia      NO_DATA
 (50, 2, 3, 60, 'ICAFAY1', 4), --dimension: lluvia       NO_DATA
 (77, 2, 3, 77, 'IMOLIN34', 4), --dimension: lluvia
-(78, 2, 3, 78, 'ISALTA17', 4), --dimension: lluvia
+--(78, 2, 3, 78, 'ISALTA17', 4), --dimension: lluvia
 (79, 2, 3, 79, 'ISALTA14', 4), --dimension: lluvia
 (80, 2, 3, 80, 'ISALTA30', 4), --dimension: lluvia
 (81, 2, 3, 81, 'ISALTA34', 4); --dimension: lluvia
