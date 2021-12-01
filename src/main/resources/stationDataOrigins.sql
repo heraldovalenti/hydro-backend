@@ -31,7 +31,9 @@ INSERT INTO station_data_origin
 (28, 1, 3, 11, 'Termoandes', 3) --dimension: lluvia, default unit: mm
 
 (48, 1, 1, 28, 'Alemania', null), --dimension: nivel
-(49, 1, 3, 33, 'Alemania', null); --dimension: lluvia
+(49, 1, 3, 33, 'Alemania', null), --dimension: lluvia
+
+(82, 1, 3, 82, 'EscuelaMoldes', 3); --dimension: lluvia, default unit: mm
 
 --data origin: WeatherUnderground
 INSERT INTO station_data_origin
@@ -115,4 +117,4 @@ INSERT INTO station_data_origin
 (74, 7, 2, 5, 75, ''), --SNIH - La Punilla
 (75, 7, 2, 5, 68, ''); --SNIH - El Tunal
 
--- last ID: 81 (weather underground - Estacion San Lorenzo)
+-- last ID: 82 (AES - escuela moldes)
