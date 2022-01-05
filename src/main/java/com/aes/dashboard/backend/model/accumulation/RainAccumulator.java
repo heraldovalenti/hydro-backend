@@ -3,6 +3,8 @@ package com.aes.dashboard.backend.model.accumulation;
 import com.aes.dashboard.backend.model.DataOrigin;
 import com.aes.dashboard.backend.model.Observation;
 import com.aes.dashboard.backend.model.Station;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,8 @@ import java.util.stream.Collectors;
 import static com.aes.dashboard.backend.config.GlobalConfigs.*;
 
 public abstract class RainAccumulator {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RainAccumulator.class);
 
     private static final Map<DataOrigin, RainAccumulator> dataOriginAccumulatorMap = Map.of(
             new DataOrigin(DATA_ORIGIN_AES), new AesRainAccumulator(),
@@ -24,16 +28,26 @@ public abstract class RainAccumulator {
             new Station(11), new SimpleRainAccumulator(), // AES - Termoandes
             new Station(16), new SimpleRainAccumulator(),// AES - Medina
             new Station(76), new SimpleRainAccumulator(), // AES - El Tunal
-            new Station(6), new SimpleRainAccumulator() // AES - Cabra Corral
+            new Station(6), new SimpleRainAccumulator(), // AES - Cabra Corral
+            new Station(82), new SimpleRainAccumulator() // AES - Coronel Moldes
     );
 
     public static Optional<RainAccumulator> accumulatorForObservations(List<Observation> observationList) {
         Optional<Station> observationStation = observationList
                 .stream().map(o -> o.getStation()).distinct().findFirst();
-        if (observationStation.isEmpty()) return Optional.empty();
+        if (observationStation.isEmpty()) {
+            LOGGER.warn("cannot get station from observations {}", observationList);
+            return Optional.empty();
+        }
         Station station = observationStation.get();
-        return stationAccumulatorMap.containsKey(station) ?
+        Optional<RainAccumulator> result = stationAccumulatorMap.containsKey(station) ?
                 Optional.of(stationAccumulatorMap.get(station)) : Optional.empty();
+        if (result.isPresent()) {
+            LOGGER.debug("accumulator for station {}: {}", station.getId(), result.get().getClass().getSimpleName());
+        } else {
+            LOGGER.debug("no accumulator for station {} is configured", station.getId());
+        }
+        return result;
     }
 
     public static Optional<RainAccumulator> accumulatorForDataOrigin(DataOrigin dataOrigin) {
