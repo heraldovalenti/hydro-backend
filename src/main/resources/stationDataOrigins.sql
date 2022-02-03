@@ -115,6 +115,7 @@ INSERT INTO station_data_origin
 (72, 7, 2, 5, 65, ''), --SNIH - La Maroma
 (73, 7, 2, 5, 67, ''), --SNIH - Metán - Desembocadura
 (74, 7, 2, 5, 75, ''), --SNIH - La Punilla
-(75, 7, 2, 5, 68, ''); --SNIH - El Tunal
+(75, 7, 2, 5, 68, ''), --SNIH - El Tunal
+(83, 7, 2, 5, 28, ''); --AES - Alemania
 
--- last ID: 82 (AES - escuela moldes)
+-- last ID: 83 (AES - Alemania)
