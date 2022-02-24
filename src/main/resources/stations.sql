@@ -92,6 +92,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (79, -65.40, -24.73, 'Weather Underground - San Jose UCASAL MATTEO'), --ISALTA14
 (80, -65.42, -24.78, 'Weather Underground - CruzDelSur'), --ISALTA30
 (81, -65.48, -24.73, 'Weather Underground - Estacion San Lorenzo'), --ISALTA34
-(82, -65.47, -25.27, 'AES - Escuela Moldes');
+(82, -65.47, -25.27, 'AES - Escuela Moldes'),
+(83, -65.42, -24.73, 'Weather Underground - Infomet');
 
--- last ID: 82 (AES escuela moldes)
+-- last ID: 83 (Weather Underground - Infomet)

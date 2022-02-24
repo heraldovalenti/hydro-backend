@@ -57,7 +57,8 @@ INSERT INTO station_data_origin
 --(78, 2, 3, 78, 'ISALTA17', 4), --dimension: lluvia
 (79, 2, 3, 79, 'ISALTA14', 4), --dimension: lluvia
 (80, 2, 3, 80, 'ISALTA30', 4), --dimension: lluvia
-(81, 2, 3, 81, 'ISALTA34', 4); --dimension: lluvia
+(81, 2, 3, 81, 'ISALTA34', 4), --dimension: lluvia
+(84, 2, 3, 83, 'ISALTA31', 4); --dimension: lluvia
 
 --data origin: INTA_Siga2
 INSERT INTO station_data_origin
@@ -118,4 +119,4 @@ INSERT INTO station_data_origin
 (75, 7, 2, 5, 68, ''), --SNIH - El Tunal
 (83, 7, 2, 5, 28, ''); --AES - Alemania
 
--- last ID: 83 (AES - Alemania)
+-- last ID: 84 (ISALTA31)
