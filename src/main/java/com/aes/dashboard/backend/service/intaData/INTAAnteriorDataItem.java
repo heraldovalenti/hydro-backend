@@ -37,4 +37,13 @@ public class INTAAnteriorDataItem {
     public void setIntensidadLluvia(double intensidadLluvia) {
         this.intensidadLluvia = intensidadLluvia;
     }
+
+    @Override
+    public String toString() {
+        return "INTAAnteriorDataItem{" +
+                "date=" + date +
+                ", lluvia=" + lluvia +
+                ", intensidadLluvia=" + intensidadLluvia +
+                '}';
+    }
 }

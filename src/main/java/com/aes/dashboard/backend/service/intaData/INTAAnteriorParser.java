@@ -14,13 +14,21 @@ import static com.aes.dashboard.backend.config.GlobalConfigs.UTC_ZONE_ID;
 public class INTAAnteriorParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(INTAAnteriorParser.class);
+    public static final String RAIN = "Rain";
+    public static final String LLUVIA = "Lluvia";
+    public static final String SPACE = " ";
 
     public static List<INTAAnteriorDataItem> parseResponse(String response) {
         List<INTAAnteriorDataItem> result = new LinkedList<>();
         String[] lines = response.split("\n");
+        if (lines.length <= 3) {
+            return result;
+        }
+        int rainIndex = rainColumnIndex(lines[1]);
+        LOGGER.debug("Rain column is {} for line: {}", rainIndex, lines[1]);
         for (int i = 3; i < lines.length; i++) {
             String line = lines[i];
-            Optional<INTAAnteriorDataItem> itemOpt = parseLine(line);
+            Optional<INTAAnteriorDataItem> itemOpt = parseLine(line, rainIndex);
             if (itemOpt.isPresent()) result.add(itemOpt.get());
         }
         Collections.sort(result, Comparator.comparing(INTAAnteriorDataItem::getDate));
@@ -30,26 +38,41 @@ public class INTAAnteriorParser {
         return result;
     }
 
-    private static Optional<INTAAnteriorDataItem> parseLine(String line) {
-        List<String> parts = Arrays.stream(line.split(" ")).filter(s -> !s.isEmpty()).collect(Collectors.toList());
+    private static int rainColumnIndex(String line1) {
+        boolean isEnglish = line1.contains(RAIN);
+        List<String> columns = Arrays.stream(line1.split(SPACE)).filter(s -> !s.isEmpty()).collect(Collectors.toList());
+        for (int i = 0; i < columns.size(); i++) {
+            if (isEnglish && RAIN.equals(columns.get(i))) {
+                return i;
+            } else if (!isEnglish && LLUVIA.equals(columns.get(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private static Optional<INTAAnteriorDataItem> parseLine(String line, int rainIndex) {
+        LOGGER.debug("Parsing line: {}", line);
+        List<String> parts = Arrays.stream(line.split(SPACE)).filter(s -> !s.isEmpty()).collect(Collectors.toList());
         Optional<LocalDateTime> date = parseDate(parts.get(0), parts.get(1));
         if (date.isEmpty()) {
             LOGGER.warn("Could not parse <date> from line {}", line);
             return Optional.empty();
         }
-        double lluvia = 0;
-        double intensidadLluvia = 0;
+        double rain = 0;
+        double rainRate = 0;
         try {
-            lluvia = Double.parseDouble(parts.get(17));
+            rain = Double.parseDouble(parts.get(rainIndex));
         } catch (NumberFormatException e) {
-            LOGGER.warn("Could not parse <lluvia> from line", line, e);
+            LOGGER.warn("Could not parse <rain> from line", line, e);
         }
         try {
-            intensidadLluvia = Double.parseDouble(parts.get(18));
+            rainRate = Double.parseDouble(parts.get(rainIndex + 1));
         } catch (NumberFormatException e) {
-            LOGGER.warn("Could not parse <intensidadLluvia> from line {}", line, e);
+            LOGGER.warn("Could not parse <rainRate> from line {}", line, e);
         }
-        INTAAnteriorDataItem result = new INTAAnteriorDataItem(date.get(), lluvia, intensidadLluvia);
+        INTAAnteriorDataItem result = new INTAAnteriorDataItem(date.get(), rain, rainRate);
+        LOGGER.debug("Parse line result: {}", result);
         return Optional.of(result);
     }
 
