@@ -2,7 +2,6 @@ package com.aes.dashboard.backend.controller;
 
 import com.aes.dashboard.backend.model.Basin;
 import com.aes.dashboard.backend.service.BasinService;
-import com.aes.dashboard.backend.service.forecast.ForecastFetchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
