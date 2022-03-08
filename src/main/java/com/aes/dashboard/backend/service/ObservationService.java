@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service;
 
+import com.aes.dashboard.backend.controller.entities.RequestTimePeriod;
 import com.aes.dashboard.backend.model.*;
 import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationDataOriginRepository;
@@ -23,7 +24,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
+
+import static com.aes.dashboard.backend.config.GlobalConfigs.SALTA_ZONE_ID;
 
 @Service
 public class ObservationService {
@@ -77,15 +81,15 @@ public class ObservationService {
                                     && aesStationDataOrigin.getDimension().getDescription().toLowerCase().trim()
                                     .equals(item.getDimension().toLowerCase().trim())
                     ).forEach(dataItem -> {
-                        Observation observation = new Observation();
-                        observation.setDimension(aesStationDataOrigin.getDimension());
-                        observation.setStation(aesStationDataOrigin.getStation());
-                        observation.setDataOrigin(aesDataOrigin);
-                        observation.setTime(dataItem.getDate());
-                        observation.setValue(dataItem.getValue());
-                        Optional<MeasurementUnit> unit = measurementUnitService.getByAlias(dataItem.getUnit());
-                        if (unit.isPresent()) observation.setUnit(unit.get());
-                        else observation.setUnit(aesStationDataOrigin.getDefaultUnit());
+                Observation observation = new Observation();
+                observation.setDimension(aesStationDataOrigin.getDimension());
+                observation.setStation(aesStationDataOrigin.getStation());
+                observation.setDataOrigin(aesDataOrigin);
+                observation.setTime(dataItem.getDate());
+                observation.setValue(dataItem.getValue());
+                Optional<MeasurementUnit> unit = measurementUnitService.getByAlias(dataItem.getUnit());
+                if (unit.isPresent()) observation.setUnit(unit.get());
+                else observation.setUnit(aesStationDataOrigin.getDefaultUnit());
                 observations.add(observation);
             });
             updateObservationsForStationOrigin(aesStationDataOrigin, observations);
@@ -168,7 +172,14 @@ public class ObservationService {
 
     @Transactional
     public void updateSNIHObservations() {
-        LOGGER.info("Starting update for SNIH observations...");
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(SALTA_ZONE_ID));
+        RequestTimePeriod period = new RequestTimePeriod(now, now);
+        updateSNIHObservations(period, true);
+    }
+
+    @Transactional
+    public void updateSNIHObservations(RequestTimePeriod period, boolean skipPreviousObservations) {
+        LOGGER.info("Starting update for SNIH observations (from {} to {})...", period.getFrom(), period.getTo());
         DataOrigin snihDataOrigin = dataOriginService.getSNIHDataOrigin();
         List<StationDataOrigin> snihStationDataOriginList = stationDataOriginRepository.findByDataOrigin(snihDataOrigin);
         for (StationDataOrigin snihStationDataOrigin : snihStationDataOriginList) {
@@ -179,7 +190,7 @@ public class ObservationService {
                 continue;
             }
             List<SNIHObservation> snihDataItems = snihDataService.getLatestData(
-                    snihStationDataOrigin.getExternalStationId(), aux.get());
+                    snihStationDataOrigin.getExternalStationId(), aux.get(), period.getFrom(), period.getTo());
             for (SNIHObservation dataItem : snihDataItems) {
                 Observation observation = new Observation();
                 observation.setDimension(snihStationDataOrigin.getDimension());
@@ -190,16 +201,26 @@ public class ObservationService {
                 observation.setUnit(snihStationDataOrigin.getDefaultUnit());
                 observations.add(observation);
             }
-            updateObservationsForStationOrigin(snihStationDataOrigin, observations);
+            updateObservationsForStationOrigin(snihStationDataOrigin, observations, skipPreviousObservations);
         }
         LOGGER.info("Update for SNIH observations completed");
     }
 
     @Transactional
-    public void updateObservationsForStationOrigin(StationDataOrigin stationDataOrigin, List<Observation> observations) {
+    public void updateObservationsForStationOrigin(
+            StationDataOrigin stationDataOrigin,
+            List<Observation> observations) {
+        updateObservationsForStationOrigin(stationDataOrigin, observations, true);
+    }
+
+    @Transactional
+    public void updateObservationsForStationOrigin(
+            StationDataOrigin stationDataOrigin,
+            List<Observation> observations,
+            boolean skipPreviousObservations) {
         Optional<Observation> lastObservation = observationRepository.findFirstByStationAndDimensionOrderByTimeDesc(
                 stationDataOrigin.getStation(), stationDataOrigin.getDimension());
-        if (lastObservation.isPresent()) {
+        if (lastObservation.isPresent() && skipPreviousObservations) {
             LOGGER.info("Last observation for station \"{}\" ({}) and dimension \"{}\" found ({}), discarding previous observations...",
                     stationDataOrigin.getStation().getDescription(),
                     stationDataOrigin.getStation().getId(),
@@ -286,7 +307,7 @@ public class ObservationService {
                     .findByStationAndDimensionAndBetweenTime(station, dimension, from, to);
             if (!latestObservation.isEmpty()) result.add(latestObservation.get(0));
             Long endStation = System.currentTimeMillis();
-            LOGGER.debug("took {} millis for station {}", endStation-startStation, station.getId());
+            LOGGER.debug("took {} millis for station {}", endStation - startStation, station.getId());
         }
         Long end = System.currentTimeMillis();
         LOGGER.debug("took {} millis", end - start);

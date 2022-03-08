@@ -101,7 +101,7 @@ public class ObservationController {
             @RequestParam(defaultValue = "false", name = "useHQModel") boolean useHQModel,
             @PageableDefault(value = 20, page = 0)
             @SortDefault(sort = "time", direction = Sort.Direction.DESC)
-            Pageable pageable,
+                    Pageable pageable,
             @RequestBody RequestTimePeriod requestTimePeriod) {
         Optional<Station> station = stationRepository.findById(stationId);
         Optional<MeasurementDimension> dimension = measurementDimensionRepository.findById(dimensionId);
@@ -162,8 +162,15 @@ public class ObservationController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateSNIHObservations")
-    public void updateSNIHObservations() {
-        observationService.updateSNIHObservations();
+    public void updateSNIHObservations(
+            @RequestParam(defaultValue = "") String from,
+            @RequestParam(defaultValue = "") String to) {
+        if (!from.isEmpty() && !to.isEmpty()) {
+            RequestTimePeriod period = RequestTimePeriod.of(from, to);
+            observationService.updateSNIHObservations(period, false);
+        } else {
+            observationService.updateSNIHObservations();
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/lastObservation/{stationId}/{dimensionId}")
