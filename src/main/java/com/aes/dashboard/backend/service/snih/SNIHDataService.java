@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service.snih;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class SNIHDataService {
     private RestTemplate restTemplate;
 
     public SNIHDataService(
-            RestTemplate restTemplate,
+            @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate,
             @Value("${snih.url.latest}") String url) {
         this.restTemplate = restTemplate;
         this.url = url;
@@ -38,16 +39,16 @@ public class SNIHDataService {
                 "fechaDesde", from.format(dtf),
                 "fechaHasta", to.format(dtf),
                 "estacion", stationId,
-                "codigo", code.code.toString() );
+                "codigo", code.code.toString());
         ResponseEntity<SNIHDataRoot> response = this.restTemplate.postForEntity(
                 this.url, body, SNIHDataRoot.class);
         List<SNIHObservation> result = new LinkedList<>();
         SNIHDataRoot dataRoot = response.getBody();
         for (SNIHDataMedicion medicion : dataRoot.getD().getMediciones()) {
-            result.add( new SNIHObservation(
+            result.add(new SNIHObservation(
                     medicion.parseFechaHora(),
                     medicion.parseCodigo(),
-                    medicion.parseValor() ));
+                    medicion.parseValor()));
         }
         return result;
     }
