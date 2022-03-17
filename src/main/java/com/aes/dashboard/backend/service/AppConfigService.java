@@ -44,7 +44,7 @@ public class AppConfigService {
     }
 
     private String truncateAuthToken(String authToken) {
-        int begin = 260, end = 360;
+        int begin = 550, end = 650;
         try {
             return authToken.substring(begin, end);
         } catch (IndexOutOfBoundsException e) {
