@@ -13,6 +13,7 @@ import com.aes.dashboard.backend.repository.StationRepository;
 import com.aes.dashboard.backend.service.MeasurementUnitService;
 import com.aes.dashboard.backend.service.ObservationService;
 import com.aes.dashboard.backend.service.RainAccumulationService;
+import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,9 @@ public class ObservationController {
 
     @Autowired
     private RainAccumulationService rainAccumulationService;
+
+    @Autowired
+    private AESDataService aesDataService;
 
     @RequestMapping(method = RequestMethod.GET)
     public Page<Observation> listAll(
@@ -139,6 +143,11 @@ public class ObservationController {
         observationService.updateINTASiga2Observations();
         observationService.updateINTAAnteriorObservations();
         observationService.updateSNIHObservations();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/refreshAuthToken")
+    public void refreshAuthToken() {
+        aesDataService.refreshAuthToken();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateAesObservations")

@@ -43,7 +43,6 @@ public class AESDataService {
 
     public List<DataItem> getLatestData() {
         String authToken = appConfigService.getAuthToken();
-        refreshAuthToken(authToken);
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(this.url)
                 .queryParam("authToken", encodeParam(authToken));
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory();
@@ -55,6 +54,11 @@ public class AESDataService {
         List<DataItem> result = new LinkedList<>();
         Arrays.stream(response.getBody()).forEach(latestDataItem -> result.addAll(latestDataItem.getData()));
         return result;
+    }
+
+    public void refreshAuthToken() {
+        String currentAuthToken = appConfigService.getAuthToken();
+        refreshAuthToken(currentAuthToken);
     }
 
     public void refreshAuthToken(String currentAuthToken) {
