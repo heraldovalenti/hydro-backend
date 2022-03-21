@@ -1,6 +1,0 @@
-*/30 * * * * curl --user monitor:SaltaLaLinda01 http://localhost:8080/api/observations/updateAesObservations
-*/15 * * * * curl --user monitor:SaltaLaLinda01 http://localhost:8080/api/observations/updateWeatherUndergroundObservations
-*/15 * * * * curl --user monitor:SaltaLaLinda01 http://localhost:8080/api/observations/updateINTASiga2Observations
-*/15 * * * * curl --user monitor:SaltaLaLinda01 http://localhost:8080/api/observations/updateINTAAnteriorObservations
-*/15 * * * * curl --user monitor:SaltaLaLinda01 http://localhost:8080/api/observations/updateSNIHObservations
-0    3 * * * curl --user monitor:SaltaLaLinda01 http://localhost:8080/api/forecast -X POST
