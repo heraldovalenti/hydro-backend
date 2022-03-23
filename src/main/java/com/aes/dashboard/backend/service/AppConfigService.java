@@ -25,6 +25,10 @@ public class AppConfigService {
         return result.orElseThrow(() -> new AppConfigMissing(name));
     }
 
+    public AppConfig getAuthTokenConfig() {
+        return getConfig(LATEST_DATA_AUTH_TOKEN);
+    }
+
     public String getAuthToken() {
         return getConfig(LATEST_DATA_AUTH_TOKEN).getValue();
     }

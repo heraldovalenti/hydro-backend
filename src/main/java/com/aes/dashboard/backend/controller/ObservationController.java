@@ -54,9 +54,6 @@ public class ObservationController {
     @Autowired
     private RainAccumulationService rainAccumulationService;
 
-    @Autowired
-    private AESDataService aesDataService;
-
     @RequestMapping(method = RequestMethod.GET)
     public Page<Observation> listAll(
             @PageableDefault(value = 20, page = 0)
@@ -143,11 +140,6 @@ public class ObservationController {
         observationService.updateINTASiga2Observations();
         observationService.updateINTAAnteriorObservations();
         observationService.updateSNIHObservations();
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/refreshAuthToken")
-    public void refreshAuthToken() {
-        aesDataService.refreshAuthToken();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateAesObservations")

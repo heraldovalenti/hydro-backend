@@ -23,7 +23,7 @@ public class HealthCheckController {
     private AESDataService aesDataService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity list() {
+    public ResponseEntity generalHealthCheck() {
         LOGGER.info("general health check");
         return ResponseEntity.ok().build();
     }
