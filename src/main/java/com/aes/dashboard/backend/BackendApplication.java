@@ -32,6 +32,7 @@ public class BackendApplication {
 						.allowCredentials(true)
 						.allowedMethods(
 								HttpMethod.GET.name(),
+								HttpMethod.PUT.name(),
 								HttpMethod.POST.name());
 			}
 		};
