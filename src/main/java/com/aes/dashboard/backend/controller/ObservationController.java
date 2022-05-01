@@ -13,7 +13,6 @@ import com.aes.dashboard.backend.repository.StationRepository;
 import com.aes.dashboard.backend.service.MeasurementUnitService;
 import com.aes.dashboard.backend.service.ObservationService;
 import com.aes.dashboard.backend.service.RainAccumulationService;
-import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController

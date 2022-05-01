@@ -5,10 +5,7 @@ import com.aes.dashboard.backend.service.AppConfigService;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/aes")
@@ -33,8 +30,12 @@ public class AesController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/refreshAuthToken")
-    public ResponseEntity<Void> refreshAuthToken() {
-        aesDataService.refreshAuthToken();
+    public ResponseEntity<Void> refreshAuthToken(@RequestParam(defaultValue = "") String authToken) {
+        if (!authToken.isEmpty()) {
+            aesDataService.refreshAuthToken(authToken);
+        } else {
+            aesDataService.refreshAuthToken();
+        }
         return ResponseEntity.ok(null);
     }
 }

@@ -4,6 +4,7 @@ import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -29,14 +30,14 @@ public class AESDataService {
     private static final String AUTH_TOKEN_COOKIE_NAME = "FedAuth";
 
     private String url;
-    private RestTemplate restTemplate;
+    private RestTemplateBuilder restTemplateBuilder;
     private AppConfigService appConfigService;
 
     public AESDataService(
-            RestTemplate restTemplate,
+            RestTemplateBuilder restTemplateBuilder,
             @Value("${aes.one-drive.url}") String url,
             AppConfigService appConfigService) {
-        this.restTemplate = restTemplate;
+        this.restTemplateBuilder = restTemplateBuilder;
         this.url = url;
         this.appConfigService = appConfigService;
     }
@@ -47,8 +48,9 @@ public class AESDataService {
                 .queryParam("authToken", encodeParam(authToken));
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory();
         defaultUriBuilderFactory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
-        this.restTemplate.setUriTemplateHandler(defaultUriBuilderFactory);
-        ResponseEntity<LatestDataItem[]> response = this.restTemplate.getForEntity(
+        RestTemplate restTemplate = this.restTemplateBuilder.build();
+        restTemplate.setUriTemplateHandler(defaultUriBuilderFactory);
+        ResponseEntity<LatestDataItem[]> response = restTemplate.getForEntity(
                 builder.build(false).toUriString(),
                 LatestDataItem[].class);
         List<DataItem> result = new LinkedList<>();
@@ -67,7 +69,8 @@ public class AESDataService {
 //                .queryParam("skipSignal", encodeParam("true"))
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory();
         defaultUriBuilderFactory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
-        this.restTemplate.setUriTemplateHandler(defaultUriBuilderFactory);
+        RestTemplate restTemplate = this.restTemplateBuilder.build();
+        restTemplate.setUriTemplateHandler(defaultUriBuilderFactory);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("accept", "application/json;odata=verbose");
@@ -92,7 +95,7 @@ public class AESDataService {
         headers.add("cookie", cookieHeaderValue);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<String> response = this.restTemplate.exchange(
+        ResponseEntity<String> response = restTemplate.exchange(
                 builder.build(false).toUriString(),
                 HttpMethod.POST,
                 entity,

@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 docker run --rm \
     -w /aes \
     -v $HOME/.m2:/root/.m2 \
