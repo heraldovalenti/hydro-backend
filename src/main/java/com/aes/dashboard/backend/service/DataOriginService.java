@@ -32,6 +32,10 @@ public class DataOriginService {
         return dataOriginRepository.findById(6L).get();
     }
 
+    public DataOrigin getWeatherlinkDataOrigin() {
+        return dataOriginRepository.findById(8L).get();
+    }
+
     public DataOrigin getHQModelDataOrigin() {
         return dataOriginRepository.findById(7L).get();
     }

@@ -93,6 +93,12 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (80, -65.42, -24.78, 'Weather Underground - CruzDelSur'), --ISALTA30
 (81, -65.48, -24.73, 'Weather Underground - Estacion San Lorenzo'), --ISALTA34
 (82, -65.47, -25.27, 'AES - Escuela Moldes'),
-(83, -65.42, -24.73, 'Weather Underground - Infomet');
+(83, -65.42, -24.73, 'Weather Underground - Infomet'),
 
--- last ID: 83 (Weather Underground - Infomet)
+(84, -65.4169, -24.7942, 'Weatherlink - ERA 01 - Las Tolas'), -- "bd59bd4c-cbec-40e1-a2d4-36f5feea3475"
+(85, -65.4790, -25.2809, 'Weatherlink - Escuela Coronel Moldes'), -- "351e2b80-75a7-419d-a081-d8ab6ddd3051"
+(86, -65.0413, -24.6855, 'Weatherlink - EMA Norte - Pampa Energía CTG'), -- "a9e1a996-c5ea-4ae1-a582-b46c64403c99"
+(87, -65.0439, -24.6885, 'Weatherlink - EMA Sur - Pampa Energía CTG'), -- "70d018b1-cfae-4ca6-b9b2-598bcd796cb3"
+(88, -64.3822, -25.3109, 'Weatherlink - EMA Nitratos Austin'); -- "f0805dcb-4b23-4e81-9a73-5e31c5e212dc"
+
+-- last ID: 88 (Weatherlink - EMA Nitratos Austin)

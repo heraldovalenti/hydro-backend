@@ -15,6 +15,8 @@ import com.aes.dashboard.backend.service.snih.SNIHDataService;
 import com.aes.dashboard.backend.service.snih.SNIHObservation;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundDataService;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundResult;
+import com.aes.dashboard.backend.service.weatherlinkData.WeatherlinkDataService;
+import com.aes.dashboard.backend.service.weatherlinkData.WeatherlinkResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,9 @@ public class ObservationService {
 
     @Autowired
     private WeatherUndergroundDataService weatherUndergroundDataService;
+
+    @Autowired
+    private WeatherlinkDataService weatherlinkDataService;
 
     @Autowired
     private INTASiga2DataService intaSiga2DataService;
@@ -120,6 +125,31 @@ public class ObservationService {
             this.updateOrCreateObservation(observation);
         }
         LOGGER.info("Update for WeatherUnderground observations completed");
+    }
+
+    @Transactional
+    public void updateWeatherlinkObservations() {
+        LOGGER.info("Starting update for Weatherlink observations");
+        DataOrigin weatherlinkDataOrigin = dataOriginService.getWeatherlinkDataOrigin();
+        List<StationDataOrigin> weatherlinkStationDataOriginList = stationDataOriginRepository.findByDataOrigin(weatherlinkDataOrigin);
+
+        for (StationDataOrigin weatherlinkStationDataOrigin : weatherlinkStationDataOriginList) {
+            Optional<WeatherlinkResult> wlResult = weatherlinkDataService.getObservationData(
+                    weatherlinkStationDataOrigin.getExternalStationId());
+            if (wlResult.isEmpty()) continue;
+            Observation observation = new Observation();
+            observation.setDimension(weatherlinkStationDataOrigin.getDimension());
+            observation.setStation(weatherlinkStationDataOrigin.getStation());
+            observation.setDataOrigin(weatherlinkDataOrigin);
+
+            if (wlResult.isEmpty()) continue;
+            observation.setTime(weatherUndergroundDataService.roundDateTime(wlResult.get().getObservationTime()));
+            observation.setValue(wlResult.get().getObservationValue());
+            observation.setUnit(weatherlinkStationDataOrigin.getDefaultUnit());
+            this.updateOrCreateObservation(observation);
+        }
+
+        LOGGER.info("Update for Weatherlink observations completed");
     }
 
     @Transactional

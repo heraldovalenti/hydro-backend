@@ -21,7 +21,8 @@ public abstract class RainAccumulator {
             new DataOrigin(DATA_ORIGIN_AES), new AesRainAccumulator(),
             new DataOrigin(DATA_ORIGIN_WU), new WURainAccumulator(),
             new DataOrigin(DATA_ORIGIN_INTA_SIGA), new SimpleRainAccumulator(),
-            new DataOrigin(DATA_ORIGIN_INTA_ANTERIOR), new SimpleRainAccumulator()
+            new DataOrigin(DATA_ORIGIN_INTA_ANTERIOR), new SimpleRainAccumulator(),
+            new DataOrigin(DATA_ORIGIN_WEATHERLINK), new WURainAccumulator()
     );
 
     private static final Map<Station, RainAccumulator> stationAccumulatorMap = Map.of(

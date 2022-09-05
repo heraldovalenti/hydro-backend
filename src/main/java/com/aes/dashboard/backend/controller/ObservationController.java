@@ -140,6 +140,7 @@ public class ObservationController {
         observationService.updateINTASiga2Observations();
         observationService.updateINTAAnteriorObservations();
         observationService.updateSNIHObservations();
+        observationService.updateWeatherlinkObservations();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateAesObservations")
@@ -172,6 +173,11 @@ public class ObservationController {
         } else {
             observationService.updateSNIHObservations();
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/updateWeatherlinkObservations")
+    public void updateWeatherlinkObservations() {
+        observationService.updateWeatherlinkObservations();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/lastObservation/{stationId}/{dimensionId}")
