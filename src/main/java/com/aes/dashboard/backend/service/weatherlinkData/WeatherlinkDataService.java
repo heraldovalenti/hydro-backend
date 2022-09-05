@@ -62,7 +62,7 @@ public class WeatherlinkDataService {
 
             return Optional.of(response.getBody());
         } catch (Exception e) {
-            LOGGER.warn("Could not retrieve observation data for station ID {}", stationId);
+            LOGGER.warn("Could not retrieve observation data for station ID {}", stationId, e);
             return Optional.empty();
         }
     }
