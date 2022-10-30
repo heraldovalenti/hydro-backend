@@ -3,3 +3,4 @@ target/
 *.iml
 env.yaml
 env.sh
+.env
