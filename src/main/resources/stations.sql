@@ -106,6 +106,11 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (85, -65.4790, -25.2809, 'Weatherlink - Escuela Coronel Moldes'), -- "351e2b80-75a7-419d-a081-d8ab6ddd3051"
 (86, -63.6667, -22.2036, 'Weatherlink - EMA Norte - Pampa Energía CTG'), -- "a9e1a996-c5ea-4ae1-a582-b46c64403c99"
 (87, -65.0439, -24.6885, 'Weatherlink - EMA Sur - Pampa Energía CTG'), -- "70d018b1-cfae-4ca6-b9b2-598bcd796cb3"
-(88, -64.4472, -25.3500, 'Weatherlink - EMA Nitratos Austin'); -- "f0805dcb-4b23-4e81-9a73-5e31c5e212dc"
+(88, -64.4472, -25.3500, 'Weatherlink - EMA Nitratos Austin'), -- "f0805dcb-4b23-4e81-9a73-5e31c5e212dc"
 
--- last ID: 88 (Weatherlink - EMA Nitratos Austin)
+(96, -64.981216, -25.506801, 'Weatherlink - Metan'), -- "9c4e35eb-9121-4c27-acac-f0901d51c5db"
+(97, -65.494437, -26.236316, 'Weatherlink - PLR 02 Cerro'), -- "17d6d435-6e0f-439d-a252-a474ccaa9382"
+(98, -67.407549, -26.062218, 'Weatherlink - Martillo Este'), -- "4a824103-5e7d-467d-b6bc-8434fce4c44a"
+(99, -66.102293, -25.052811, 'Weatherlink - EMA - Esc. Agrot. Payogasta'); -- "6ba85f40-404a-4661-bcfe-93cbcac16031"
+
+-- last ID: 99 (Weatherlink - EMA - Esc. Agrot. Payogasta)

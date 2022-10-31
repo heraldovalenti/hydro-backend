@@ -133,6 +133,11 @@ INSERT INTO station_data_origin
 (86, 8, 3, 4, 85, '351e2b80-75a7-419d-a081-d8ab6ddd3051'), --Weatherlink - Escuela Coronel Moldes
 (87, 8, 3, 4, 86, 'a9e1a996-c5ea-4ae1-a582-b46c64403c99'), --Weatherlink - EMA Norte - Pampa Energía CTG
 (88, 8, 3, 4, 87, '70d018b1-cfae-4ca6-b9b2-598bcd796cb3'), --Weatherlink - EMA Sur - Pampa Energía CTG
-(89, 8, 3, 4, 88, 'f0805dcb-4b23-4e81-9a73-5e31c5e212dc'); --Weatherlink - EMA Nitratos Austin
+(89, 8, 3, 4, 88, 'f0805dcb-4b23-4e81-9a73-5e31c5e212dc'), --Weatherlink - EMA Nitratos Austin
 
--- last ID: 89 (Weatherlink - EMA Nitratos Austin)
+(97,  8, 3, 4, 96, '9c4e35eb-9121-4c27-acac-f0901d51c5db'), --Weatherlink - Metan
+(98,  8, 3, 4, 97, '17d6d435-6e0f-439d-a252-a474ccaa9382'), --Weatherlink - PLR 02 Cerro
+(99,  8, 3, 4, 98, '4a824103-5e7d-467d-b6bc-8434fce4c44a'), --Weatherlink - Martillo Este
+(100, 8, 3, 4, 99, '6ba85f40-404a-4661-bcfe-93cbcac16031'); --Weatherlink - EMA - Esc. Agrot. Payogasta
+
+-- last ID: 100 (Weatherlink - EMA - Esc. Agrot. Payogasta)
