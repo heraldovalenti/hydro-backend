@@ -69,7 +69,14 @@ INSERT INTO station_data_origin
 (32, 3, 3, 43, '415', 3), --dimension: lluvia, default unit: mm
 (33, 3, 3, 44, '393', 3), --dimension: lluvia, default unit: mm
 (34, 3, 3, 45, '348', 3), --dimension: lluvia, default unit: mm
-(35, 3, 3, 46, '516', 3); --dimension: lluvia, default unit: mm
+(35, 3, 3, 46, '516', 3), --dimension: lluvia, default unit: mm
+(90, 3, 3, 89, '494', 3), --dimension: lluvia, default unit: mm
+(91, 3, 3, 90, '369', 3), --dimension: lluvia, default unit: mm
+(92, 3, 3, 91, '507', 3), --dimension: lluvia, default unit: mm
+(93, 3, 3, 92, '414', 3), --dimension: lluvia, default unit: mm
+(94, 3, 3, 93, '692', 3), --dimension: lluvia, default unit: mm
+(95, 3, 3, 94,  '68', 3), --dimension: lluvia, default unit: mm
+(96, 3, 3, 95, '496', 3); --dimension: lluvia, default unit: mm
 
 --data origin: INTA_Anterior
 INSERT INTO station_data_origin

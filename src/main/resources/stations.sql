@@ -55,6 +55,13 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (44, -66.33,         -27.61, 'INTA - Andalgala'), --393
 (45, -65.38,         -27.02, 'INTA - Famailla'), --348
 (46, -65.83,         -22.8,  'INTA - Abra Pampa'), --516
+(89, -64.96,         -22.25,  'INTA - Sta Victoria O -EEA Abra Pampa'), -- 494 Sta Victoria O -EEA Abra Pampa Latitud	-22.25	Longitud	-64.96
+(90, -62.71,         -22.27,  'INTA - Santa Victoria Este - EEA Yuto'), -- 369 Santa Victoria Este - EEA Yuto Latitud	-22.27	Longitud	-62.71
+(91, -65.27,         -26.28,  'INTA - Trancas - EEA Famaillá'),         -- 507 Trancas - EEA Famaillá Latitud	-26.28	Longitud	-65.27
+(92, -62.89,         -23.46,  'INTA - Morillo - EEA Salta'),            -- 414 Morillo - EEA Salta Latitud	-23.46	Longitud	-62.89
+(93, -65.05,         -27.83,  'INTA - Taco Ralo - EEA Famailla'),       -- 692 Taco Ralo - EEA Famailla Latitud	-27.83	Longitud	-65.05
+(94, -65.42,         -27.05,  'INTA - Famailla (EMC)'),                 --  68 INTA - Famailla (EMC) Latitud	-27.05	Longitud	-65.42
+(95, -62.71,         -25.86,  'INTA - Monte Quemado - EEA E Santiago'), -- 496 Monte Quemado - EEA E Santiago Latitud	-25.86	Longitud	-62.71
 
 (49, -65.416111,     -24.73,      'INTA - Parque del Bicentenario'), --ema_bicentenario
 (50, -64.225277,     -25.1163889, 'INTA - Olleros'), --ema_olleros
