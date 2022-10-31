@@ -53,13 +53,19 @@ public class WeatherlinkDataService {
             String cookieHeaderValue = String.format("%s=%s", AUTH_TOKEN_COOKIE_NAME, currentAuthToken);
             headers.add("cookie", cookieHeaderValue);
             HttpEntity<String> entity = new HttpEntity<>(headers);
+            String stationUrl = builder.build(false).toUriString();
+            LOGGER.debug("Retrieving observation data for station ID {} (URL: {})", stationId, stationUrl);
 
             ResponseEntity<WeatherlinkResult> response = restTemplate.exchange(
-                    builder.build(false).toUriString(),
+                    stationUrl,
                     HttpMethod.GET,
                     entity,
                     WeatherlinkResult.class);
-
+            WeatherlinkResult result = response.getBody();
+            if (!response.hasBody() || result == null || result.getoIssData() == null) {
+                LOGGER.warn("No observation data found for station ID {}", stationId);
+                return Optional.empty();
+            }
             return Optional.of(response.getBody());
         } catch (Exception e) {
             LOGGER.warn("Could not retrieve observation data for station ID {}", stationId, e);
