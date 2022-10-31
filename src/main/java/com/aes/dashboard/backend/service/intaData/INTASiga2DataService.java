@@ -49,30 +49,39 @@ public class INTASiga2DataService {
     }
 
     public String retrieveStationBaseUrl() {
-        String varsResult = this.restTemplate.getForObject(baseUrl + varsPath, String.class);
+        String url = baseUrl + varsPath;
+        LOGGER.debug("Trying to retrieve station base URL with {}...", url);
+        String varsResult = this.restTemplate.getForObject(url, String.class);
         String[] lines = varsResult.split("\n");
         String result = Arrays.stream(lines)
                 .filter(line -> line.contains(varsKey))
                 .collect(Collectors.joining());
         String[] lineParts = result.split("'");
-        return lineParts[1];
+        String lineParts1 = lineParts[1];
+        LOGGER.debug("Retrieved station base URL: {}", lineParts1);
+        return lineParts1;
     }
 
     public List<INTASiga2DataItem> getObservationData(String stationId) {
         String stationBaseUrl = baseUrl + "/" + retrieveStationBaseUrl() + stationId;
+        LOGGER.debug("Retrieving observation data for station ID {} (URL: {})", stationId, stationBaseUrl);
         List<INTASiga2DataItem> result = new LinkedList<>();
         try {
             ResponseEntity<INTASiga2DataItem[]> response = this.restTemplate.getForEntity(
                     stationBaseUrl,
                     INTASiga2DataItem[].class);
-            Arrays.stream(response.getBody()).forEach(intaDataItem -> {
-                ZonedDateTime saltaTime = ZonedDateTime.of(intaDataItem.getFecha(), ZoneId.of(SALTA_ZONE_ID));
-                ZonedDateTime utcTime = saltaTime.withZoneSameInstant(ZoneId.of(UTC_ZONE_ID));
-                intaDataItem.setFecha(utcTime.toLocalDateTime());
-                result.add(intaDataItem);
-            });
+            if (!response.hasBody() || response.getBody() == null) {
+                LOGGER.warn("No observation data found for station ID {}", stationId);
+            } else {
+                Arrays.stream(response.getBody()).forEach(intaDataItem -> {
+                    ZonedDateTime saltaTime = ZonedDateTime.of(intaDataItem.getFecha(), ZoneId.of(SALTA_ZONE_ID));
+                        ZonedDateTime utcTime = saltaTime.withZoneSameInstant(ZoneId.of(UTC_ZONE_ID));
+                        intaDataItem.setFecha(utcTime.toLocalDateTime());
+                        result.add(intaDataItem);
+                });
+            }
         } catch (Exception e) {
-            LOGGER.warn("Could not retrieve observation data for station ID {}", stationId, e);
+            LOGGER.warn("Could not retrieve observation data for station ID {} (URL: {})", stationId, stationBaseUrl, e);
         }
         return result;
     }

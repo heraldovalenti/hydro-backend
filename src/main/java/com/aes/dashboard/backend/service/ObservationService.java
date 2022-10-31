@@ -169,6 +169,7 @@ public class ObservationService {
                 observation.setTime(dataItem.getFecha());
                 observation.setValue(dataItem.getPrecipitacion());
                 observation.setUnit(intaStationDataOrigin.getDefaultUnit());
+                observations.add(observation);
             }
             updateObservationsForStationOrigin(intaStationDataOrigin, observations);
         }
