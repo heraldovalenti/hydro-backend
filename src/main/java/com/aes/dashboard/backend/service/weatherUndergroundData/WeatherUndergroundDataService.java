@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service.weatherUndergroundData;
 
+import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,24 +18,25 @@ public class WeatherUndergroundDataService {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeatherUndergroundDataService.class);
 
     private String url;
-    private String apiKey;
     private RestTemplate restTemplate;
+    private AppConfigService appConfigService;
     private int dateMinutesRound;
 
     public WeatherUndergroundDataService(
             RestTemplate restTemplate,
+            AppConfigService appConfigService,
             @Value("${weather-underground-data.url}") String url,
-            @Value("${weather-underground-data.apiKey}") String apiKey,
             @Value("${weather-underground-data.dateMinutesRound}") Integer dateMinutesRound) {
         this.restTemplate = restTemplate;
         this.url = url;
-        this.apiKey = apiKey;
         this.dateMinutesRound = dateMinutesRound;
+        this.appConfigService = appConfigService;
     }
 
     public Optional<WeatherUndergroundResult> getObservationData(String stationId) {
+        String apiKey = appConfigService.getWeatherUndergroundAuthToken();
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(this.url)
-                .queryParam("apiKey", this.apiKey)
+                .queryParam("apiKey", apiKey)
                 .queryParam("format", "json")
                 .queryParam("units", "e")
                 .queryParam("stationId", stationId);
@@ -44,7 +46,7 @@ public class WeatherUndergroundDataService {
                     WeatherUndergroundResult.class);
             return Optional.of(response.getBody());
         } catch (Exception e) {
-            LOGGER.warn("Could not retrieve observation data for station ID {}", stationId);
+            LOGGER.warn("Could not retrieve observation data for station ID {}", stationId, e);
             return Optional.empty();
         }
     }

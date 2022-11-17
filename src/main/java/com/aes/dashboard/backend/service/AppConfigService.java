@@ -16,6 +16,7 @@ public class AppConfigService {
 
     private static final String LATEST_DATA_AUTH_TOKEN = "LATEST_DATA_AUTH_TOKEN";
     private static final String WEATHERLINK_AUTH_TOKEN = "WEATHERLINK_AUTH_TOKEN";
+    private static final String WEATHERUNDERGROUND_AUTH_TOKEN = "WEATHERUNDERGROUND_AUTH_TOKEN";
     private static final String USER_AGENT_HEADER = "USER_AGENT_HEADER";
     private static final Logger LOGGER = LoggerFactory.getLogger(AppConfigService.class);
 
@@ -33,6 +34,10 @@ public class AppConfigService {
 
     public String getAuthToken() {
         return getConfig(LATEST_DATA_AUTH_TOKEN).getValue();
+    }
+
+    public String getWeatherUndergroundAuthToken() {
+        return getConfig(WEATHERUNDERGROUND_AUTH_TOKEN).getValue();
     }
 
     public String getWeatherlinkAuthToken() {
