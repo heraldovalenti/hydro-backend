@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service.weatherUndergroundData;
 
+import com.aes.dashboard.backend.model.StationDataOrigin;
 import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,20 +34,26 @@ public class WeatherUndergroundDataService {
         this.appConfigService = appConfigService;
     }
 
-    public Optional<WeatherUndergroundResult> getObservationData(String stationId) {
+    public Optional<WeatherUndergroundResult> getObservationData(StationDataOrigin stationDataOrigin) {
+
         String apiKey = appConfigService.getWeatherUndergroundAuthToken();
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(this.url)
                 .queryParam("apiKey", apiKey)
                 .queryParam("format", "json")
                 .queryParam("units", "e")
-                .queryParam("stationId", stationId);
+                .queryParam("stationId", stationDataOrigin.getExternalStationId());
         try {
             ResponseEntity<WeatherUndergroundResult> response = this.restTemplate.getForEntity(
                     builder.toUriString(),
                     WeatherUndergroundResult.class);
+            if (!response.hasBody()) {
+                LOGGER.warn("Weatherunderground station {} (external ID {}) has no data",
+                        stationDataOrigin.getStation().getId(), stationDataOrigin.getExternalStationId());
+                return Optional.empty();
+            }
             return Optional.of(response.getBody());
         } catch (Exception e) {
-            LOGGER.warn("Could not retrieve observation data for station ID {}", stationId, e);
+            LOGGER.warn("Could not retrieve observation data for station ID {}", stationDataOrigin, e);
             return Optional.empty();
         }
     }

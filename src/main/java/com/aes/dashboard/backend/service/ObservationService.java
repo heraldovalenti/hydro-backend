@@ -108,8 +108,7 @@ public class ObservationService {
         DataOrigin WUDataOrigin = dataOriginService.getWeatherUndergroundDataOrigin();
         List<StationDataOrigin> WUStationDataOriginList = stationDataOriginRepository.findByDataOrigin(WUDataOrigin);
         for (StationDataOrigin WUStationDataOrigin : WUStationDataOriginList) {
-            Optional<WeatherUndergroundResult> wuResult = weatherUndergroundDataService.getObservationData(
-                    WUStationDataOrigin.getExternalStationId());
+            Optional<WeatherUndergroundResult> wuResult = weatherUndergroundDataService.getObservationData(WUStationDataOrigin);
             if (wuResult.isEmpty()) continue;
             Observation observation = new Observation();
             observation.setDimension(WUStationDataOrigin.getDimension());

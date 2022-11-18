@@ -1,5 +1,7 @@
 package com.aes.dashboard.backend.service.weatherUndergroundData;
 
+import com.aes.dashboard.backend.model.Station;
+import com.aes.dashboard.backend.model.StationDataOrigin;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,12 @@ class WeatherUndergroundDataServiceTest {
 
     @Test
     public void getObservationDataTest_IROSARIO12() {
-        Optional<WeatherUndergroundResult> optionalResult = this.service.getObservationData("IROSARIO12");
+        Station s = new Station();
+        s.setId(1);
+        StationDataOrigin sdo = new StationDataOrigin();
+        sdo.setExternalStationId("IROSARIO12");
+        sdo.setStation(s);
+        Optional<WeatherUndergroundResult> optionalResult = this.service.getObservationData(sdo);
         Assertions.assertTrue(optionalResult.isPresent());
         WeatherUndergroundResult result = optionalResult.get();
         Assertions.assertEquals(1, result.getSummaries().size());
@@ -31,7 +38,12 @@ class WeatherUndergroundDataServiceTest {
 
     @Test
     public void getObservationDataTest_ISALTA7() {
-        Optional<WeatherUndergroundResult> optionalResult = this.service.getObservationData("ISALTA7");
+        Station s = new Station();
+        s.setId(1);
+        StationDataOrigin sdo = new StationDataOrigin();
+        sdo.setExternalStationId("ISALTA7");
+        sdo.setStation(s);
+        Optional<WeatherUndergroundResult> optionalResult = this.service.getObservationData(sdo);
         Assertions.assertTrue(optionalResult.isEmpty());
     }
 
