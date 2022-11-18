@@ -95,7 +95,6 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (75, -65.823113,     -26.011919,  'SNIH - La Punilla'), --10611
 
 (77, -66.24, -25.32, 'Weather Underground - Seclantas'), --IMOLIN34
---(78, -65.49, -24.74, 'Weather Underground - sanlo-sla-ar'), --ISALTA17
 (79, -65.40, -24.73, 'Weather Underground - San Jose UCASAL MATTEO'), --ISALTA14
 (80, -65.42, -24.78, 'Weather Underground - CruzDelSur'), --ISALTA30
 (81, -65.48, -24.73, 'Weather Underground - Estacion San Lorenzo'), --ISALTA34
@@ -111,6 +110,10 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (96, -64.981216, -25.506801, 'Weatherlink - Metan'), -- "9c4e35eb-9121-4c27-acac-f0901d51c5db"
 (97, -65.494437, -26.236316, 'Weatherlink - PLR 02 Cerro'), -- "17d6d435-6e0f-439d-a252-a474ccaa9382"
 (98, -67.407549, -26.062218, 'Weatherlink - Martillo Este'), -- "4a824103-5e7d-467d-b6bc-8434fce4c44a"
-(99, -66.102293, -25.052811, 'Weatherlink - EMA - Esc. Agrot. Payogasta'); -- "6ba85f40-404a-4661-bcfe-93cbcac16031"
+(99, -66.102293, -25.052811, 'Weatherlink - EMA - Esc. Agrot. Payogasta'), -- "6ba85f40-404a-4661-bcfe-93cbcac16031"
 
--- last ID: 99 (Weatherlink - EMA - Esc. Agrot. Payogasta)
+(100, -65.98, -26.07, 'Weather Underground - Cafayate'), -- "ICAFAY2"
+(101, -64.69, -26.01, 'Weather Underground - Rosario de la Frontera'), -- "IROSAR87"
+(102, -64.03, -23.21, 'Weather Underground - Embarcacion'); -- "IGRLJOSD2"
+
+-- last ID: 102 (Weather Underground - IGRLJOSD2)

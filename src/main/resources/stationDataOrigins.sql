@@ -39,26 +39,28 @@ INSERT INTO station_data_origin
 INSERT INTO station_data_origin
 (id,data_origin_id,dimension_id,station_id,external_station_id,default_unit_id) VALUES
 (15, 2, 3, 19, 'IROSARIO12', 4), --dimension: lluvia
-(16, 2, 3, 20, 'ISALTACE3', 4), --dimension: lluvia     NO_DATA
-(17, 2, 3, 18, 'IMETND1', 4), --dimension: lluvia       NO_DATA
+(16, 2, 3, 20, 'ISALTACE3', 4), --dimension: lluvia
+(17, 2, 3, 18, 'IMETND1', 4), --dimension: lluvia
 (18, 2, 3, 21, 'ISALTA10', 4), --dimension: lluvia
 (19, 2, 3, 22, 'ISALTA17', 4), --dimension: lluvia
 (20, 2, 3, 23, 'IROSARIO32', 4), --dimension: lluvia
-(21, 2, 3, 24, 'ITUMBA11', 4), --dimension: lluvia      NO_DATA
+(21, 2, 3, 24, 'ITUMBA11', 4), --dimension: lluvia
 (22, 2, 3, 25, 'IMONTE19', 4), --dimension: lluvia
-(23, 2, 3, 26, 'IANDAL3', 4), --dimension: lluvia       NO_DATA
+(23, 2, 3, 26, 'IANDAL3', 4), --dimension: lluvia
 (24, 2, 3, 4,  'ISALTA7', 4), --dimension: lluvia
 (25, 2, 3, 5,  'ILACAL8', 4), --dimension: lluvia
 (26, 2, 3, 3,  'ISALTA11', 4), --dimension: lluvia
 (27, 2, 3, 40, 'IROSAR45', 4), --dimension: lluvia
-(36, 2, 3, 48, 'ISALTA13', 4), --dimension: lluvia      NO_DATA
-(50, 2, 3, 60, 'ICAFAY1', 4), --dimension: lluvia       NO_DATA
+(36, 2, 3, 48, 'ISALTA13', 4), --dimension: lluvia
+(50, 2, 3, 60, 'ICAFAY1', 4), --dimension: lluvia
 (77, 2, 3, 77, 'IMOLIN34', 4), --dimension: lluvia
---(78, 2, 3, 78, 'ISALTA17', 4), --dimension: lluvia
 (79, 2, 3, 79, 'ISALTA14', 4), --dimension: lluvia
 (80, 2, 3, 80, 'ISALTA30', 4), --dimension: lluvia
 (81, 2, 3, 81, 'ISALTA34', 4), --dimension: lluvia
-(84, 2, 3, 83, 'ISALTA31', 4); --dimension: lluvia
+(84, 2, 3, 83, 'ISALTA31', 4), --dimension: lluvia
+(101, 2, 3, 100, 'ICAFAY2', 4), --dimension: lluvia
+(102, 2, 3, 101, 'IROSAR87', 4), --dimension: lluvia
+(103, 2, 3, 102, 'IGRLJOSD2', 4); --dimension: lluvia
 
 --data origin: INTA_Siga2
 INSERT INTO station_data_origin
@@ -140,4 +142,4 @@ INSERT INTO station_data_origin
 (99,  8, 3, 4, 98, '4a824103-5e7d-467d-b6bc-8434fce4c44a'), --Weatherlink - Martillo Este
 (100, 8, 3, 4, 99, '6ba85f40-404a-4661-bcfe-93cbcac16031'); --Weatherlink - EMA - Esc. Agrot. Payogasta
 
--- last ID: 100 (Weatherlink - EMA - Esc. Agrot. Payogasta)
+-- last ID: 103 (weather underground - IGRLJOSD2)
