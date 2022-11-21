@@ -30,7 +30,9 @@ public abstract class RainAccumulator {
             new Station(16), new SimpleRainAccumulator(),// AES - Medina
             new Station(76), new SimpleRainAccumulator(), // AES - El Tunal
             new Station(6), new SimpleRainAccumulator(), // AES - Cabra Corral
-            new Station(82), new SimpleRainAccumulator() // AES - Coronel Moldes
+            new Station(82), new SimpleRainAccumulator(), // AES - Coronel Moldes
+            new Station(10), new SimpleRainAccumulator(), // AES - MEtan
+            new Station(8), new SimpleRainAccumulator() // AES - Carril
     );
 
     public static Optional<RainAccumulator> accumulatorForObservations(List<Observation> observationList) {

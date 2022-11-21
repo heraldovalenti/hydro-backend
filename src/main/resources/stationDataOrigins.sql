@@ -33,7 +33,10 @@ INSERT INTO station_data_origin
 (48, 1, 1, 28, 'Alemania', null), --dimension: nivel
 (49, 1, 3, 33, 'Alemania', null), --dimension: lluvia
 
-(82, 1, 3, 82, 'EscuelaMoldes', 3); --dimension: lluvia, default unit: mm
+(82, 1, 3, 82, 'EscuelaMoldes', 3), --dimension: lluvia, default unit: mm
+
+(104, 1, 3,  8, 'Carril', 3), --dimension: lluvia, default unit: mm
+(105, 1, 3, 10, 'Metan', 3); --dimension: lluvia, default unit: mm
 
 --data origin: WeatherUnderground
 INSERT INTO station_data_origin
@@ -142,4 +145,4 @@ INSERT INTO station_data_origin
 (99,  8, 3, 4, 98, '4a824103-5e7d-467d-b6bc-8434fce4c44a'), --Weatherlink - Martillo Este
 (100, 8, 3, 4, 99, '6ba85f40-404a-4661-bcfe-93cbcac16031'); --Weatherlink - EMA - Esc. Agrot. Payogasta
 
--- last ID: 103 (weather underground - IGRLJOSD2)
+-- last ID: 105 (AES - METAN)
