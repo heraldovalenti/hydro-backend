@@ -12,7 +12,8 @@ import static com.aes.dashboard.backend.config.GlobalConfigs.ISO_DATE_TIME_FORMA
 public class ForecastDetail {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FORECAST_DETAIL_SEQ")
+    @SequenceGenerator(name = "FORECAST_DETAIL_SEQ", sequenceName = "SEQUENCE_FORECAST_DETAIL", allocationSize = 1312)
     @Column(nullable = false)
     private long id;
 

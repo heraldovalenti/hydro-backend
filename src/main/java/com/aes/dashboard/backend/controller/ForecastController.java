@@ -41,7 +41,7 @@ public class ForecastController {
         return ResponseEntity.ok( snapshot.get() );
      }
 
-     @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ForecastSnapshot> fetchAndPersist() {
         LOGGER.info("Refreshing forecast snapshot...");
         ForecastSnapshot forecastSnapshot = refreshSnapshot();

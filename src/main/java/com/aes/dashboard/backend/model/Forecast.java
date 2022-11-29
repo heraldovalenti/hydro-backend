@@ -9,7 +9,8 @@ import java.util.List;
 public class Forecast {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FORECAST_SEQ")
+    @SequenceGenerator(name = "FORECAST_SEQ", sequenceName = "SEQUENCE_FORECAST", allocationSize = 20)
     @Column(nullable = false)
     private long id;
 
