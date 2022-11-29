@@ -4,6 +4,8 @@ import com.aes.dashboard.backend.model.Forecast;
 import com.aes.dashboard.backend.model.ForecastSnapshot;
 import com.aes.dashboard.backend.service.forecast.ForecastFetchService;
 import com.aes.dashboard.backend.service.forecast.ForecastService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ import static com.aes.dashboard.backend.config.GlobalConfigs.UTC_ZONE_ID;
 @RequestMapping("/forecast")
 public class ForecastController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ForecastController.class);
+
     @Autowired
     private ForecastService forecastService;
 
@@ -38,11 +42,13 @@ public class ForecastController {
      }
 
      @RequestMapping(method = RequestMethod.POST)
-     public ResponseEntity<ForecastSnapshot> fetchAndPersist() {
-         ForecastSnapshot forecastSnapshot = refreshSnapshot();
-         forecastSnapshot = this.forecastService.persistForecastSnapshot(forecastSnapshot);
-         return ResponseEntity.status(HttpStatus.CREATED).body(forecastSnapshot);
-     }
+    public ResponseEntity<ForecastSnapshot> fetchAndPersist() {
+        LOGGER.info("Refreshing forecast snapshot...");
+        ForecastSnapshot forecastSnapshot = refreshSnapshot();
+        forecastSnapshot = this.forecastService.persistForecastSnapshot(forecastSnapshot);
+        LOGGER.info("Refreshing forecast snapshot completed");
+        return ResponseEntity.status(HttpStatus.CREATED).body(forecastSnapshot);
+    }
 
     @RequestMapping(method = RequestMethod.GET, path = "/refresh")
     public ForecastSnapshot refreshSnapshot() {
