@@ -63,7 +63,8 @@ INSERT INTO station_data_origin
 (84, 2, 3, 83, 'ISALTA31', 4), --dimension: lluvia
 (101, 2, 3, 100, 'ICAFAY2', 4), --dimension: lluvia
 (102, 2, 3, 101, 'IROSAR87', 4), --dimension: lluvia
-(103, 2, 3, 102, 'IGRLJOSD2', 4); --dimension: lluvia
+(103, 2, 3, 102, 'IGRLJOSD2', 4), --dimension: lluvia
+(106, 2, 3, 103, 'ISALTA41', 4); --dimension: lluvia
 
 --data origin: INTA_Siga2
 INSERT INTO station_data_origin
@@ -145,4 +146,4 @@ INSERT INTO station_data_origin
 (99,  8, 3, 4, 98, '4a824103-5e7d-467d-b6bc-8434fce4c44a'), --Weatherlink - Martillo Este
 (100, 8, 3, 4, 99, '6ba85f40-404a-4661-bcfe-93cbcac16031'); --Weatherlink - EMA - Esc. Agrot. Payogasta
 
--- last ID: 105 (AES - METAN)
+-- last ID: 106 (AES - METAN)
