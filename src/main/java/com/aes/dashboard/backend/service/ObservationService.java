@@ -32,6 +32,7 @@ import java.time.ZoneId;
 import java.util.*;
 
 import static com.aes.dashboard.backend.config.GlobalConfigs.SALTA_ZONE_ID;
+import static com.aes.dashboard.backend.config.GlobalConfigs.UTC_ZONE_ID;
 
 @Service
 public class ObservationService {
@@ -243,7 +244,7 @@ public class ObservationService {
 
     @Transactional
     public void updateAesIbuObservations() {
-        LocalDateTime now = LocalDateTime.now(ZoneId.of(SALTA_ZONE_ID));
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(UTC_ZONE_ID));
         LOGGER.info("Starting update for AES IBU observations...");
         DataOrigin aesIbuDataOrigin = dataOriginService.getAesIbuDataOrigin();
         List<StationDataOrigin> aesIbuStationDataOriginList = stationDataOriginRepository.findByDataOrigin(aesIbuDataOrigin);
