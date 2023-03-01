@@ -115,6 +115,10 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (100, -65.98, -26.07, 'Weather Underground - Cafayate'), -- "ICAFAY2"
 (101, -64.69, -26.01, 'Weather Underground - Rosario de la Frontera'), -- "IROSAR87"
 (102, -64.03, -23.21, 'Weather Underground - Embarcacion'), -- "IGRLJOSD2"
-(103, -65.50, -24.85, 'Weather Underground - San Luis UCASAL MATTEO'); -- "ISALTA41"
+(103, -65.50, -24.85, 'Weather Underground - San Luis UCASAL MATTEO'), -- "ISALTA41"
 
--- last ID: 103 (Weather Underground - ISALTA41)
+(104, -65.329, -25.265, 'AES (IBU) - Cabra Corral'), -- "AES IBU CC"
+(105, -65.291, -25.297, 'AES (IBU) - PB'), -- "AES IBU PB"
+(106, -64.480, -25.225, 'AES (IBU) - El Tunal'); -- "AES IBU TUNAL"
+
+-- last ID: 106 (AES (IBU) - El Tunal)

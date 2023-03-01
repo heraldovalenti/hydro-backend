@@ -10,7 +10,8 @@ INSERT INTO data_origin (id, description) VALUES
 (5, 'INTA_Anterior'),
 (6, 'SNIH'),
 (7, 'HQ_model'),
-(8, 'Weatherlink');
+(8, 'Weatherlink'),
+(9, 'AesIbu');
 
 INSERT INTO measurement_dimension (id, description, preferred_unit_id) VALUES
 (1, 'nivel', 2),

@@ -146,4 +146,13 @@ INSERT INTO station_data_origin
 (99,  8, 3, 4, 98, '4a824103-5e7d-467d-b6bc-8434fce4c44a'), --Weatherlink - Martillo Este
 (100, 8, 3, 4, 99, '6ba85f40-404a-4661-bcfe-93cbcac16031'); --Weatherlink - EMA - Esc. Agrot. Payogasta
 
--- last ID: 106 (AES - METAN)
+-- data origin: Weatherlink
+INSERT INTO station_data_origin
+(id,data_origin_id,dimension_id,default_unit_id,station_id,external_station_id) VALUES
+(107, 9, 1, 2, 104, 'CCOR_NIVEL'),  --AES (IBU) - Cabra Corral - nivel
+(108, 9, 1, 2, 105, 'PB_NIVEL'),    --AES (IBU) - PB           - nivel
+(109, 9, 2, 5, 105, 'PB_CAUDAL'),   --AES (IBU) - PB           - caudal
+(110, 9, 1, 2, 106, 'TUNA_NIVEL'),  --AES (IBU) - El Tunal     - nivel
+(111, 9, 2, 5, 106, 'TUNA_CAUDAL'); --AES (IBU) - El Tunal     - caudal
+
+-- last ID: 111 (AES (IBU) - El Tunal)

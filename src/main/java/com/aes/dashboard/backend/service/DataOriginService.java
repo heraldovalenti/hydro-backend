@@ -39,4 +39,8 @@ public class DataOriginService {
     public DataOrigin getHQModelDataOrigin() {
         return dataOriginRepository.findById(7L).get();
     }
+
+    public DataOrigin getAesIbuDataOrigin() {
+        return dataOriginRepository.findById(9L).get();
+    }
 }

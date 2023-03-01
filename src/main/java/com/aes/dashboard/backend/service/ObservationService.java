@@ -4,6 +4,8 @@ import com.aes.dashboard.backend.controller.entities.RequestTimePeriod;
 import com.aes.dashboard.backend.model.*;
 import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationDataOriginRepository;
+import com.aes.dashboard.backend.service.aesGenexLinea.AesIbuDataParts;
+import com.aes.dashboard.backend.service.aesGenexLinea.AesIbuDataService;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
 import com.aes.dashboard.backend.service.aesLatestData.DataItem;
 import com.aes.dashboard.backend.service.intaData.INTAAnteriorDataItem;
@@ -71,6 +73,9 @@ public class ObservationService {
 
     @Autowired
     private MeasurementDimensionService measurementDimensionService;
+
+    @Autowired
+    private AesIbuDataService aesIbuDataService;
 
     @Transactional
     public void updateAesObservations() {
@@ -234,6 +239,37 @@ public class ObservationService {
             updateObservationsForStationOrigin(snihStationDataOrigin, observations, skipPreviousObservations);
         }
         LOGGER.info("Update for SNIH observations completed");
+    }
+
+    @Transactional
+    public void updateAesIbuObservations() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(SALTA_ZONE_ID));
+        LOGGER.info("Starting update for AES IBU observations...");
+        DataOrigin aesIbuDataOrigin = dataOriginService.getAesIbuDataOrigin();
+        List<StationDataOrigin> aesIbuStationDataOriginList = stationDataOriginRepository.findByDataOrigin(aesIbuDataOrigin);
+        Map<AesIbuDataParts, Double> observationData = aesIbuDataService.getObservationData();
+        for (StationDataOrigin aesIbuStationDataOrigin : aesIbuStationDataOriginList) {
+            List<Observation> observations = new LinkedList<>();
+            AesIbuDataParts key = AesIbuDataParts.valueOf(aesIbuStationDataOrigin.getExternalStationId());
+            Double observationValue = observationData.get(key);
+            if (observationValue == null) {
+                LOGGER.warn("{} AES IBU observation value for station {} (id {})",
+                        aesIbuStationDataOrigin.getDimension().getDescription(),
+                        aesIbuStationDataOrigin.getStation().getDescription(),
+                        aesIbuStationDataOrigin.getStation().getId());
+                continue;
+            }
+            Observation observation = new Observation();
+            observation.setDimension(aesIbuStationDataOrigin.getDimension());
+            observation.setStation(aesIbuStationDataOrigin.getStation());
+            observation.setDataOrigin(aesIbuDataOrigin);
+            observation.setTime(now);
+            observation.setValue(observationValue);
+            observation.setUnit(aesIbuStationDataOrigin.getDefaultUnit());
+            observations.add(observation);
+            updateObservationsForStationOrigin(aesIbuStationDataOrigin, observations);
+        }
+        LOGGER.info("Update for AES IBU observations completed");
     }
 
     @Transactional
