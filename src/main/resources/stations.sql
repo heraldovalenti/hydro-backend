@@ -8,7 +8,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (7, -65.5641075318,  -25.4646389836, 'AES - La Viña'),
 (8, -65.5004368533,  -25.0730600581, 'AES - El Carril'),
 (9, -65.4789176706,  -25.2811344002, 'AES - Cnel Moldes'),
-(10, -64.9807806494, -25.5084829401, 'AES - Metán'),
+(10, -64.9763,       -25.4767,       'AES - Metán'),
 (11, -65.0521912365, -24.7432383402, 'AES - Termoandes'),
 (12, -65.8229722222, -26.012,        'AES - La Punilla'),
 (13, -65.6621666667, -24.9006666667, 'AES - Campo Quijano'),
