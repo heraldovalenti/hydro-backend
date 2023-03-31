@@ -13,7 +13,7 @@ public class AesRainAccumulator extends RainAccumulator {
         List<Observation> purgedList = observations.stream()
                 .filter(o -> o.getValue() >= 0) // filter out observations with negative value
                 .collect(Collectors.toList());
-        if (purgedList.size() == 1) return 0;
+        if (purgedList.isEmpty() || purgedList.size() == 1) return 0;
         LinkedList<Observation> sorted = new LinkedList<>(this.sortObservations(purgedList));
         double firstObservation = sorted.getFirst().getValue();
         double lastObservation = sorted.getLast().getValue();
