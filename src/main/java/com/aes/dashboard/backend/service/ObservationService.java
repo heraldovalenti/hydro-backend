@@ -353,6 +353,7 @@ public class ObservationService {
         MeasurementUnit m3PerSecondMeasurementUnit = measurementUnitService.getM3PerSecondMeasurementUnit();
         Page<Observation> hObservations = observationRepository.findByStationAndDimensionAndBetweenTime(
                 station, levelMeasurementDimension, from, to, pageable);
+        measurementUnitService.normalizeMeasurementUnits(hObservations);
         return hObservations.map(o -> {
             double hValue = o.getValue();
             double qValue = station.getHqModel().q(hValue);

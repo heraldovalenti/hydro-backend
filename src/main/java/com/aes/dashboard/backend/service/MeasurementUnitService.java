@@ -15,7 +15,8 @@ import java.util.Optional;
 public class MeasurementUnitService {
 
     private static final List<MeasurementUnitConversion> conversions = List.of(
-            new MeasurementUnitConversion(4, 3, 25.4) // inch > millimeters
+            new MeasurementUnitConversion(4, 3, 25.4), // inch > millimeters
+            new MeasurementUnitConversion(6, 2, 0.01) // centimetro > metro
     );
 
     @Autowired

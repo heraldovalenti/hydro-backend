@@ -24,4 +24,5 @@ INSERT INTO measurement_unit (id, description, alias) VALUES
 (2, 'metro', 'm'),
 (3, 'milimetro', 'mm'),
 (4, 'pulgada', 'in'),
-(5, 'm3/sec', 'm3/sec');
+(5, 'm3/sec', 'm3/sec'),
+(6, 'centrimetro', 'cm');
