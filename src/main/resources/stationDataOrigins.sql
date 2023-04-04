@@ -9,7 +9,7 @@ INSERT INTO station_data_origin
 (76, 1, 1, 32, 'CampoQuijano', null), --dimension: nivel
 (3,  1, 3, 13, 'CampoQuijano', null), --dimension: lluvia
 
-(4, 1, 1, 38, 'Miraflores', null), --dimension: nivel
+(4, 1, 1, 38, 'Miraflores', 6), --dimension: nivel, default unit: cm
 (5, 1, 3, 15, 'Miraflores', null), --dimension: lluvia
 
 (6, 1, 1, 36, 'Medina', null), --dimension: nivel
