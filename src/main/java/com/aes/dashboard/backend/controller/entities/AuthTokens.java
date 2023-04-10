@@ -1,7 +1,5 @@
 package com.aes.dashboard.backend.controller.entities;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-
 import javax.validation.constraints.NotNull;
 
 public class AuthTokens {
