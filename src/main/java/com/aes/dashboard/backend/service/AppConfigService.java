@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service;
 
+import com.aes.dashboard.backend.controller.entities.AuthTokens;
 import com.aes.dashboard.backend.exception.AppConfigMissing;
 import com.aes.dashboard.backend.model.AppConfig;
 import com.aes.dashboard.backend.repository.AppConfigRepository;
@@ -14,7 +15,8 @@ import java.util.Optional;
 @Service
 public class AppConfigService {
 
-    private static final String LATEST_DATA_AUTH_TOKEN = "LATEST_DATA_AUTH_TOKEN";
+    private static final String LATEST_DATA_FED_AUTH = "LATEST_DATA_FED_AUTH";
+    private static final String LATEST_DATA_RT_FA = "LATEST_DATA_RT_FA";
     private static final String WEATHERLINK_AUTH_TOKEN = "WEATHERLINK_AUTH_TOKEN";
     private static final String WEATHERUNDERGROUND_AUTH_TOKEN = "WEATHERUNDERGROUND_AUTH_TOKEN";
     private static final String USER_AGENT_HEADER = "USER_AGENT_HEADER";
@@ -28,12 +30,10 @@ public class AppConfigService {
         return result.orElseThrow(() -> new AppConfigMissing(name));
     }
 
-    public AppConfig getAuthTokenConfig() {
-        return getConfig(LATEST_DATA_AUTH_TOKEN);
-    }
-
-    public String getAuthToken() {
-        return getConfig(LATEST_DATA_AUTH_TOKEN).getValue();
+    public AuthTokens getAuthTokens() {
+        String fedAuth = getConfig(LATEST_DATA_FED_AUTH).getValue();
+        String rtFa = getConfig(LATEST_DATA_RT_FA).getValue();
+        return new AuthTokens(fedAuth, rtFa);
     }
 
     public String getWeatherUndergroundAuthToken() {
@@ -48,27 +48,30 @@ public class AppConfigService {
         return getConfig(USER_AGENT_HEADER).getValue();
     }
 
+
     @Transactional
-    public void updateAuthToken(String authToken) {
-        AppConfig authTokenConfig = getConfig(LATEST_DATA_AUTH_TOKEN);
-        if (authTokenConfig.getValue().equals(authToken)) {
-            LOGGER.info("Skipping authToken update as it is still the same token value ({})", truncateAuthToken(authToken));
+    public void updateFedAuth(String fedAuth) {
+        updateAuthToken(LATEST_DATA_FED_AUTH, fedAuth);
+    }
+
+    @Transactional
+    public void updateRtFa(String rtFa) {
+        updateAuthToken(LATEST_DATA_RT_FA, rtFa);
+    }
+
+    @Transactional
+    private void updateAuthToken(String authTokenName, String authTokenValue) {
+        AppConfig authTokenConfig = getConfig(authTokenName);
+        if (authTokenConfig.getValue().equals(authTokenValue)) {
+            LOGGER.info("Skipping {} update as it is still the same token value ({})",
+                    authTokenName, authTokenValue);
         } else {
             String oldValue = authTokenConfig.getValue();
-            authTokenConfig.setValue(authToken);
+            authTokenConfig.setValue(authTokenValue);
             appConfigRepository.save(authTokenConfig);
-            LOGGER.info("authToken was updated: was {} and now is {}",
-                    truncateAuthToken(oldValue), truncateAuthToken(authToken));
+            LOGGER.info("{} was updated: was {} and now is {}",
+                    authTokenName, oldValue, authTokenValue);
         }
     }
 
-    private String truncateAuthToken(String authToken) {
-        int begin = 550, end = 650;
-        try {
-            return authToken.substring(begin, end);
-        } catch (IndexOutOfBoundsException e) {
-            LOGGER.warn("Tried to substring authToken between {} and {} but authToken length is {}", begin, end, authToken.length());
-        }
-        return authToken;
-    }
 }

@@ -1,6 +1,6 @@
 package com.aes.dashboard.backend.controller;
 
-import com.aes.dashboard.backend.model.AppConfig;
+import com.aes.dashboard.backend.controller.entities.AuthTokens;
 import com.aes.dashboard.backend.service.AppConfigService;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +17,22 @@ public class AesController {
     @Autowired
     private AESDataService aesDataService;
 
-    @RequestMapping(method = RequestMethod.GET, path = "/authToken")
-    public ResponseEntity<AppConfig> getAuthToken() {
-        AppConfig authTokenConfig = appConfigService.getAuthTokenConfig();
-        return ResponseEntity.ok(authTokenConfig);
+    @RequestMapping(method = RequestMethod.GET, path = "/authTokens")
+    public ResponseEntity<AuthTokens> getAuthTokens() {
+        AuthTokens authTokens = appConfigService.getAuthTokens();
+        return ResponseEntity.ok(authTokens);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/authToken")
-    public ResponseEntity<Void> updateAuthToken(@RequestBody AppConfig appConfig) {
-        appConfigService.updateAuthToken(appConfig.getValue());
+    @RequestMapping(method = RequestMethod.PUT, path = "/authTokens")
+    public ResponseEntity<Void> updateAuthTokens(@RequestBody AuthTokens authTokens) {
+        appConfigService.updateFedAuth(authTokens.getFedAuth());
+        appConfigService.updateRtFa(authTokens.getRtFa());
         return ResponseEntity.ok(null);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/refreshAuthToken")
-    public ResponseEntity<Void> refreshAuthToken(@RequestParam(defaultValue = "") String authToken) {
-        if (!authToken.isEmpty()) {
-            aesDataService.refreshAuthToken(authToken);
-        } else {
-            aesDataService.refreshAuthToken();
-        }
+    @RequestMapping(method = RequestMethod.POST, value = "/refreshAuthTokens")
+    public ResponseEntity<Void> refreshAuthTokens(@RequestBody AuthTokens authTokens) {
+        aesDataService.refreshAuthTokens(authTokens);
         return ResponseEntity.ok(null);
     }
 }

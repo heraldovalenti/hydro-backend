@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service.aesLatestData;
 
+import com.aes.dashboard.backend.controller.entities.AuthTokens;
 import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,9 @@ import java.util.stream.Collectors;
 public class AESDataService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AESDataService.class);
-    private static final String AUTH_TOKEN_COOKIE_NAME = "FedAuth";
+    private static final String COOKIE_NAME_FED_AUTH = "FedAuth";
+    private static final String COOKIE_NAME_RT_FA = "rtFa";
+
 
     private String url;
     private RestTemplateBuilder restTemplateBuilder;
@@ -43,27 +46,30 @@ public class AESDataService {
     }
 
     public List<DataItem> getLatestData() {
-        String authToken = appConfigService.getAuthToken();
+        AuthTokens authTokens = appConfigService.getAuthTokens();
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(this.url)
-                .queryParam("authToken", encodeParam(authToken));
+                .queryParam("authToken", encodeParam(authTokens.getFedAuth()));
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory();
         defaultUriBuilderFactory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
         RestTemplate restTemplate = this.restTemplateBuilder.build();
         restTemplate.setUriTemplateHandler(defaultUriBuilderFactory);
-        ResponseEntity<LatestDataItem[]> response = restTemplate.getForEntity(
+
+        HttpEntity<AuthTokensRequest> request = new HttpEntity<>(new AuthTokensRequest(authTokens));
+        ResponseEntity<LatestDataItem[]> response = restTemplate.postForEntity(
                 builder.build(false).toUriString(),
+                request,
                 LatestDataItem[].class);
         List<DataItem> result = new LinkedList<>();
         Arrays.stream(response.getBody()).forEach(latestDataItem -> result.addAll(latestDataItem.getData()));
         return result;
     }
 
-    public void refreshAuthToken() {
-        String currentAuthToken = appConfigService.getAuthToken();
-        refreshAuthToken(currentAuthToken);
+    public void refreshAuthTokens() {
+        AuthTokens currentAuthTokens = appConfigService.getAuthTokens();
+        refreshAuthTokens(currentAuthTokens);
     }
 
-    public void refreshAuthToken(String currentAuthToken) {
+    public void refreshAuthTokens(AuthTokens currentAuthTokens) {
         String oneDriveBaseUrl = "https://aescloud-my.sharepoint.com/personal/edgardo_mendez_aes_com/_api/contextinfo";
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(oneDriveBaseUrl);
 //                .queryParam("skipSignal", encodeParam("true"))
@@ -91,7 +97,12 @@ public class AESDataService {
         headers.add("user-agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36");
 
 
-        String cookieHeaderValue = String.format("KillSwitchOverrides_enableKillSwitches=; KillSwitchOverrides_disableKillSwitches=; %s=%s", AUTH_TOKEN_COOKIE_NAME, currentAuthToken);
+        String cookieHeaderValue = String.format("KillSwitchOverrides_enableKillSwitches=;" +
+                "KillSwitchOverrides_disableKillSwitches=;" +
+                "%s=%s;" +
+                "%s=%s;",
+                COOKIE_NAME_FED_AUTH, currentAuthTokens.getFedAuth(),
+                COOKIE_NAME_RT_FA, currentAuthTokens.getRtFa());
         headers.add("cookie", cookieHeaderValue);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
@@ -105,14 +116,26 @@ public class AESDataService {
         Objects.requireNonNull(response.getHeaders().get("set-cookie"))
                 .stream().forEach(h -> cookies.addAll(HttpCookie.parse(h)));
         LOGGER.debug("retrieved cookies: {}", cookies);
-        List<HttpCookie> authTokenCookies = cookies.stream()
-                .filter(c -> AUTH_TOKEN_COOKIE_NAME.equals(c.getName()))
+
+        // FedAuth
+        List<HttpCookie> fedAuthCookie = cookies.stream()
+                .filter(c -> COOKIE_NAME_FED_AUTH.equals(c.getName()))
                 .collect(Collectors.toList());
-        if (authTokenCookies.isEmpty()) {
+        if (fedAuthCookie.isEmpty()) {
             LOGGER.warn("{} cookie was not found, authToken refresh could not be completed (provided authToken is {})",
-                    AUTH_TOKEN_COOKIE_NAME, currentAuthToken);
+                    COOKIE_NAME_FED_AUTH, currentAuthTokens);
         }
-        authTokenCookies.forEach(c -> appConfigService.updateAuthToken(c.getValue()));
+        fedAuthCookie.forEach(c -> appConfigService.updateFedAuth(c.getValue()));
+
+        // RtFa
+        List<HttpCookie> rtFaCookie = cookies.stream()
+                .filter(c -> COOKIE_NAME_RT_FA.equals(c.getName()))
+                .collect(Collectors.toList());
+        if (rtFaCookie.isEmpty()) {
+            LOGGER.warn("{} cookie was not found, authToken refresh could not be completed (provided authToken is {})",
+                    COOKIE_NAME_RT_FA, currentAuthTokens);
+        }
+        rtFaCookie.forEach(c -> appConfigService.updateRtFa(c.getValue()));
     }
 
     private String encodeParam(String param) {

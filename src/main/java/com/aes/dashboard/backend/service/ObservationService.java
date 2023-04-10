@@ -99,8 +99,8 @@ public class ObservationService {
                 observation.setTime(dataItem.getDate());
                 observation.setValue(dataItem.getValue());
                 Optional<MeasurementUnit> unit = measurementUnitService.getByAlias(dataItem.getUnit());
-                Optional<MeasurementUnit> defaultUnit = Optional.of(aesStationDataOrigin.getDefaultUnit());
-                if (defaultUnit.isPresent()) {
+                MeasurementUnit defaultUnit = aesStationDataOrigin.getDefaultUnit();
+                if (defaultUnit != null) {
                     observation.setUnit(aesStationDataOrigin.getDefaultUnit());
                 } else if (unit.isPresent()) {
                     observation.setUnit(unit.get());
