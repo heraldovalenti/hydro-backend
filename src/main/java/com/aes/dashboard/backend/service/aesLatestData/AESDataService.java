@@ -46,9 +46,13 @@ public class AESDataService {
     }
 
     public List<DataItem> getLatestData() {
+        return getLatestData(false);
+    }
+
+    public List<DataItem> getLatestData(boolean healthCheck) {
         AuthTokens authTokens = appConfigService.getAuthTokens();
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(this.url)
-                .queryParam("authToken", encodeParam(authTokens.getFedAuth()));
+                .queryParam("healthCheck", Boolean.toString(healthCheck));
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory();
         defaultUriBuilderFactory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
         RestTemplate restTemplate = this.restTemplateBuilder.build();
@@ -62,11 +66,6 @@ public class AESDataService {
         List<DataItem> result = new LinkedList<>();
         Arrays.stream(response.getBody()).forEach(latestDataItem -> result.addAll(latestDataItem.getData()));
         return result;
-    }
-
-    public void refreshAuthTokens() {
-        AuthTokens currentAuthTokens = appConfigService.getAuthTokens();
-        refreshAuthTokens(currentAuthTokens);
     }
 
     public void refreshAuthTokens(AuthTokens currentAuthTokens) {

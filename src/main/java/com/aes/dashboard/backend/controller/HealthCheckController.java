@@ -32,7 +32,7 @@ public class HealthCheckController {
     public ResponseEntity latestData() {
         LOGGER.info("health check for latestData");
         try {
-            int latestDataSize = aesDataService.getLatestData().size();
+            int latestDataSize = aesDataService.getLatestData(true).size();
             return ResponseEntity.ok().body(
                     Map.of(
                             "latestDataCheck", "ok",
