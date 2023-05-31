@@ -4,6 +4,7 @@ import com.aes.dashboard.backend.model.StationDataOrigin;
 import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class WeatherUndergroundDataService {
     private int dateMinutesRound;
 
     public WeatherUndergroundDataService(
-            RestTemplate restTemplate,
+            @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate,
             AppConfigService appConfigService,
             @Value("${weather-underground-data.url}") String url,
             @Value("${weather-underground-data.dateMinutesRound}") Integer dateMinutesRound) {

@@ -4,6 +4,7 @@ import com.aes.dashboard.backend.controller.entities.AuthTokens;
 import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
@@ -33,16 +34,16 @@ public class AESDataService {
 
 
     private String url;
-    private RestTemplateBuilder restTemplateBuilder;
     private AppConfigService appConfigService;
+    private RestTemplate sslDisabledRestTemplate;
 
     public AESDataService(
-            RestTemplateBuilder restTemplateBuilder,
             @Value("${aes.one-drive.url}") String url,
+            @Qualifier("sslDisablingRestTemplate") RestTemplate sslDisabledRestTemplate,
             AppConfigService appConfigService) {
-        this.restTemplateBuilder = restTemplateBuilder;
         this.url = url;
         this.appConfigService = appConfigService;
+        this.sslDisabledRestTemplate = sslDisabledRestTemplate;
     }
 
     public List<DataItem> getLatestData() {
@@ -55,7 +56,7 @@ public class AESDataService {
                 .queryParam("healthCheck", Boolean.toString(healthCheck));
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory();
         defaultUriBuilderFactory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
-        RestTemplate restTemplate = this.restTemplateBuilder.build();
+        RestTemplate restTemplate = this.sslDisabledRestTemplate;
         restTemplate.setUriTemplateHandler(defaultUriBuilderFactory);
 
         HttpEntity<AuthTokensRequest> request = new HttpEntity<>(new AuthTokensRequest(authTokens));
@@ -74,7 +75,7 @@ public class AESDataService {
 //                .queryParam("skipSignal", encodeParam("true"))
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory();
         defaultUriBuilderFactory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
-        RestTemplate restTemplate = this.restTemplateBuilder.build();
+        RestTemplate restTemplate = this.sslDisabledRestTemplate;
         restTemplate.setUriTemplateHandler(defaultUriBuilderFactory);
 
         HttpHeaders headers = new HttpHeaders();

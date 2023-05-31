@@ -3,6 +3,7 @@ package com.aes.dashboard.backend.service.weatherlinkData;
 import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +27,7 @@ public class WeatherlinkDataService {
     private AppConfigService appConfigService;
 
     public WeatherlinkDataService(
-            RestTemplate restTemplate,
+            @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate,
             AppConfigService appConfigService,
             @Value("${weatherlink-data.url}") String url) {
         this.restTemplate = restTemplate;

@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 
 @Configuration
-public class SNIHRestTemplate {
+public class SSLDisablingRestTemplate {
 
     @Bean(name = "sslDisablingRestTemplate")
     public RestTemplate restTemplate(RestTemplateBuilder builder) throws NoSuchAlgorithmException, KeyManagementException {
