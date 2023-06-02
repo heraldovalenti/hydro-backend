@@ -69,6 +69,10 @@ public class AESDataService {
         return result;
     }
 
+    public void refreshAuthTokens() {
+        AuthTokens authTokens = appConfigService.getAuthTokens();
+        refreshAuthTokens(authTokens);
+    }
     public void refreshAuthTokens(AuthTokens currentAuthTokens) {
         String oneDriveBaseUrl = "https://aescloud-my.sharepoint.com/personal/edgardo_mendez_aes_com/_api/contextinfo";
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(oneDriveBaseUrl);

@@ -30,8 +30,14 @@ public class AesController {
         return ResponseEntity.ok(null);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/refreshAuthTokens")
+    public ResponseEntity<Void> refreshAuthTokens() {
+        aesDataService.refreshAuthTokens();
+        return ResponseEntity.ok(null);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/refreshAuthTokens")
-    public ResponseEntity<Void> refreshAuthTokens(@RequestBody AuthTokens authTokens) {
+    public ResponseEntity<Void> setAuthTokens(@RequestBody AuthTokens authTokens) {
         aesDataService.refreshAuthTokens(authTokens);
         return ResponseEntity.ok(null);
     }
