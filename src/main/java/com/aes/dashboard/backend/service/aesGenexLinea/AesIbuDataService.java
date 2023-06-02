@@ -1,18 +1,17 @@
 package com.aes.dashboard.backend.service.aesGenexLinea;
 
-import com.aes.dashboard.backend.model.Observation;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,13 +24,16 @@ public class AesIbuDataService {
     private static final int TUNA_ROW_INDEX = 9;
 
     private String url;
-    private RestTemplate restTemplate;
+    private  String httpProxyHost;
+    private Integer httpProxyPort;
 
     public AesIbuDataService(
             @Value("${aes.ibu.url}") String url,
-            @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate) {
+            @Value("${backend.http.proxy.host}") String httpProxyHost,
+            @Value("${backend.http.proxy.port}") Integer httpProxyPort) {
         this.url = url;
-        this.restTemplate = restTemplate;
+        this.httpProxyHost = httpProxyHost;
+        this.httpProxyPort = httpProxyPort;
     }
 
     public Map<AesIbuDataParts, Double> getObservationData() {
@@ -55,7 +57,15 @@ public class AesIbuDataService {
     private Optional<Elements> fetchObservations() {
         Document doc = null;
         try {
-            doc = Jsoup.connect(url).get();
+            Proxy proxy = null;
+            if (httpProxyHost != "" && httpProxyPort != null) {
+                proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(httpProxyHost, httpProxyPort));
+                LOGGER.info("Using proxy configuration with {} and {}: {}",
+                        httpProxyHost, httpProxyPort, proxy.toString());
+            }
+            doc = Jsoup.connect(url)
+                    .proxy(proxy)
+                    .get();
             Elements rows = doc.select("#table-sparkline > tbody > tr");
             LOGGER.debug("ROWS AMOUNT {}", rows.size());
             return Optional.of(rows);
