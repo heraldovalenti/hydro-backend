@@ -3,6 +3,7 @@ package com.aes.dashboard.backend.service.forecast;
 import com.aes.dashboard.backend.model.Forecast;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ForecastFetchService {
     private RestTemplate restTemplate;
 
     public ForecastFetchService(
-            RestTemplate restTemplate,
+            @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate,
             @Value("${aes.forecasts.url}") String url) {
         this.restTemplate = restTemplate;
         this.url = url;

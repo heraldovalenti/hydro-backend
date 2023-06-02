@@ -7,6 +7,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -26,7 +27,9 @@ public class AesIbuDataService {
     private String url;
     private RestTemplate restTemplate;
 
-    public AesIbuDataService(@Value("${aes.ibu.url}") String url, RestTemplate restTemplate) {
+    public AesIbuDataService(
+            @Value("${aes.ibu.url}") String url,
+            @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
     }

@@ -2,6 +2,7 @@ package com.aes.dashboard.backend.service.intaData;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -18,7 +19,7 @@ public class INTAAnteriorDataService {
     private final RestTemplate restTemplate;
 
     public INTAAnteriorDataService(
-            RestTemplate restTemplate,
+            @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate,
             @Value("${INTA-data.anterior.baseUrl}") String baseUrl,
             @Value("${INTA-data.anterior.sufix}") String sufix
     ) {
