@@ -1,5 +1,7 @@
 package com.aes.dashboard.backend.config;
 
+import java.time.Duration;
+
 public class GlobalConfigs {
 
     public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
@@ -16,5 +18,7 @@ public class GlobalConfigs {
     public static final Long DATA_ORIGIN_SMG = 4L;
     public static final Long DATA_ORIGIN_INTA_ANTERIOR = 5L;
     public static final Long DATA_ORIGIN_WEATHERLINK = 8L;
+
+    public static final Duration REQUEST_TIMEOUT = Duration.ofSeconds(30);
 
 }
