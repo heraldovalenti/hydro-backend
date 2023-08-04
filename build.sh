@@ -1,5 +1,6 @@
 #!/bin/bash
 
+DOCKER_BUILDER=maven:3-jdk-11
 DOCKER_TAG=us-central1-docker.pkg.dev/hydro-dashboard-283320/aes-docker-repo/aes-api
 
 VERSION=$1
@@ -20,7 +21,7 @@ docker run --rm \
     -w /aes \
     -v $HOME/.m2:/root/.m2 \
     -v $PWD:/aes \
-    maven:3-jdk-11 mvn clean package -DskipTests=true
+    $DOCKER_BUILDER mvn clean package -DskipTests=true
 
 docker build -t aes-api:$VERSION .
 
