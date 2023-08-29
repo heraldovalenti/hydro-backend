@@ -93,6 +93,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (73, -63.976155,     -25.413480,  'SNIH - Canal Macapillo'), --10699
 (74, -63.948058,     -25.610777,  'SNIH - Canal de Dios'), --10815
 (75, -65.823113,     -26.011919,  'SNIH - La Punilla'), --10611
+(108, -65.523888,     -25.509166,  'SNIH - Coropampa'), --10709
 
 (77, -66.24, -25.32, 'Weather Underground - Seclantas'), --IMOLIN34
 (79, -65.40, -24.73, 'Weather Underground - San Jose UCASAL MATTEO'), --ISALTA14
@@ -122,4 +123,4 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (106, -64.480, -25.225, 'AES (IBU) - El Tunal'), -- "AES IBU TUNAL"
 (107, -66.03, -26.35, 'Weather Underground - Finca Daniel'); -- "ICOLAL3"
 
--- last ID: 107 (weatherunderground (ICOLAL3) - Finca Daniel)
+-- last ID: 108 (SNIH (10709) - COROPAMPA)

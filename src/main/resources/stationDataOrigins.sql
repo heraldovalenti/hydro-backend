@@ -119,7 +119,9 @@ INSERT INTO station_data_origin
 (63, 6, 1, 2, 72, '10696'), --Canal Liag - El Quebrachal'), --10696, dimension: nivel, default unit: m
 (64, 6, 1, 2, 73, '10699'), --Canal Macapillo'), --10699, dimension: nivel, default unit: m
 (65, 6, 1, 2, 74, '10815'), --Canal de Dios'), --10815, dimension: nivel, default unit: m
-(66, 6, 1, 2, 75, '10611'); --La Punilla'); --10611, dimension: nivel, default unit: m
+(66, 6, 1, 2, 75, '10611'), --La Punilla'); --10611, dimension: nivel, default unit: m
+(113, 6, 3, 3, 108, '10709'), --Coropampa', 10709, dimension: lluvia, default unit: mm
+(114, 6, 1, 2, 108, '10709'); --Coropampa', 10709, dimension: nivel, default unit: m
 
 -- data origin: HQ Model
 INSERT INTO station_data_origin
@@ -156,4 +158,4 @@ INSERT INTO station_data_origin
 (110, 9, 1, 2, 106, 'TUNA_NIVEL'),  --AES (IBU) - El Tunal     - nivel
 (111, 9, 2, 5, 106, 'TUNA_CAUDAL'); --AES (IBU) - El Tunal     - caudal
 
--- last ID: 112 (weatherunderground (ICOLAL3) - Finca Daniel)
+-- last ID: 114 (SNIH (10709) - COROPAMPA)
