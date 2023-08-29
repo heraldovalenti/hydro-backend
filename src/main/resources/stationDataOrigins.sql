@@ -64,7 +64,8 @@ INSERT INTO station_data_origin
 (101, 2, 3, 100, 'ICAFAY2', 4), --dimension: lluvia
 (102, 2, 3, 101, 'IROSAR87', 4), --dimension: lluvia
 (103, 2, 3, 102, 'IGRLJOSD2', 4), --dimension: lluvia
-(106, 2, 3, 103, 'ISALTA41', 4); --dimension: lluvia
+(106, 2, 3, 103, 'ISALTA41', 4), --dimension: lluvia
+(112, 2, 3, 107, 'ICOLAL3', 4); --dimension: lluvia
 
 --data origin: INTA_Siga2
 INSERT INTO station_data_origin
@@ -146,7 +147,7 @@ INSERT INTO station_data_origin
 (99,  8, 3, 4, 98, '4a824103-5e7d-467d-b6bc-8434fce4c44a'), --Weatherlink - Martillo Este
 (100, 8, 3, 4, 99, '6ba85f40-404a-4661-bcfe-93cbcac16031'); --Weatherlink - EMA - Esc. Agrot. Payogasta
 
--- data origin: Weatherlink
+-- data origin: AES IBU
 INSERT INTO station_data_origin
 (id,data_origin_id,dimension_id,default_unit_id,station_id,external_station_id) VALUES
 (107, 9, 1, 2, 104, 'CCOR_NIVEL'),  --AES (IBU) - Cabra Corral - nivel
@@ -155,4 +156,4 @@ INSERT INTO station_data_origin
 (110, 9, 1, 2, 106, 'TUNA_NIVEL'),  --AES (IBU) - El Tunal     - nivel
 (111, 9, 2, 5, 106, 'TUNA_CAUDAL'); --AES (IBU) - El Tunal     - caudal
 
--- last ID: 111 (AES (IBU) - El Tunal)
+-- last ID: 112 (weatherunderground (ICOLAL3) - Finca Daniel)
