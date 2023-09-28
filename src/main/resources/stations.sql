@@ -6,7 +6,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (5, -65.39,          -24.61,         'UCASAL - La Caldera'), --ILACAL8
 (6, -65.3339166667,  -25.2700277778, 'AES - Cabra Corral'),
 (7, -65.5641075318,  -25.4646389836, 'AES - La Viña'),
-(8, -65.5004368533,  -25.0730600581, 'AES - El Carril'),
+(8, -65.500536,      -25.084061,     'AES - El Carril'),
 (9, -65.4789176706,  -25.2811344002, 'AES - Cnel Moldes'),
 (10, -64.9763,       -25.4767,       'AES - Metán'),
 (11, -65.0521912365, -24.7432383402, 'AES - Termoandes'),
