@@ -1,6 +1,7 @@
 package com.aes.dashboard.backend.service.weatherUndergroundData;
 
 import com.aes.dashboard.backend.model.StationDataOrigin;
+import com.aes.dashboard.backend.model.date.DateRounder;
 import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class WeatherUndergroundDataService {
     private RestTemplate restTemplate;
     private AppConfigService appConfigService;
     private int dateMinutesRound;
+    private DateRounder dateRounder;
 
     public WeatherUndergroundDataService(
             @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate,
@@ -31,8 +33,9 @@ public class WeatherUndergroundDataService {
             @Value("${weather-underground-data.dateMinutesRound}") Integer dateMinutesRound) {
         this.restTemplate = restTemplate;
         this.url = url;
-        this.dateMinutesRound = dateMinutesRound;
         this.appConfigService = appConfigService;
+        this.dateMinutesRound = dateMinutesRound;
+        this.dateRounder = new DateRounder(this.dateMinutesRound);
     }
 
     public Optional<WeatherUndergroundResult> getObservationData(StationDataOrigin stationDataOrigin) {
@@ -60,14 +63,7 @@ public class WeatherUndergroundDataService {
     }
 
     public LocalDateTime roundDateTime(LocalDateTime date) {
-        int minuteDiff = date.getMinute() % this.dateMinutesRound;
-        if (date.getSecond() == 0 && minuteDiff == 0) {
-            return date;
-        }
-        LocalDateTime plusMinutes = date.plusMinutes(this.dateMinutesRound);
-        LocalDateTime roundToSeconds = plusMinutes.withSecond(0);
-        LocalDateTime roundToMinutes = roundToSeconds.plusMinutes(-minuteDiff);
-        return roundToMinutes;
+        return this.dateRounder.roundDateTime(date);
     }
 
 }

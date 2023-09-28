@@ -152,7 +152,7 @@ public class ObservationService {
             observation.setDataOrigin(weatherlinkDataOrigin);
 
             if (wlResult.isEmpty()) continue;
-            observation.setTime(weatherUndergroundDataService.roundDateTime(wlResult.get().getObservationTime()));
+            observation.setTime(weatherlinkDataService.roundDateTime(wlResult.get().getObservationTime()));
             observation.setValue(wlResult.get().getObservationValue());
             observation.setUnit(weatherlinkStationDataOrigin.getDefaultUnit());
             this.updateOrCreateObservation(observation);

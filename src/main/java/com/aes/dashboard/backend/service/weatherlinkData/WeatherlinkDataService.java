@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service.weatherlinkData;
 
+import com.aes.dashboard.backend.model.date.DateRounder;
 import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,14 +26,19 @@ public class WeatherlinkDataService {
     private String url;
     private RestTemplate restTemplate;
     private AppConfigService appConfigService;
+    private int dateMinutesRound;
+    private DateRounder dateRounder;
 
     public WeatherlinkDataService(
             @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate,
             AppConfigService appConfigService,
-            @Value("${weatherlink-data.url}") String url) {
+            @Value("${weatherlink-data.url}") String url,
+            @Value("${weatherlink-data.dateMinutesRound}") Integer dateMinutesRound) {
         this.restTemplate = restTemplate;
         this.url = url;
         this.appConfigService = appConfigService;
+        this.dateMinutesRound = dateMinutesRound;
+        this.dateRounder = new DateRounder(this.dateMinutesRound);
     }
 
     public Optional<WeatherlinkResult> getObservationData(String stationId) {
@@ -72,6 +78,10 @@ public class WeatherlinkDataService {
             LOGGER.warn("Could not retrieve observation data for station ID {}", stationId, e);
             return Optional.empty();
         }
+    }
+
+    public LocalDateTime roundDateTime(LocalDateTime date) {
+        return this.dateRounder.roundDateTime(date);
     }
 
 }
