@@ -112,6 +112,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (97, -65.494437, -26.236316, 'Weatherlink - PLR 02 Cerro'), -- "17d6d435-6e0f-439d-a252-a474ccaa9382"
 (98, -67.407549, -26.062218, 'Weatherlink - Martillo Este'), -- "4a824103-5e7d-467d-b6bc-8434fce4c44a"
 (99, -66.102293, -25.052811, 'Weatherlink - EMA - Esc. Agrot. Payogasta'), -- "6ba85f40-404a-4661-bcfe-93cbcac16031"
+(109, -65.500595, -25.073462, 'Weatherlink - El Carril'), -- "ae2d126e-8524-427c-8757-25197f533276"
 
 (100, -65.98, -26.07, 'Weather Underground - Cafayate'), -- "ICAFAY2"
 (101, -64.69, -26.01, 'Weather Underground - Rosario de la Frontera'), -- "IROSAR87"
@@ -123,4 +124,4 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (106, -64.480, -25.225, 'AES (IBU) - El Tunal'), -- "AES IBU TUNAL"
 (107, -66.03, -26.35, 'Weather Underground - Finca Daniel'); -- "ICOLAL3"
 
--- last ID: 108 (SNIH (10709) - COROPAMPA)
+-- last ID: 109 (Weatherlink - El Carril)

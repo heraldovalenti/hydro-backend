@@ -147,7 +147,8 @@ INSERT INTO station_data_origin
 (97,  8, 3, 4, 96, '9c4e35eb-9121-4c27-acac-f0901d51c5db'), --Weatherlink - Metan
 (98,  8, 3, 4, 97, '17d6d435-6e0f-439d-a252-a474ccaa9382'), --Weatherlink - PLR 02 Cerro
 (99,  8, 3, 4, 98, '4a824103-5e7d-467d-b6bc-8434fce4c44a'), --Weatherlink - Martillo Este
-(100, 8, 3, 4, 99, '6ba85f40-404a-4661-bcfe-93cbcac16031'); --Weatherlink - EMA - Esc. Agrot. Payogasta
+(100, 8, 3, 4, 99, '6ba85f40-404a-4661-bcfe-93cbcac16031'), --Weatherlink - EMA - Esc. Agrot. Payogasta
+(115, 8, 3, 4, 109, 'ae2d126e-8524-427c-8757-25197f533276'); --Weatherlink - El Carril
 
 -- data origin: AES IBU
 INSERT INTO station_data_origin
@@ -158,4 +159,4 @@ INSERT INTO station_data_origin
 (110, 9, 1, 2, 106, 'TUNA_NIVEL'),  --AES (IBU) - El Tunal     - nivel
 (111, 9, 2, 5, 106, 'TUNA_CAUDAL'); --AES (IBU) - El Tunal     - caudal
 
--- last ID: 114 (SNIH (10709) - COROPAMPA)
+-- last ID: 115 (Weatherlink - El Carril)
