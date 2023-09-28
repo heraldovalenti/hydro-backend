@@ -139,7 +139,7 @@ INSERT INTO station_data_origin
 INSERT INTO station_data_origin
 (id,data_origin_id,dimension_id,default_unit_id,station_id,external_station_id) VALUES
 (85, 8, 3, 4, 84, 'bd59bd4c-cbec-40e1-a2d4-36f5feea3475'), --Weatherlink - ERA 01 - Las Tolas
-(86, 8, 3, 4, 85, '351e2b80-75a7-419d-a081-d8ab6ddd3051'), --Weatherlink - Escuela Coronel Moldes
+(86, 8, 3, 4, 85, '6ae0d38c-0f2c-46b9-8b84-263174d9f837'), --Weatherlink - Escuela Coronel Moldes
 (87, 8, 3, 4, 86, 'a9e1a996-c5ea-4ae1-a582-b46c64403c99'), --Weatherlink - EMA Norte - Pampa Energía CTG
 (88, 8, 3, 4, 87, '70d018b1-cfae-4ca6-b9b2-598bcd796cb3'), --Weatherlink - EMA Sur - Pampa Energía CTG
 (89, 8, 3, 4, 88, 'f0805dcb-4b23-4e81-9a73-5e31c5e212dc'), --Weatherlink - EMA Nitratos Austin
