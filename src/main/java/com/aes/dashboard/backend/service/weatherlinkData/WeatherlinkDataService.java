@@ -69,7 +69,9 @@ public class WeatherlinkDataService {
                     entity,
                     WeatherlinkResult.class);
             WeatherlinkResult result = response.getBody();
-            if (!response.hasBody() || result == null || result.getoIssData() == null) {
+            if (!response.hasBody()
+                    || result == null
+                    || !result.isDataAvailable()) {
                 LOGGER.warn("No observation data found for station ID {}", stationId);
                 return Optional.empty();
             }
