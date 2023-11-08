@@ -36,7 +36,10 @@ INSERT INTO station_data_origin
 (82, 1, 3, 82, 'EscuelaMoldes', 3), --dimension: lluvia, default unit: mm
 
 (104, 1, 3,  8, 'Carril', 3), --dimension: lluvia, default unit: mm
-(105, 1, 3, 10, 'Metan', 3); --dimension: lluvia, default unit: mm
+(105, 1, 3, 10, 'Metan', 3), --dimension: lluvia, default unit: mm
+
+(116, 1, 1, 110, 'Viboras', null), --dimension: nivel
+(117, 1, 3, 110, 'Viboras', null); --dimension: lluvia
 
 --data origin: WeatherUnderground
 INSERT INTO station_data_origin
@@ -159,4 +162,4 @@ INSERT INTO station_data_origin
 (110, 9, 1, 2, 106, 'TUNA_NIVEL'),  --AES (IBU) - El Tunal     - nivel
 (111, 9, 2, 5, 106, 'TUNA_CAUDAL'); --AES (IBU) - El Tunal     - caudal
 
--- last ID: 115 (Weatherlink - El Carril)
+-- last ID: 117 (AES - Las viboras)

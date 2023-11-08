@@ -26,8 +26,9 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (24, -65.47,         -23.74, 'Weather Underground - Santa Rosa de Chuschuyoc'), --ITUMBA11
 (25, -65.66,         -27.23, 'Weather Underground - Sargento Moya'), -- IMONTE19
 (26, -66.33,         -27.55, 'Weather Underground - Daza Chaquiago'), -- IANDAL3
-(27, -66.1834,       -25.1816, 'AES - Las viboras'),
+(27, -66.1834,       -25.1816, 'AES - Cachi'),
 (28, -65.614427294,  -25.6235940086, 'AES - Alemanía'),
+(110, -64.646116,  -25.072718, 'AES - Las viboras'),
 
 -- AES future: la viña, cerrillos y hornillos
 
@@ -41,7 +42,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (37, -64.4771146654, -25.2287507835, 'AES - ET' ),
 (38, -64.85,         -25.31,         'AES - Miraflores' ),
 (39, -65.33,         -25.27,         'AES - CC' ),
-(47, -66.1838,       -25.1816,       'AES - Las viboras'),
+(47, -66.1838,       -25.1816,       'AES - Cachi'),
 
 (40, -64.69,         -26.01,          'Weather Underground - Daza Copo Quile'), --IROSAR45
 (48, -65.42,         -24.79,          'Weather Underground - Dante Alighieri UCASAL MATTEO'), --ISALTA13
@@ -124,4 +125,4 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (106, -64.480, -25.225, 'AES (IBU) - El Tunal'), -- "AES IBU TUNAL"
 (107, -66.03, -26.35, 'Weather Underground - Finca Daniel'); -- "ICOLAL3"
 
--- last ID: 109 (Weatherlink - El Carril)
+-- last ID: 110 (AES - Las viboras)
