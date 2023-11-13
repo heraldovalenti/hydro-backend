@@ -16,4 +16,4 @@ With a built JAR:
 # DB backup/restore
 
 backup: `pg_dump -U postgres -d aes -W -F custom -f <date>.sql`  
-restore: `psql -U postgres -d aes -W -f <date>.sql`
+restore: `pg_restore -U postgres -d aes --verbose <date>.sql`
