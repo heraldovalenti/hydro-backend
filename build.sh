@@ -1,7 +1,9 @@
 #!/bin/bash
 
+IMAGE_NAME=aes-api
 DOCKER_BUILDER=maven:3-jdk-11
-DOCKER_TAG=us-central1-docker.pkg.dev/hydro-dashboard-283320/aes-docker-repo/aes-api
+DOCKER_TAG=us-central1-docker.pkg.dev/hydro-dashboard-283320/aes-docker-repo/$IMAGE_NAME
+SKIP_APP_BUILD=0
 
 VERSION=$1
 if [[ -z $VERSION ]]
@@ -17,15 +19,25 @@ then
   exit 1
 fi
 
-docker run --rm \
-    -w /aes \
-    -v $HOME/.m2:/root/.m2 \
-    -v $PWD:/aes \
-    $DOCKER_BUILDER mvn clean package -DskipTests=true
+for ARG in $@
+do
+  if [[ $ARG == "--skipAppBuild" ]]; then SKIP_APP_BUILD=1; fi
+done
 
-docker build -t aes-api:$VERSION .
+if [[ $SKIP_APP_BUILD == 0 ]]; then
+  docker run --rm \
+      -w /aes \
+      -v $HOME/.m2:/root/.m2 \
+      -v $PWD:/aes \
+      $DOCKER_BUILDER mvn clean package -DskipTests=true
+else
+  echo "skipping app build..."
+fi
 
-docker tag aes-api:$VERSION $DOCKER_TAG:$VERSION
+
+docker build -t $IMAGE_NAME:$VERSION .
+
+docker tag $IMAGE_NAME:$VERSION $DOCKER_TAG:$VERSION
 
 docker push $DOCKER_TAG:$VERSION
 
