@@ -60,9 +60,9 @@ public class AESDataService {
         restTemplate.setUriTemplateHandler(defaultUriBuilderFactory);
 
         HttpEntity<AuthTokensRequest> request = new HttpEntity<>(new AuthTokensRequest(authTokens));
-        ResponseEntity<LatestDataItem[]> response = restTemplate.postForEntity(
+        ResponseEntity<LatestDataItem[]> response = restTemplate.getForEntity(
                 builder.build(false).toUriString(),
-                request,
+//                request,
                 LatestDataItem[].class);
         List<DataItem> result = new LinkedList<>();
         Arrays.stream(response.getBody()).forEach(latestDataItem -> result.addAll(latestDataItem.getData()));
