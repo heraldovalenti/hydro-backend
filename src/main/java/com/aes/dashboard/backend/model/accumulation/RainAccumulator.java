@@ -27,7 +27,6 @@ public abstract class RainAccumulator {
 
     private static final Map<Station, RainAccumulator> stationAccumulatorMap = Map.of(
             new Station(11), new SimpleRainAccumulator(), // AES - Termoandes
-            new Station(16), new SimpleRainAccumulator(),// AES - Medina
             new Station(76), new SimpleRainAccumulator(), // AES - El Tunal
             new Station(6), new SimpleRainAccumulator(), // AES - Cabra Corral
             new Station(82), new SimpleRainAccumulator(), // AES - Coronel Moldes
