@@ -18,6 +18,12 @@ then
   exit 1
 fi
 
+docker run --rm \
+    -w /aes \
+    -v $HOME/.m2:/root/.m2 \
+    -v $PWD:/aes \
+    $DOCKER_BUILDER mvn clean package -DskipTests=true
+
 docker build -t $IMAGE_NAME:$VERSION .
 
 docker tag $IMAGE_NAME:$VERSION $DOCKER_TAG:$VERSION
