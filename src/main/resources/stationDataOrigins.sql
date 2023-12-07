@@ -68,7 +68,12 @@ INSERT INTO station_data_origin
 (102, 2, 3, 101, 'IROSAR87', 4), --dimension: lluvia
 (103, 2, 3, 102, 'IGRLJOSD2', 4), --dimension: lluvia
 (106, 2, 3, 103, 'ISALTA41', 4), --dimension: lluvia
-(112, 2, 3, 107, 'ICOLAL3', 4); --dimension: lluvia
+(112, 2, 3, 107, 'ICOLAL3', 4), --dimension: lluvia
+(118, 2, 3, 111, 'ICAMPO260', 4), --dimension: lluvia
+(119, 2, 3, 112, 'ISALTA52', 4), --dimension: lluvia
+(120, 2, 3, 113, 'ISALTA51', 4), --dimension: lluvia
+(121, 2, 3, 114, 'IANTOF8', 4), --dimension: lluvia
+(122, 2, 3, 115, 'ILASLA1', 4); --dimension: lluvia
 
 --data origin: INTA_Siga2
 INSERT INTO station_data_origin
@@ -162,4 +167,4 @@ INSERT INTO station_data_origin
 (110, 9, 1, 2, 106, 'TUNA_NIVEL'),  --AES (IBU) - El Tunal     - nivel
 (111, 9, 2, 5, 106, 'TUNA_CAUDAL'); --AES (IBU) - El Tunal     - caudal
 
--- last ID: 117 (AES - Las viboras)
+-- last ID: 122 (WU - ILASLA1)

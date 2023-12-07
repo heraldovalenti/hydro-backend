@@ -123,6 +123,12 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (104, -65.329, -25.265, 'AES (IBU) - Cabra Corral'), -- "AES IBU CC"
 (105, -65.291, -25.297, 'AES (IBU) - PB'), -- "AES IBU PB"
 (106, -64.480, -25.225, 'AES (IBU) - El Tunal'), -- "AES IBU TUNAL"
-(107, -66.03, -26.35, 'Weather Underground - Finca Daniel'); -- "ICOLAL3"
+(107, -66.03, -26.35, 'Weather Underground - Finca Daniel'), -- "ICOLAL3"
 
--- last ID: 110 (AES - Las viboras)
+(111, -65.56, -24.88, 'Weather Underground - WS Los Robles'), -- "ICAMPO260"
+(112, -65.46, -24.78, 'Weather Underground - San Benito'), -- "ISALTA52"
+(113, -65.47, -24.80, 'Weather Underground - Daza DZ-WH2900'), -- "ISALTA51"
+(114, -66.98, -25.42, 'Weather Underground - Candelas1'), -- "IANTOF8"
+(115, -64.20, -24.72, 'Weather Underground - EM Pkt'), -- "ILASLA1"
+
+-- last ID: 115 (Weather Underground - ILASLA1)
