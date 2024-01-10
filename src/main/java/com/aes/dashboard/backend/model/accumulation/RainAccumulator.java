@@ -20,19 +20,19 @@ public abstract class RainAccumulator {
     private static final Map<DataOrigin, RainAccumulator> dataOriginAccumulatorMap = Map.of(
             new DataOrigin(DATA_ORIGIN_AES), new AesRainAccumulator(),
             new DataOrigin(DATA_ORIGIN_WU), new WURainAccumulator(),
-            new DataOrigin(DATA_ORIGIN_INTA_SIGA), new SimpleRainAccumulator(),
-            new DataOrigin(DATA_ORIGIN_INTA_ANTERIOR), new SimpleRainAccumulator(),
+            new DataOrigin(DATA_ORIGIN_INTA_SIGA), new PositiveValuesRainAccumulator(),
+            new DataOrigin(DATA_ORIGIN_INTA_ANTERIOR), new PositiveValuesRainAccumulator(),
             new DataOrigin(DATA_ORIGIN_SNIH), new SimpleRainAccumulator(),
             new DataOrigin(DATA_ORIGIN_WEATHERLINK), new WURainAccumulator()
     );
 
     private static final Map<Station, RainAccumulator> stationAccumulatorMap = Map.of(
-            new Station(11), new SimpleRainAccumulator(), // AES - Termoandes
-            new Station(76), new SimpleRainAccumulator(), // AES - El Tunal
-            new Station(6), new SimpleRainAccumulator(), // AES - Cabra Corral
-            new Station(82), new SimpleRainAccumulator(), // AES - Coronel Moldes
-            new Station(10), new SimpleRainAccumulator(), // AES - MEtan
-            new Station(8), new SimpleRainAccumulator() // AES - Carril
+            new Station(11), new PositiveValuesRainAccumulator(), // AES - Termoandes
+            new Station(76), new PositiveValuesRainAccumulator(), // AES - El Tunal
+            new Station(6), new PositiveValuesRainAccumulator(), // AES - Cabra Corral
+            new Station(82), new PositiveValuesRainAccumulator(), // AES - Coronel Moldes
+            new Station(10), new PositiveValuesRainAccumulator(), // AES - MEtan
+            new Station(8), new PositiveValuesRainAccumulator() // AES - Carril
     );
 
     public static Optional<RainAccumulator> accumulatorForObservations(List<Observation> observationList) {
