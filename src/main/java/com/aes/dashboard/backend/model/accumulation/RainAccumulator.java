@@ -22,6 +22,7 @@ public abstract class RainAccumulator {
             new DataOrigin(DATA_ORIGIN_WU), new WURainAccumulator(),
             new DataOrigin(DATA_ORIGIN_INTA_SIGA), new SimpleRainAccumulator(),
             new DataOrigin(DATA_ORIGIN_INTA_ANTERIOR), new SimpleRainAccumulator(),
+            new DataOrigin(DATA_ORIGIN_SNIH), new SimpleRainAccumulator(),
             new DataOrigin(DATA_ORIGIN_WEATHERLINK), new WURainAccumulator()
     );
 

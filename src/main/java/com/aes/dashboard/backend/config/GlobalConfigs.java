@@ -17,6 +17,8 @@ public class GlobalConfigs {
     public static final Long DATA_ORIGIN_INTA_SIGA = 3L;
     public static final Long DATA_ORIGIN_SMG = 4L;
     public static final Long DATA_ORIGIN_INTA_ANTERIOR = 5L;
+
+    public static final Long DATA_ORIGIN_SNIH = 6L;
     public static final Long DATA_ORIGIN_WEATHERLINK = 8L;
 
     public static final Duration REQUEST_TIMEOUT = Duration.ofSeconds(30);
