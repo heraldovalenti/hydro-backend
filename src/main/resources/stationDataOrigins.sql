@@ -125,6 +125,7 @@ INSERT INTO station_data_origin
 (57, 6, 1, 2, 66, '10622'), --Cabra Corral'), --10622, dimension: nivel, default unit: m
 (58, 6, 1, 2, 67, '10705'), --Metán - Desembocadura'), --10705, dimension: nivel, default unit: m
 (59, 6, 1, 2, 68, '10626'), --El Tunal'), --10626, dimension: nivel, default unit: m
+(132, 6, 3, 3, 68, '10626'), --El Tunal'), --10626, dimension: lluvia, default unit: mm
 (60, 6, 1, 2, 69, '10684'), --Canal Finca Agropecuaria I'), --10684, dimension: nivel, default unit: m
 (61, 6, 1, 2, 70, '10686'), --Finca Agropecuaria'), --10686, dimension: nivel, default unit: m
 (62, 6, 1, 2, 71, '10695'), --Juramento - El Quebrachal'), --10695, dimension: nivel, default unit: m
@@ -133,7 +134,9 @@ INSERT INTO station_data_origin
 (65, 6, 1, 2, 74, '10815'), --Canal de Dios'), --10815, dimension: nivel, default unit: m
 (66, 6, 1, 2, 75, '10611'), --La Punilla'); --10611, dimension: nivel, default unit: m
 (113, 6, 3, 3, 108, '10709'), --Coropampa', 10709, dimension: lluvia, default unit: mm
-(114, 6, 1, 2, 108, '10709'); --Coropampa', 10709, dimension: nivel, default unit: m
+(114, 6, 1, 2, 108, '10709'), --Coropampa', 10709, dimension: nivel, default unit: m
+(133, 6, 1, 2, 124, '10210'), --Pie de Medano'), --10210, dimension: nivel, default unit: m
+(134, 6, 3, 3, 124, '10210'); --Pie de Medano'), --10210, dimension: lluvia, default unit: mm
 
 -- data origin: HQ Model
 INSERT INTO station_data_origin
@@ -177,4 +180,4 @@ INSERT INTO station_data_origin
 (110, 9, 1, 2, 106, 'TUNA_NIVEL'),  --AES (IBU) - El Tunal     - nivel
 (111, 9, 2, 5, 106, 'TUNA_CAUDAL'); --AES (IBU) - El Tunal     - caudal
 
--- last ID: 131 (Weather Underground - ISALTA48)
+-- last ID: 134 (SNIH - Pie de Medano - 10210)

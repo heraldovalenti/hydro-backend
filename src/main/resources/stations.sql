@@ -95,6 +95,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (74, -63.948058,     -25.610777,  'SNIH - Canal de Dios'), --10815
 (75, -65.823113,     -26.011919,  'SNIH - La Punilla'), --10611
 (108, -65.523888,     -25.509166,  'SNIH - Coropampa'), --10709
+(124, -66.217887,     -26.995315,  'SNIH - Pie de Medano'), --10210
 
 (77, -66.24, -25.32, 'Weather Underground - Seclantas'), --IMOLIN34
 (79, -65.40, -24.73, 'Weather Underground - San Jose UCASAL MATTEO'), --ISALTA14
@@ -141,4 +142,4 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (122, -65.41, -24.70, 'Weather Underground - Vaqueros'), -- "ILACALDE2"
 (123, -65.949481, -25.968560, 'Weather Underground - Animana'), -- "ISALTA48"
 
--- last ID: 123 (Weather Underground - Animana)
+-- last ID: 124 (SNIH - Pie de Medano - 10210)
