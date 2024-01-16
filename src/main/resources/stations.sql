@@ -115,6 +115,11 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (99, -66.102293, -25.052811, 'Weatherlink - EMA - Esc. Agrot. Payogasta'), -- "6ba85f40-404a-4661-bcfe-93cbcac16031"
 (109, -65.500595, -25.073462, 'Weatherlink - AES El Carril'), -- "ae2d126e-8524-427c-8757-25197f533276"
 
+(116, -64.23361,  -24.74097, 'Weatherlink - AeroSoluciones'), -- "18e5098c-8f0c-48a7-99e9-562fd205f097"
+(117, -66.47424,  -24.19186, 'Weatherlink - Ema Telescopio'), -- "fea8cc22-e36e-4e1f-996e-bae6b49a3c16"
+(118, -66.85274,  -25.36368, 'Weatherlink - Process Plant'),  -- "9fdda27a-1101-48d0-b3fd-827d9f2cdf35"
+(119, -66.894,    -25.42385, 'Weatherlink - Well 19'),        -- "d238511c-6c93-48fd-859a-788eaa751e42"
+
 (100, -65.98, -26.07, 'Weather Underground - Cafayate'), -- "ICAFAY2"
 (101, -64.69, -26.01, 'Weather Underground - Rosario de la Frontera'), -- "IROSAR87"
 (102, -64.03, -23.21, 'Weather Underground - Embarcacion'), -- "IGRLJOSD2"
@@ -131,4 +136,4 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (114, -66.98, -25.42, 'Weather Underground - Candelas1'), -- "IANTOF8"
 (115, -64.20, -24.72, 'Weather Underground - EM Pkt'), -- "ILASLA1"
 
--- last ID: 115 (Weather Underground - ILASLA1)
+-- last ID: 119 (Weatherlink - Well 19)
