@@ -136,4 +136,9 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (114, -66.98, -25.42, 'Weather Underground - Candelas1'), -- "IANTOF8"
 (115, -64.20, -24.72, 'Weather Underground - EM Pkt'), -- "ILASLA1"
 
--- last ID: 119 (Weatherlink - Well 19)
+(120, -65.54, -24.90, 'Weather Underground - El Mollar UCASAL MATTEO'), -- "ICERRI5"
+(121, -65.97, -26.07, 'Weather Underground - Aeropuerto CAF'), -- "ICAFAY3"
+(122, -65.41, -24.70, 'Weather Underground - Vaqueros'), -- "ILACALDE2"
+(123, -65.949481, -25.968560, 'Weather Underground - Animana'), -- "ISALTA48"
+
+-- last ID: 123 (Weather Underground - Animana)
