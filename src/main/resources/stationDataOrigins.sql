@@ -141,7 +141,8 @@ INSERT INTO station_data_origin
 (73, 7, 2, 5, 67, ''), --SNIH - Metán - Desembocadura
 (74, 7, 2, 5, 75, ''), --SNIH - La Punilla
 (75, 7, 2, 5, 68, ''), --SNIH - El Tunal
-(83, 7, 2, 5, 28, ''); --AES - Alemania
+(83, 7, 2, 5, 28, ''), --AES - Alemania
+(123, 7, 2, 5, 110, ''); --AES - Viboras
 
 -- data origin: Weatherlink
 INSERT INTO station_data_origin
@@ -167,4 +168,4 @@ INSERT INTO station_data_origin
 (110, 9, 1, 2, 106, 'TUNA_NIVEL'),  --AES (IBU) - El Tunal     - nivel
 (111, 9, 2, 5, 106, 'TUNA_CAUDAL'); --AES (IBU) - El Tunal     - caudal
 
--- last ID: 122 (WU - ILASLA1)
+-- last ID: 123 (AES - Viboras)
