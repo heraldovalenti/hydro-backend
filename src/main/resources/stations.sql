@@ -17,18 +17,10 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (16, -64.5927,       -25.3858,       'AES - Medina'),
 (17, -64.4760555556, -25.2265,       'AES - El Tunal'),
 (76, -64.47        , -25.22,         'AES - El Tunal'),
-(18, -64.78,         -25.45, 'Weather Underground - Sala Guanaco'), --IMETND1
-(19, -65.64,         -24.91, 'Weather Underground - Campo Quijano'), --IROSARIO12
-(20, -65.4,          -24.89, 'Weather Underground - La Isla'), -- ISALTACE3
-(21, -65.4,          -24.78, 'Weather Underground - Cerro San Bernardo'), --ISALTA10
-(22, -65.49,         -24.74, 'Weather Underground - San Lorenzo'), --ISALTA17
-(23, -64.95,         -25.8,  'Weather Underground - R. de la Frontera'), --IROSARIO32
-(24, -65.47,         -23.74, 'Weather Underground - Santa Rosa de Chuschuyoc'), --ITUMBA11
-(25, -65.66,         -27.23, 'Weather Underground - Sargento Moya'), -- IMONTE19
-(26, -66.33,         -27.55, 'Weather Underground - Daza Chaquiago'), -- IANDAL3
-(27, -66.1593,       -25.1207, 'AES - Cachi'),
+
+(27, -66.1593,       -25.1207,       'AES - Cachi'),
 (28, -65.614427294,  -25.6235940086, 'AES - Alemanía'),
-(110, -64.646116,  -25.072718, 'AES - Las viboras'),
+(110, -64.646116,  -25.072718,       'AES - Las viboras'),
 
 -- AES future: la viña, cerrillos y hornillos
 
@@ -43,10 +35,11 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (38, -64.85,         -25.31,         'AES - Miraflores' ),
 (39, -65.33,         -25.27,         'AES - CC' ),
 (47, -66.1589,       -25.1203,       'AES - Cachi'),
+(82, -65.47,         -25.27,         'AES - Escuela Moldes'),
 
-(40, -64.69,         -26.01,          'Weather Underground - Daza Copo Quile'), --IROSAR45
-(48, -65.42,         -24.79,          'Weather Underground - Dante Alighieri UCASAL MATTEO'), --ISALTA13
-
+(104, -65.329, -25.265, 'AES (IBU) - Cabra Corral'), -- "AES IBU CC"
+(105, -65.291, -25.297, 'AES (IBU) - PB'), -- "AES IBU PB"
+(106, -64.480, -25.225, 'AES (IBU) - El Tunal'), -- "AES IBU TUNAL"
 -- INTA
 (1, -65.567772429,   -25.4723965124, 'INTA - La Viña'), --N/A
 (29, -66.25,         -25.33, 'INTA - Seclantás'), --352
@@ -77,8 +70,6 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (58, -65.585833,     -24.9880556, 'INTA - UC6-CDA Rosario de Lerma'), --ema_rlerma
 (59, -65.973888,     -26.1,       'INTA - Bodegas Etchart'), --ema_etchart
 
-(60, -66.012908,     -26.092266,  'Weather Underground - Escuela S Agustín UCASAL MATTEO'), --ICAFAY1
-
 (61, -65.043638,     -24.687527,  'SNIH - Güemes'), --10687
 (62, -64.808055,     -23.909444,  'SNIH - Fraile Pintado - RN 34'), --10036
 (63, -66.159161,     -25.120525,  'SNIH - Cachi'), --10646
@@ -97,13 +88,6 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (108, -65.523888,     -25.509166,  'SNIH - Coropampa'), --10709
 (124, -66.217887,     -26.995315,  'SNIH - Pie de Medano'), --10210
 
-(77, -66.24, -25.32, 'Weather Underground - Seclantas'), --IMOLIN34
-(79, -65.40, -24.73, 'Weather Underground - San Jose UCASAL MATTEO'), --ISALTA14
-(80, -65.42, -24.78, 'Weather Underground - CruzDelSur'), --ISALTA30
-(81, -65.48, -24.73, 'Weather Underground - Estacion San Lorenzo'), --ISALTA34
-(82, -65.47, -25.27, 'AES - Escuela Moldes'),
-(83, -65.42, -24.73, 'Weather Underground - Infomet'),
-
 (84, -66.7572, -24.8853, 'Weatherlink - ERA 01 - Las Tolas'), -- "bd59bd4c-cbec-40e1-a2d4-36f5feea3475"
 (85, -65.4790, -25.2809, 'Weatherlink - AES Escuela Coronel Moldes'), -- "351e2b80-75a7-419d-a081-d8ab6ddd3051"
 (86, -63.6667, -22.2036, 'Weatherlink - EMA Norte - Pampa Energía CTG'), -- "a9e1a996-c5ea-4ae1-a582-b46c64403c99"
@@ -121,14 +105,30 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (118, -66.85274,  -25.36368, 'Weatherlink - Process Plant'),  -- "9fdda27a-1101-48d0-b3fd-827d9f2cdf35"
 (119, -66.894,    -25.42385, 'Weatherlink - Well 19'),        -- "d238511c-6c93-48fd-859a-788eaa751e42"
 
+(18, -64.78, -25.45, 'Weather Underground - Sala Guanaco'), --IMETND1
+(19, -65.64, -24.91, 'Weather Underground - Campo Quijano'), --IROSARIO12
+(20, -65.4,  -24.89, 'Weather Underground - La Isla'), -- ISALTACE3
+(21, -65.4,  -24.78, 'Weather Underground - Cerro San Bernardo'), --ISALTA10
+(22, -65.49, -24.74, 'Weather Underground - San Lorenzo'), --ISALTA17
+(23, -64.95, -25.8,  'Weather Underground - R. de la Frontera'), --IROSARIO32
+(24, -65.47, -23.74, 'Weather Underground - Santa Rosa de Chuschuyoc'), --ITUMBA11
+(25, -65.66, -27.23, 'Weather Underground - Sargento Moya'), -- IMONTE19
+(26, -66.33, -27.55, 'Weather Underground - Daza Chaquiago'), -- IANDAL3
+(40, -64.69, -26.01, 'Weather Underground - Daza Copo Quile'), --IROSAR45
+(48, -65.42, -24.79, 'Weather Underground - Dante Alighieri UCASAL MATTEO'), --ISALTA13
+
+(60, -66.012908,     -26.092266,  'Weather Underground - Escuela S Agustín UCASAL MATTEO'), --ICAFAY1
+
+(77, -66.24, -25.32, 'Weather Underground - Seclantas'), --IMOLIN34
+(79, -65.40, -24.73, 'Weather Underground - San Jose UCASAL MATTEO'), --ISALTA14
+(80, -65.42, -24.78, 'Weather Underground - CruzDelSur'), --ISALTA30
+(81, -65.48, -24.73, 'Weather Underground - Estacion San Lorenzo'), --ISALTA34
+(83, -65.42, -24.73, 'Weather Underground - Infomet'),
+
 (100, -65.98, -26.07, 'Weather Underground - Cafayate'), -- "ICAFAY2"
 (101, -64.69, -26.01, 'Weather Underground - Rosario de la Frontera'), -- "IROSAR87"
 (102, -64.03, -23.21, 'Weather Underground - Embarcacion'), -- "IGRLJOSD2"
 (103, -65.50, -24.85, 'Weather Underground - San Luis UCASAL MATTEO'), -- "ISALTA41"
-
-(104, -65.329, -25.265, 'AES (IBU) - Cabra Corral'), -- "AES IBU CC"
-(105, -65.291, -25.297, 'AES (IBU) - PB'), -- "AES IBU PB"
-(106, -64.480, -25.225, 'AES (IBU) - El Tunal'), -- "AES IBU TUNAL"
 (107, -66.03, -26.35, 'Weather Underground - Finca Daniel'), -- "ICOLAL3"
 
 (111, -65.56, -24.88, 'Weather Underground - WS Los Robles'), -- "ICAMPO260"
