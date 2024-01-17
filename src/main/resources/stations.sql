@@ -114,7 +114,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (24, -65.47, -23.74, 'Weather Underground - Santa Rosa de Chuschuyoc'), --ITUMBA11
 (25, -65.66, -27.23, 'Weather Underground - Sargento Moya'), -- IMONTE19
 (26, -66.33, -27.55, 'Weather Underground - Daza Chaquiago'), -- IANDAL3
-(40, -64.69, -26.01, 'Weather Underground - Daza Copo Quile'), --IROSAR45
+(40, -64.69, -26.012, 'Weather Underground - Daza Copo Quile'), --IROSAR45
 (48, -65.42, -24.79, 'Weather Underground - Dante Alighieri UCASAL MATTEO'), --ISALTA13
 
 (60, -66.012908,     -26.092266,  'Weather Underground - Escuela S Agustín UCASAL MATTEO'), --ICAFAY1
@@ -126,7 +126,7 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (83, -65.42, -24.73, 'Weather Underground - Infomet'),
 
 (100, -65.98, -26.07, 'Weather Underground - Cafayate'), -- "ICAFAY2"
-(101, -64.69, -26.01, 'Weather Underground - Rosario de la Frontera'), -- "IROSAR87"
+(101, -64.69, -26.008, 'Weather Underground - Rosario de la Frontera'), -- "IROSAR87"
 (102, -64.03, -23.21, 'Weather Underground - Embarcacion'), -- "IGRLJOSD2"
 (103, -65.50, -24.85, 'Weather Underground - San Luis UCASAL MATTEO'), -- "ISALTA41"
 (107, -66.03, -26.35, 'Weather Underground - Finca Daniel'), -- "ICOLAL3"
