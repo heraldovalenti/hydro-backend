@@ -15,75 +15,38 @@ public class INTAAnteriorDataServiceTest {
     private INTAAnteriorDataService intaAnteriorDataService;
 
     @Test
-    public void ema_ollerosStationTest() {
-        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_olleros");
-        Assertions.assertFalse(result.isEmpty());
-
-    }
-
-    @Test
-    public void ema_bicentenarioStationTest() {
-        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_bicentenario");
-        Assertions.assertFalse(result.isEmpty());
-
-    }
-
-    @Test
-    public void ema_spmfStationTest() {
-        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_spmf");
-        Assertions.assertFalse(result.isEmpty());
-
-    }
-
-    @Test
-    public void ema_lavinaStationTest() {
-        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_lavina");
-        Assertions.assertFalse(result.isEmpty());
-
-    }
-
-    @Test
-    public void ema_desdeelsurStationTest() {
-        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_desdeelsur");
-        Assertions.assertFalse(result.isEmpty());
-
-    }
-
-    @Test
-    public void ema_yatastoStationTest() {
-        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_yatasto");
-        Assertions.assertFalse(result.isEmpty());
-
-    }
-
-    @Test
-    public void ema_cerrillosStationTest() {
-        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_cerrillos");
-        Assertions.assertFalse(result.isEmpty());
-
-    }
-
-    @Test
-    public void ema_esca3167StationTest() {
-        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_esca3167");
+    public void eeasalta_cerrillosStationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("eeasalta_cerrillos");
         Assertions.assertFalse(result.isEmpty());
     }
 
     @Test
-    public void ema_elgalponStationTest() {
-        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_elgalpon");
+    public void eeasalta_lavinaStationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("eeasalta_lavina");
         Assertions.assertFalse(result.isEmpty());
     }
 
     @Test
-    public void ema_rlermaStationTest() {
-        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_rlerma");
+    public void eeasalta_abrasolStationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("eeasalta_abrasol");
         Assertions.assertFalse(result.isEmpty());
     }
 
     @Test
-    public void ema_etchartStationTest() {
-        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("ema_etchart");
+    public void eeasalta_3167StationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("eeasalta_3167");
+        Assertions.assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void eeasalta_3169StationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("eeasalta_3169");
+        Assertions.assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void eeasalta_elbreteStationTest() {
+        List<INTAAnteriorDataItem> result = intaAnteriorDataService.getObservationData("eeasalta_elbrete");
         Assertions.assertFalse(result.isEmpty());
     }
 
