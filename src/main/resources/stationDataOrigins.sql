@@ -102,16 +102,17 @@ INSERT INTO station_data_origin
 (id,data_origin_id,dimension_id,station_id,external_station_id,default_unit_id) VALUES
 (37, 5, 3, 49, 'ema_bicentenario', 3), --dimension: lluvia, default unit: mm
 (38, 5, 3, 50, 'ema_olleros', 3), --dimension: lluvia, default unit: mm
-(39, 5, 3, 51, 'ema_spmf', 3), --dimension: lluvia, default unit: mm
-(40, 5, 3, 52, 'ema_lavina', 3), --dimension: lluvia, default unit: mm
+(39, 5, 3, 51, 'eeasalta_elbrete', 3), --dimension: lluvia, default unit: mm
+(40, 5, 3, 52, 'eeasalta_lavina', 3), --dimension: lluvia, default unit: mm
 (41, 5, 3, 53, 'ema_desdeelsur', 3), --dimension: lluvia, default unit: mm
 
 (42, 5, 3, 54, 'ema_yatasto', 3), --dimension: lluvia, default unit: mm
-(43, 5, 3, 55, 'ema_cerrillos', 3), --dimension: lluvia, default unit: mm
-(44, 5, 3, 56, 'ema_esca3167', 3), --dimension: lluvia, default unit: mm
-(45, 5, 3, 57, 'ema_elgalpon', 3), --dimension: lluvia, default unit: mm
+(43, 5, 3, 55, 'eeasalta_cerrillos', 3), --dimension: lluvia, default unit: mm
+(44, 5, 3, 56, 'eeasalta_3167', 3), --dimension: lluvia, default unit: mm
+(45, 5, 3, 57, 'eeasalta_3169', 3), --dimension: lluvia, default unit: mm
 (46, 5, 3, 58, 'ema_rlerma', 3), --dimension: lluvia, default unit: mm
-(47, 5, 3, 59, 'ema_etchart', 3); --dimension: lluvia, default unit: mm
+(47, 5, 3, 59, 'ema_etchart', 3), --dimension: lluvia, default unit: mm
+(135, 5, 3, 125, 'eeasalta_abrasol', 3); --dimension: lluvia, default unit: mm
 
 -- data origin: SNIH
 INSERT INTO station_data_origin
@@ -180,4 +181,4 @@ INSERT INTO station_data_origin
 (110, 9, 1, 2, 106, 'TUNA_NIVEL'),  --AES (IBU) - El Tunal     - nivel
 (111, 9, 2, 5, 106, 'TUNA_CAUDAL'); --AES (IBU) - El Tunal     - caudal
 
--- last ID: 134 (SNIH - Pie de Medano - 10210)
+-- last ID: 135 (Abra del Sol SRL - Oran - eeasalta_abrasol)
