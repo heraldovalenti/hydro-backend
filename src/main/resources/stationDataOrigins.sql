@@ -77,7 +77,8 @@ INSERT INTO station_data_origin
 (128, 2, 3, 120, 'ICERRI5', 4), --dimension: lluvia
 (129, 2, 3, 121, 'ICAFAY3', 4), --dimension: lluvia
 (130, 2, 3, 122, 'ILACALDE2', 4), --dimension: lluvia
-(131, 2, 3, 123, 'ISALTA48', 4); --dimension: lluvia
+(131, 2, 3, 123, 'ISALTA48', 4), --dimension: lluvia
+(136, 2, 3, 126, 'IMETND2', 4); --dimension: lluvia
 
 --data origin: INTA_Siga2
 INSERT INTO station_data_origin
@@ -181,4 +182,4 @@ INSERT INTO station_data_origin
 (110, 9, 1, 2, 106, 'TUNA_NIVEL'),  --AES (IBU) - El Tunal     - nivel
 (111, 9, 2, 5, 106, 'TUNA_CAUDAL'); --AES (IBU) - El Tunal     - caudal
 
--- last ID: 135 (Abra del Sol SRL - Oran - eeasalta_abrasol)
+-- last ID: 136 (Weather Underground - Los Manantiales - IMETND2)

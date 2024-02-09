@@ -141,5 +141,6 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (121, -65.97, -26.07, 'Weather Underground - Aeropuerto CAF'), -- "ICAFAY3"
 (122, -65.41, -24.70, 'Weather Underground - Vaqueros'), -- "ILACALDE2"
 (123, -65.949481, -25.968560, 'Weather Underground - Animana'), -- "ISALTA48"
+(126, -64.95, -25.44, 'Weather Underground - Los Manantiales'), -- "IMETND2"
 
--- last ID: 125 (INTA - Abra del Sol SRL - eeasalta_abrasol)
+-- last ID: 126 (Weather Underground - Los Manantiales - IMETND2)
