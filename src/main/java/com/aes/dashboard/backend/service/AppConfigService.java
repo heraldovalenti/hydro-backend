@@ -1,6 +1,5 @@
 package com.aes.dashboard.backend.service;
 
-import com.aes.dashboard.backend.controller.entities.AuthTokens;
 import com.aes.dashboard.backend.exception.AppConfigMissing;
 import com.aes.dashboard.backend.model.AppConfig;
 import com.aes.dashboard.backend.repository.AppConfigRepository;
@@ -15,8 +14,6 @@ import java.util.Optional;
 @Service
 public class AppConfigService {
 
-    private static final String LATEST_DATA_FED_AUTH = "LATEST_DATA_FED_AUTH";
-    private static final String LATEST_DATA_RT_FA = "LATEST_DATA_RT_FA";
     private static final String WEATHERLINK_AUTH_TOKEN = "WEATHERLINK_AUTH_TOKEN";
     private static final String WEATHERUNDERGROUND_AUTH_TOKEN = "WEATHERUNDERGROUND_AUTH_TOKEN";
     private static final String USER_AGENT_HEADER = "USER_AGENT_HEADER";
@@ -30,12 +27,6 @@ public class AppConfigService {
         return result.orElseThrow(() -> new AppConfigMissing(name));
     }
 
-    public AuthTokens getAuthTokens() {
-        String fedAuth = getConfig(LATEST_DATA_FED_AUTH).getValue();
-        String rtFa = getConfig(LATEST_DATA_RT_FA).getValue();
-        return new AuthTokens(fedAuth, rtFa);
-    }
-
     public String getWeatherUndergroundAuthToken() {
         return getConfig(WEATHERUNDERGROUND_AUTH_TOKEN).getValue();
     }
@@ -46,17 +37,6 @@ public class AppConfigService {
 
     public String getUserAgentHeader() {
         return getConfig(USER_AGENT_HEADER).getValue();
-    }
-
-
-    @Transactional
-    public void updateFedAuth(String fedAuth) {
-        updateAuthToken(LATEST_DATA_FED_AUTH, fedAuth);
-    }
-
-    @Transactional
-    public void updateRtFa(String rtFa) {
-        updateAuthToken(LATEST_DATA_RT_FA, rtFa);
     }
 
     @Transactional

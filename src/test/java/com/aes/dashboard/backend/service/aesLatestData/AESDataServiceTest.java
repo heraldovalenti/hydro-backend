@@ -1,6 +1,5 @@
 package com.aes.dashboard.backend.service.aesLatestData;
 
-import com.aes.dashboard.backend.controller.entities.AuthTokens;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
