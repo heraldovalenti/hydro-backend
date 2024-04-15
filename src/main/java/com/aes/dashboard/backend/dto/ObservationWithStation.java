@@ -1,4 +1,4 @@
-package com.aes.dashboard.backend.controller.entities;
+package com.aes.dashboard.backend.dto;
 
 import com.aes.dashboard.backend.model.Observation;
 import com.aes.dashboard.backend.model.Station;

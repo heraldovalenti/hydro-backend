@@ -1,6 +1,6 @@
 package com.aes.dashboard.backend.service;
 
-import com.aes.dashboard.backend.controller.entities.RequestTimePeriod;
+import com.aes.dashboard.backend.dto.RequestTimePeriod;
 import com.aes.dashboard.backend.model.MeasurementDimension;
 import com.aes.dashboard.backend.model.Observation;
 import com.aes.dashboard.backend.model.Station;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

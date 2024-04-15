@@ -1,6 +1,6 @@
 package com.aes.dashboard.backend.controller;
 
-import com.aes.dashboard.backend.controller.entities.RequestTimePeriod;
+import com.aes.dashboard.backend.dto.RequestTimePeriod;
 import com.aes.dashboard.backend.exception.EntityNotFound;
 import com.aes.dashboard.backend.model.MeasurementDimension;
 import com.aes.dashboard.backend.model.Observation;

@@ -1,6 +1,6 @@
 package com.aes.dashboard.backend.service;
 
-import com.aes.dashboard.backend.controller.entities.RequestTimePeriod;
+import com.aes.dashboard.backend.dto.RequestTimePeriod;
 import com.aes.dashboard.backend.model.*;
 import com.aes.dashboard.backend.repository.ObservationRepository;
 import com.aes.dashboard.backend.repository.StationDataOriginRepository;

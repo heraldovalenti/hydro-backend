@@ -1,4 +1,4 @@
-package com.aes.dashboard.backend.controller.entities;
+package com.aes.dashboard.backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

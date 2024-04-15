@@ -1,6 +1,6 @@
 package com.aes.dashboard.backend.controller;
 
-import com.aes.dashboard.backend.controller.entities.WeatherLinkHealthCheckResult;
+import com.aes.dashboard.backend.dto.WeatherLinkHealthCheckResult;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
 import com.aes.dashboard.backend.service.weatherlinkData.WeatherlinkDataService;
 import com.aes.dashboard.backend.service.weatherlinkData.WeatherlinkResult;

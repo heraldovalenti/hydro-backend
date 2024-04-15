@@ -1,4 +1,4 @@
-package com.aes.dashboard.backend.controller.entities;
+package com.aes.dashboard.backend.dto;
 
 import com.aes.dashboard.backend.service.weatherlinkData.OIssData;
 import com.aes.dashboard.backend.service.weatherlinkData.TotalRainData;
