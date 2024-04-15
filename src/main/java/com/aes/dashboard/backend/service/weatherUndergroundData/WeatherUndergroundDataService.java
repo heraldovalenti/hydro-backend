@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service.weatherUndergroundData;
 
+import com.aes.dashboard.backend.model.Station;
 import com.aes.dashboard.backend.model.StationDataOrigin;
 import com.aes.dashboard.backend.model.date.DateRounder;
 import com.aes.dashboard.backend.service.AppConfigService;
@@ -38,8 +39,14 @@ public class WeatherUndergroundDataService {
         this.dateRounder = new DateRounder(this.dateMinutesRound);
     }
 
-    public Optional<WeatherUndergroundResult> getObservationData(StationDataOrigin stationDataOrigin) {
+    public Optional<WeatherUndergroundResult> getObservationData(String stationId) {
+        StationDataOrigin sdo = new StationDataOrigin();
+        sdo.setStation(new Station());
+        sdo.setExternalStationId(stationId);
+        return getObservationData(sdo);
+    }
 
+    public Optional<WeatherUndergroundResult> getObservationData(StationDataOrigin stationDataOrigin) {
         String apiKey = appConfigService.getWeatherUndergroundAuthToken();
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(this.url)
                 .queryParam("apiKey", apiKey)
