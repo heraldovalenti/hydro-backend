@@ -34,7 +34,7 @@ public class Station {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "station")
     private HQModel hqModel;
 
-    @Column(columnDefinition = "boolean default true")
+    @Column(nullable = false)
     private Boolean active;
 
     public Station() {
