@@ -34,6 +34,9 @@ public class Station {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "station")
     private HQModel hqModel;
 
+    @Column(columnDefinition = "boolean default true")
+    private Boolean active;
+
     public Station() {
     }
 
@@ -95,6 +98,14 @@ public class Station {
 
     public void setHqModel(HQModel hqModel) {
         this.hqModel = hqModel;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @Override
