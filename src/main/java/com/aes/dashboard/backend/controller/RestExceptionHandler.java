@@ -1,6 +1,7 @@
 package com.aes.dashboard.backend.controller;
 
 import com.aes.dashboard.backend.exception.EntityNotFound;
+import com.aes.dashboard.backend.exception.IncorrectDateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,4 +23,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
+    @ExceptionHandler({ IncorrectDateTimeFormat.class})
+    public ResponseEntity<Object> handleDateTimeFormatException(
+            IncorrectDateTimeFormat ex, WebRequest request) {
+        String message = String.format("Could not parse %s (index %s), required format is %s",
+                ex.getInput(), ex.getIndex(), ex.getFormat());
+        return handleExceptionInternal(ex, message,
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
 }
