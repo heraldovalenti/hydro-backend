@@ -1,10 +1,12 @@
 package com.aes.dashboard.backend.repository;
 
+import com.aes.dashboard.backend.dto.IStationRainAccumulation;
 import com.aes.dashboard.backend.model.MeasurementDimension;
 import com.aes.dashboard.backend.model.Observation;
 import com.aes.dashboard.backend.model.Station;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,6 +30,35 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
             @Param("from") LocalDateTime from,
             @Param("to") LocalDateTime to,
             Pageable pageable);
+
+    @Query("SELECT o FROM Observation o " +
+            "WHERE o.station = :station " +
+            "AND o.time >= :from AND o.time <= :to")
+    List<Observation> findByStationAndBetweenTime(
+            Station station,
+            @Param("from") LocalDateTime from,
+            @Param("to") LocalDateTime to,
+            Sort pageable);
+
+    @Query("SELECT o.station.id as stationId, sum(o.diff) AS accumulation " +
+            "FROM Observation o " +
+            "WHERE o.time >= :from AND o.time <= :to " +
+            "GROUP BY o.station.id")
+    List<IStationRainAccumulation> idAndSumDiffBetweenTime(
+            @Param("from") LocalDateTime from,
+            @Param("to") LocalDateTime to
+    );
+
+    @Query("SELECT o.station.id as stationId, sum(o.diff) AS accumulation " +
+            "FROM Observation o " +
+            "WHERE o.station = :station " +
+            "AND o.time >= :from AND o.time <= :to " +
+            "GROUP BY o.station.id")
+    List<IStationRainAccumulation> idAndSumDiffByStationAndBetweenTime(
+            Station station,
+            @Param("from") LocalDateTime from,
+            @Param("to") LocalDateTime to
+    );
 
     @Query("SELECT o FROM Observation o  " +
             "WHERE o.station = :station " +

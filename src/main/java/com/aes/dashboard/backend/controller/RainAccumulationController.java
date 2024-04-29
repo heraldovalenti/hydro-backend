@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.controller;
 
+import com.aes.dashboard.backend.dto.IStationRainAccumulation;
 import com.aes.dashboard.backend.dto.RequestTimePeriod;
 import com.aes.dashboard.backend.exception.EntityNotFound;
 import com.aes.dashboard.backend.model.Observation;
@@ -57,11 +58,24 @@ public class RainAccumulationController {
         return result.getRainAccumulations();
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/{stationId}")
+    public List<RainAccumulation> accumulationForStation(
+            @PathVariable Long stationId,
+            @RequestParam(defaultValue = "") String from,
+            @RequestParam(defaultValue = "") String to) {
+        RequestTimePeriod period = RequestTimePeriod.of(from, to);
+        return accumulationForStation(stationId, period);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public List<StationRainAccumulation> accumulations(
             @RequestBody RequestTimePeriod requestTimePeriod) {
         Long start = System.currentTimeMillis();
-        List<StationRainAccumulation> results = rainAccumulationService.rainAccumulations(requestTimePeriod.getFrom(), requestTimePeriod.getTo());
+        LOGGER.debug(requestTimePeriod.toString());
+        List<StationRainAccumulation> results = rainAccumulationService.rainAccumulations(
+                requestTimePeriod.getFrom(),
+                requestTimePeriod.getTo()
+        );
         Long end = System.currentTimeMillis();
         LOGGER.debug("accumulations execution time: {}", (end - start));
         return results;
@@ -73,6 +87,40 @@ public class RainAccumulationController {
         @RequestParam(defaultValue = "") String to) {
         RequestTimePeriod period = RequestTimePeriod.of(from, to);
         return accumulations(period);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "v2")
+    public List<IStationRainAccumulation> rainAccumulationsV2(
+            @RequestParam(defaultValue = "") String from,
+            @RequestParam(defaultValue = "") String to) {
+        RequestTimePeriod requestTimePeriod = RequestTimePeriod.of(from, to);
+
+        Long start = System.currentTimeMillis();
+        LOGGER.debug(requestTimePeriod.toString());
+        List<IStationRainAccumulation> results =
+                rainAccumulationService.rainAccumulationsV2(
+                        requestTimePeriod.getFrom(),
+                        requestTimePeriod.getTo()
+                );
+        Long end = System.currentTimeMillis();
+        LOGGER.debug("accumulations execution time: {}", (end - start));
+        return results;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "v2/{stationId}")
+    public List<IStationRainAccumulation> stationRainAccumulationsV2(
+            @PathVariable Long stationId,
+            @RequestParam(defaultValue = "") String from,
+            @RequestParam(defaultValue = "") String to) {
+        RequestTimePeriod requestTimePeriod = RequestTimePeriod.of(from, to);
+        Station s = stationService.find(stationId);
+        List<IStationRainAccumulation> results =
+                rainAccumulationService.stationRainAccumulationsV2(
+                        s,
+                        requestTimePeriod.getFrom(),
+                        requestTimePeriod.getTo()
+                );
+        return results;
     }
 
 }

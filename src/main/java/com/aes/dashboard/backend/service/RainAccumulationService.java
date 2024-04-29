@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service;
 
+import com.aes.dashboard.backend.dto.IStationRainAccumulation;
 import com.aes.dashboard.backend.model.MeasurementDimension;
 import com.aes.dashboard.backend.model.Observation;
 import com.aes.dashboard.backend.model.Station;
@@ -76,5 +77,18 @@ public class RainAccumulationService {
         return results;
     }
 
+    public List<IStationRainAccumulation> stationRainAccumulationsV2(
+            Station s, LocalDateTime from, LocalDateTime to) {
+        List<IStationRainAccumulation> observationList = observationRepository
+                .idAndSumDiffByStationAndBetweenTime(s, from, to);
+        return observationList;
+    }
+
+    public List<IStationRainAccumulation> rainAccumulationsV2(
+            LocalDateTime from, LocalDateTime to) {
+        List<IStationRainAccumulation> observationList = observationRepository
+                .idAndSumDiffBetweenTime(from, to);
+        return observationList;
+    }
 
 }

@@ -16,7 +16,7 @@ class AESDataServiceTest {
     @Test
     public void basicTest() {
         List<DataItem> result = service.getLatestData(true);
-        for(DataItem item : result) {
+        for (DataItem item : result) {
             System.out.println(item.toString());
         }
         Assertions.assertEquals(341, result.size());

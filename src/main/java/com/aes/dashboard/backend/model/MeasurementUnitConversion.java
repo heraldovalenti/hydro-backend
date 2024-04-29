@@ -2,25 +2,15 @@ package com.aes.dashboard.backend.model;
 
 public class MeasurementUnitConversion {
 
-    private long originId;
-    private long targetId;
     private MeasurementUnit origin;
     private MeasurementUnit target;
     private double conversionFactor;
 
 
-    public MeasurementUnitConversion(long originId, long targetId, double conversionFactor) {
-        this.originId = originId;
-        this.targetId = targetId;
+    public MeasurementUnitConversion(MeasurementUnit origin, MeasurementUnit target, double conversionFactor) {
+        this.origin = origin;
+        this.target = target;
         this.conversionFactor = conversionFactor;
-    }
-
-    public long getOriginId() {
-        return originId;
-    }
-
-    public long getTargetId() {
-        return targetId;
     }
 
     public MeasurementUnit getOrigin() {
@@ -41,5 +31,9 @@ public class MeasurementUnitConversion {
 
     public double getConversionFactor() {
         return conversionFactor;
+    }
+
+    public double convert(double input) {
+        return this.conversionFactor * input;
     }
 }

@@ -36,6 +36,9 @@ public class Observation {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private DataOrigin dataOrigin;
 
+    @Column(nullable = true)
+    private Double diff;
+
     public Observation() {
     }
 
@@ -95,6 +98,14 @@ public class Observation {
         this.dataOrigin = dataOrigin;
     }
 
+    public Double getDiff() {
+        return diff;
+    }
+
+    public void setDiff(Double diff) {
+        this.diff = diff;
+    }
+
     @Override
     public String toString() {
         return "Observation{" +
@@ -105,6 +116,7 @@ public class Observation {
                 ", unit=" + unit.getDescription() +
                 ", dimension=" + dimension.getDescription() +
                 ", dataOrigin=" + dataOrigin.getDescription() +
+                ", diff=" + diff +
                 '}';
     }
 

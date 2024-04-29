@@ -310,7 +310,7 @@ public class ObservationService {
     }
 
     @Transactional
-    public void updateOrCreateObservation(Observation observation) {
+    private void updateOrCreateObservation(Observation observation) {
         List<Observation> existingObservations = observationRepository.findByStationAndDimensionAndTime(
                 observation.getStation(), observation.getDimension(), observation.getTime()
         );
@@ -388,5 +388,10 @@ public class ObservationService {
         LOGGER.debug("took {} millis", end - start);
         measurementUnitService.normalizeMeasurementUnits(result);
         return result;
+    }
+
+    @Transactional
+    public void saveAll(List<Observation> observationList) {
+        observationRepository.saveAll(observationList);
     }
 }

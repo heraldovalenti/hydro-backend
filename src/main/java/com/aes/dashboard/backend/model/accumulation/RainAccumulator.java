@@ -43,6 +43,10 @@ public abstract class RainAccumulator {
             return Optional.empty();
         }
         Station station = observationStation.get();
+        return accumulatorForStation(station);
+    }
+
+    public static Optional<RainAccumulator> accumulatorForStation(Station station) {
         Optional<RainAccumulator> result = stationAccumulatorMap.containsKey(station) ?
                 Optional.of(stationAccumulatorMap.get(station)) : Optional.empty();
         if (result.isPresent()) {
