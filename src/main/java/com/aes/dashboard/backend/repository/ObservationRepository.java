@@ -96,4 +96,19 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
             Station station,
             MeasurementDimension rain);
 
+    // idea from: https://stackoverflow.com/questions/4510185/select-max-value-of-each-group
+    @Query( nativeQuery = true, value = "SELECT * FROM observation o1 " +
+            "INNER JOIN ( SELECT o2.station_id AS o2station_id, MAX(o2.time) AS o2time " +
+            "FROM observation o2 " +
+            "WHERE dimension_id = ?1 " +
+            "AND o2.time between ?2 and ?3 " +
+            "GROUP BY o2station_id ) o2 " +
+            "ON o1.station_id = o2station_id AND o1.time = o2time " +
+            "WHERE o1.dimension_id = ?1 " +
+            "ORDER BY o1.time DESC")
+    List<Observation> findLatestObservationsByDimension(
+            Long dimensionId,
+            LocalDateTime from,
+            LocalDateTime to);
+
 }

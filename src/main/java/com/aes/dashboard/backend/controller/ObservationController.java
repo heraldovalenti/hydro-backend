@@ -200,8 +200,8 @@ public class ObservationController {
         return result.orElse(null);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/latestObservations/{dimensionId}")
-    public List<ObservationWithStation> latestObservations(
+    @RequestMapping(method = RequestMethod.GET, value = "/latestObservations/deprecated/{dimensionId}")
+    public List<ObservationWithStation> latestObservationsDeprecated(
             @PathVariable Long dimensionId,
             @RequestParam(defaultValue = "") String from,
             @RequestParam(defaultValue = "") String to) {
@@ -216,6 +216,22 @@ public class ObservationController {
                 .collect(Collectors.toList());
         Long end = System.currentTimeMillis();
         LOGGER.debug("latestObservations execution time: {}", (end - start));
+        return result;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/latestObservations/{dimensionId}")
+    public List<ObservationWithStation> latestObservationsV2(
+            @PathVariable Long dimensionId,
+            @RequestParam(defaultValue = "") String from,
+            @RequestParam(defaultValue = "") String to) {
+        RequestTimePeriod period = RequestTimePeriod.of(from, to);
+        Optional<MeasurementDimension> dimension = measurementDimensionRepository.findById(dimensionId);
+        List<Observation> observations = observationService.latestObservationsV2(
+                dimension.orElseThrow(() -> new EntityNotFound(dimensionId, MeasurementDimension.class)),
+                period.getFrom(), period.getTo());
+        List<ObservationWithStation> result = observations.stream()
+                .map(o -> ObservationWithStation.fromObservation(o))
+                .collect(Collectors.toList());
         return result;
     }
 }

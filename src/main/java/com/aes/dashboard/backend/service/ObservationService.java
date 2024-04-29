@@ -29,10 +29,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static com.aes.dashboard.backend.config.GlobalConfigs.SALTA_ZONE_ID;
 import static com.aes.dashboard.backend.config.GlobalConfigs.UTC_ZONE_ID;
@@ -384,10 +381,19 @@ public class ObservationService {
             Long endStation = System.currentTimeMillis();
             LOGGER.debug("took {} millis for station {}", endStation - startStation, station.getId());
         }
+        Collections.sort(result, Comparator.comparing(Observation::getId));
         Long end = System.currentTimeMillis();
         LOGGER.debug("took {} millis", end - start);
         measurementUnitService.normalizeMeasurementUnits(result);
         return result;
+    }
+
+    public List<Observation> latestObservationsV2(MeasurementDimension dimension, LocalDateTime from, LocalDateTime to) {
+        List<Observation> latestObservation = observationRepository
+                    .findLatestObservationsByDimension(dimension.getId(), from, to);
+        Collections.sort(latestObservation, Comparator.comparing(Observation::getId));
+        measurementUnitService.normalizeMeasurementUnits(latestObservation);
+        return latestObservation;
     }
 
     @Transactional
