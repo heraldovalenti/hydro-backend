@@ -1,4 +1,4 @@
-INSERT INTO station (id,longitude,latitude,description) VALUES
+INSERT INTO station (id,longitude,latitude,description,active) VALUES
 
 (2, -65.4755009893,  -24.7657954885, 'UCASAL - El Tipal'), --Familia Guillen
 (3, -65.3917714195,  -24.7404422829, 'UCASAL - Fac. Ingeniería'), --ISALTA11
@@ -143,4 +143,19 @@ INSERT INTO station (id,longitude,latitude,description) VALUES
 (123, -65.949481, -25.968560, 'Weather Underground - Animana'), -- "ISALTA48"
 (126, -64.95, -25.44, 'Weather Underground - Los Manantiales'), -- "IMETND2"
 
--- last ID: 126 (Weather Underground - Los Manantiales - IMETND2)
+(127, -65.4861111, -24.8558333, 'Weather Cloud - Salta', true), -- "SASA"
+(128, -65.4833333, -24.7330556, 'Weather Cloud - ESTACION SALTA', true), -- "1968239092"
+(129, -65.4172222, -24.7313889, 'Weather Cloud - Infomet', true), -- "5457430806"
+(130, -65.6049999, -24.8472222, 'Weather Cloud - Encon Beach', true), -- "9341323576"
+(131, -65.5605555, -24.8827778, 'Weather Cloud - WS Los Robles', true), -- "8418199173"
+
+(132, -64.9644444, -24.7922222, 'Weather Cloud - EMA Roberto', true), -- "9831848457"
+(133, -65.515,     -25.8811111, 'Weather Cloud - daza', true), -- "7770552514"
+(134, -65.4808333, -26.2016667, 'Weather Cloud - Tako yana', true), -- "5992524282"
+
+(135, -65.0977777, -24.3927778, 'Weather Cloud - Jujuy', true), -- "SASJ"
+(136, -65.3219444, -24.1705556, 'Weather Cloud - Los Perales', true), -- "1752089865"
+(137, -65.3311111, -24.1675,    'Weather Cloud - Easy Weather Jujuy', true), -- "3863394405"
+(138, -65.4402777, -24.1194444, 'Weather Cloud - Dazayala', true), -- "5433158430"
+
+-- last ID: 138 (Weather Cloud - Dazayala - 5433158430)

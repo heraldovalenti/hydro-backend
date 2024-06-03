@@ -182,4 +182,22 @@ INSERT INTO station_data_origin
 (110, 9, 1, 2, 106, 'TUNA_NIVEL'),  --AES (IBU) - El Tunal     - nivel
 (111, 9, 2, 5, 106, 'TUNA_CAUDAL'); --AES (IBU) - El Tunal     - caudal
 
--- last ID: 136 (Weather Underground - Los Manantiales - IMETND2)
+-- data origin: Weather Cloud
+INSERT INTO station_data_origin
+(id,data_origin_id,dimension_id,default_unit_id,station_id,external_station_id) VALUES
+(137, 10, 3, 3, 127, 'SASA'),        --Weather Cloud - Salta
+(138, 10, 3, 3, 128, '1968239092'),  --Weather Cloud - ESTACION SALTA
+(139, 10, 3, 3, 129, '5457430806'),  --Weather Cloud - Infomet
+(140, 10, 3, 3, 130, '9341323576'),  --Weather Cloud - Encon Beach
+(141, 10, 3, 3, 131, '8418199173'),  --Weather Cloud - WS Los Robles
+
+(142, 10, 3, 3, 132, '9831848457'),  --Weather Cloud - EMA Roberto
+(143, 10, 3, 3, 133, '7770552514'),  --Weather Cloud - daza
+(144, 10, 3, 3, 134, '5992524282'),  --Weather Cloud - Tako yana
+
+(145, 10, 3, 3, 135, 'SASJ'),        --Weather Cloud - Jujuy
+(146, 10, 3, 3, 136, '1752089865'),  --Weather Cloud - Los Perales
+(147, 10, 3, 3, 137, '3863394405'),  --Weather Cloud - Easy Weather Jujuy
+(148, 10, 3, 3, 138, '5433158430');  --Weather Cloud - Dazayala
+
+-- last ID: 148 (Weather Cloud - Dazayala - 5433158430)
