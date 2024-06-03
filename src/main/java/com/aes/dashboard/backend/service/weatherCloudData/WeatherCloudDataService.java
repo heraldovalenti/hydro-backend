@@ -3,6 +3,7 @@ package com.aes.dashboard.backend.service.weatherCloudData;
 import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +26,7 @@ public class WeatherCloudDataService {
 
     public WeatherCloudDataService(
             @Value("${weathercloud-data.url}") String url,
-            RestTemplate restTemplate,
+            @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate,
             AppConfigService appConfigService) {
         this.url = url;
         this.restTemplate = restTemplate;
