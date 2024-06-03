@@ -15,6 +15,8 @@ import com.aes.dashboard.backend.service.intaData.INTASiga2DataService;
 import com.aes.dashboard.backend.service.snih.SNIHDataCode;
 import com.aes.dashboard.backend.service.snih.SNIHDataService;
 import com.aes.dashboard.backend.service.snih.SNIHObservation;
+import com.aes.dashboard.backend.service.weatherCloudData.WeatherCloudDataService;
+import com.aes.dashboard.backend.service.weatherCloudData.WeatherCloudResult;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundDataService;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundResult;
 import com.aes.dashboard.backend.service.weatherlinkData.WeatherlinkDataService;
@@ -77,6 +79,9 @@ public class ObservationService {
 
     @Autowired
     private AesIbuDataService aesIbuDataService;
+
+    @Autowired
+    private WeatherCloudDataService weatherCloudDataService;
 
     @Transactional
     public void updateAesObservations() {
@@ -275,6 +280,30 @@ public class ObservationService {
             updateObservationsForStationOrigin(aesIbuStationDataOrigin, observations);
         }
         LOGGER.info("Update for AES IBU observations completed");
+    }
+
+    @Transactional
+    public void updateWeatherCloudObservations() {
+        LOGGER.info("Starting update for Weather Cloud observations");
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(UTC_ZONE_ID));
+        DataOrigin weatherCloudDataOrigin = dataOriginService.getWeatherCloudDataOrigin();
+        List<StationDataOrigin> weatherCloudStationDataOriginList = stationDataOriginRepository.findByDataOrigin(weatherCloudDataOrigin);
+
+        for (StationDataOrigin stationDataOrigin : weatherCloudStationDataOriginList) {
+            Optional<WeatherCloudResult> weatherCloudResult = weatherCloudDataService.getObservationData(
+                    stationDataOrigin.getExternalStationId());
+            if (weatherCloudResult.isEmpty()) continue;
+            Observation observation = new Observation();
+            observation.setDimension(stationDataOrigin.getDimension());
+            observation.setStation(stationDataOrigin.getStation());
+            observation.setDataOrigin(weatherCloudDataOrigin);
+            observation.setTime(now);
+            observation.setValue(weatherCloudResult.get().getValues().getRain());
+            observation.setUnit(stationDataOrigin.getDefaultUnit());
+            this.updateOrCreateObservation(observation);
+        }
+
+        LOGGER.info("Update for Weather Cloud observations completed");
     }
 
     @Transactional

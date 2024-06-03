@@ -43,4 +43,8 @@ public class DataOriginService {
     public DataOrigin getAesIbuDataOrigin() {
         return dataOriginRepository.findById(9L).get();
     }
+
+    public DataOrigin getWeatherCloudDataOrigin() {
+        return dataOriginRepository.findById(10L).get();
+    }
 }

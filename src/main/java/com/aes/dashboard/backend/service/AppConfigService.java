@@ -17,6 +17,7 @@ public class AppConfigService {
     private static final String WEATHERLINK_AUTH_TOKEN = "WEATHERLINK_AUTH_TOKEN";
     private static final String WEATHERUNDERGROUND_AUTH_TOKEN = "WEATHERUNDERGROUND_AUTH_TOKEN";
     private static final String USER_AGENT_HEADER = "USER_AGENT_HEADER";
+    private static final String WEATHERCLOUD_COOKIE = "WEATHERCLOUD_COOKIE";
     private static final Logger LOGGER = LoggerFactory.getLogger(AppConfigService.class);
 
     @Autowired
@@ -33,6 +34,10 @@ public class AppConfigService {
 
     public String getWeatherlinkAuthToken() {
         return getConfig(WEATHERLINK_AUTH_TOKEN).getValue();
+    }
+
+    public String getWeatherCloudCookie() {
+        return getConfig(WEATHERCLOUD_COOKIE).getValue();
     }
 
     public String getUserAgentHeader() {
