@@ -5,14 +5,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,8 +31,13 @@ public class WeatherCloudDataService {
             @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate,
             AppConfigService appConfigService) {
         this.url = url;
-        this.restTemplate = restTemplate;
         this.appConfigService = appConfigService;
+        this.restTemplate = restTemplate;
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.TEXT_HTML));
+        messageConverters.add(converter);
+        this.restTemplate.setMessageConverters(messageConverters);
     }
 
     public Optional<WeatherCloudResult> getObservationData(String stationId) {
