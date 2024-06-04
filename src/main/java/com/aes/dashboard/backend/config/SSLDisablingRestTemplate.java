@@ -7,10 +7,15 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import javax.net.ssl.SSLContext;
@@ -19,6 +24,9 @@ import javax.net.ssl.X509TrustManager;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static com.aes.dashboard.backend.config.GlobalConfigs.REQUEST_TIMEOUT;
 
@@ -64,8 +72,17 @@ public class SSLDisablingRestTemplate {
         HttpComponentsClientHttpRequestFactory customRequestFactory = new HttpComponentsClientHttpRequestFactory();
         customRequestFactory.setHttpClient(httpClient);
 
-        return builder
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        List<MediaType> supportedTypes = new ArrayList<>();
+        supportedTypes.add(MediaType.APPLICATION_JSON);
+        supportedTypes.add(MediaType.TEXT_HTML);
+        converter.setSupportedMediaTypes(supportedTypes);
+        messageConverters.add(converter);
+
+     return builder
                 .requestFactory(() -> customRequestFactory)
+                .additionalMessageConverters(messageConverters)
                 .setConnectTimeout(REQUEST_TIMEOUT)
                 .build();
     }
