@@ -158,4 +158,10 @@ INSERT INTO station (id,longitude,latitude,description,active) VALUES
 (137, -65.3311111, -24.1675,    'Weather Cloud - Easy Weather Jujuy', true), -- "3863394405"
 (138, -65.4402777, -24.1194444, 'Weather Cloud - Dazayala', true), -- "5433158430"
 
--- last ID: 138 (Weather Cloud - Dazayala - 5433158430)
+(139, -65.4186706, -24.7446708, 'PWS Weather - F9219 - Salta', true), -- "mid_f9219"
+(140, -65.4800033, -24.8500003, 'PWS Weather - SASA - General Alvarado', true), -- "mid_sasa"
+(141, -65.4666666, -24.8500000, 'PWS Weather - SASA - Salta Airport', true), -- "sasa"
+(142, -65.0800018, -24.3799991, 'PWS Weather - SASJ - La Union', true), -- "mid_sasj"
+(143, -65.1000000, -24.3666666, 'PWS Weather - SASJ - Jujuy Airport', true), -- "sasj"
+
+-- last ID: 143 (PWS Weather - SASJ - Jujuy Airport)

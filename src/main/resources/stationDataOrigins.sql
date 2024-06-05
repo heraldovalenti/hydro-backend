@@ -200,4 +200,13 @@ INSERT INTO station_data_origin
 (147, 10, 3, 3, 137, '3863394405'),  --Weather Cloud - Easy Weather Jujuy
 (148, 10, 3, 3, 138, '5433158430');  --Weather Cloud - Dazayala
 
--- last ID: 148 (Weather Cloud - Dazayala - 5433158430)
+-- data origin: PWS Weather
+INSERT INTO station_data_origin
+(id,data_origin_id,dimension_id,default_unit_id,station_id,external_station_id) VALUES
+(149, 11, 3, 3, 139, 'mid_f9219'), --PWS Weather - F9219 - Salta
+(150, 11, 3, 3, 140, 'mid_sasa'),  --PWS Weather - SASA - General Alvarado
+(151, 11, 3, 3, 141, 'sasa'),      --PWS Weather - SASA - Salta Airport
+(152, 11, 3, 3, 142, 'mid_sasj'),  --PWS Weather - SASJ - La Union
+(153, 11, 3, 3, 143, 'sasj');      --PWS Weather - SASJ - Jujuy Airport
+
+-- last ID: 153 (PWS Weather - SASJ - Jujuy Airport)
