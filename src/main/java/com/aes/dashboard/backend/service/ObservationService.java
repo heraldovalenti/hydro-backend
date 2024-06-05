@@ -12,6 +12,8 @@ import com.aes.dashboard.backend.service.intaData.INTAAnteriorDataItem;
 import com.aes.dashboard.backend.service.intaData.INTAAnteriorDataService;
 import com.aes.dashboard.backend.service.intaData.INTASiga2DataItem;
 import com.aes.dashboard.backend.service.intaData.INTASiga2DataService;
+import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherDataService;
+import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherResult;
 import com.aes.dashboard.backend.service.snih.SNIHDataCode;
 import com.aes.dashboard.backend.service.snih.SNIHDataService;
 import com.aes.dashboard.backend.service.snih.SNIHObservation;
@@ -82,6 +84,9 @@ public class ObservationService {
 
     @Autowired
     private WeatherCloudDataService weatherCloudDataService;
+
+    @Autowired
+    private PWSWeatherDataService pwsWeatherDataService;
 
     @Transactional
     public void updateAesObservations() {
@@ -304,6 +309,29 @@ public class ObservationService {
         }
 
         LOGGER.info("Update for Weather Cloud observations completed");
+    }
+
+    @Transactional
+    public void updatePWSWeatherObservations() {
+        LOGGER.info("Starting update for PWS Weather observations");
+        DataOrigin pwsWeatherDataOrigin = dataOriginService.getPWSWeatherDataOrigin();
+        List<StationDataOrigin> pwsWeatherStationDataOriginList = stationDataOriginRepository.findByDataOrigin(pwsWeatherDataOrigin);
+
+        for (StationDataOrigin stationDataOrigin : pwsWeatherStationDataOriginList) {
+            Optional<PWSWeatherResult> pwsWeatherResult = pwsWeatherDataService.getObservationData(
+                    stationDataOrigin.getExternalStationId());
+            if (pwsWeatherResult.isEmpty()) continue;
+            Observation observation = new Observation();
+            observation.setDimension(stationDataOrigin.getDimension());
+            observation.setStation(stationDataOrigin.getStation());
+            observation.setDataOrigin(pwsWeatherDataOrigin);
+            observation.setTime(pwsWeatherResult.get().getObservationTime());
+            observation.setValue(pwsWeatherResult.get().getObservationValue());
+            observation.setUnit(stationDataOrigin.getDefaultUnit());
+            this.updateOrCreateObservation(observation);
+        }
+
+        LOGGER.info("Update for PWS Weather observations completed");
     }
 
     @Transactional
