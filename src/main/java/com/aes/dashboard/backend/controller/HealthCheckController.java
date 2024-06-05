@@ -3,6 +3,8 @@ package com.aes.dashboard.backend.controller;
 import com.aes.dashboard.backend.dto.HealthCheckResult;
 import com.aes.dashboard.backend.dto.WeatherLinkHealthCheckResult;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
+import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherDataService;
+import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherResult;
 import com.aes.dashboard.backend.service.weatherCloudData.WeatherCloudDataService;
 import com.aes.dashboard.backend.service.weatherCloudData.WeatherCloudResult;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundDataService;
@@ -41,6 +43,9 @@ public class HealthCheckController {
 
     @Autowired
     private WeatherCloudDataService weatherCloudDataService;
+
+    @Autowired
+    private PWSWeatherDataService pwsWeatherDataService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<HealthCheckResult> generalHealthCheck() {
@@ -137,6 +142,30 @@ public class HealthCheckController {
             return ResponseEntity.ok().body(result);
         } catch (RestClientException e) {
             LOGGER.warn("Exception during health check for /weatherCloud", e);
+            result.setInfo(Map.of(
+                    "errorMessage", e.getMessage()
+            ));
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(result);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/pwsWeather")
+    public ResponseEntity<HealthCheckResult> pwsWeather(
+            @RequestParam("stationId") String stationId) {
+        LOGGER.info("health check for pwsWeather (using stationId {})", stationId);
+        HealthCheckResult result = new HealthCheckResult("pwsWeather");
+        try {
+            Optional<PWSWeatherResult> wuResult =
+                    pwsWeatherDataService.getObservationData(stationId);
+            if (wuResult.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(result);
+            }
+            result.setInfo(Map.of(
+                    "checkResult", wuResult
+            ));
+            return ResponseEntity.ok().body(result);
+        } catch (RestClientException e) {
+            LOGGER.warn("Exception during health check for /pwsWeather", e);
             result.setInfo(Map.of(
                     "errorMessage", e.getMessage()
             ));
