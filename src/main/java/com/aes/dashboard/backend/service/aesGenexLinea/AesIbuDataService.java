@@ -24,7 +24,7 @@ public class AesIbuDataService {
     private static final int TUNA_ROW_INDEX = 9;
 
     private String url;
-    private  String httpProxyHost;
+    private String httpProxyHost;
     private Integer httpProxyPort;
 
     public AesIbuDataService(

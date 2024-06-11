@@ -19,6 +19,7 @@ public class AppConfigService {
     private static final String USER_AGENT_HEADER = "USER_AGENT_HEADER";
     private static final String WEATHERCLOUD_COOKIE = "WEATHERCLOUD_COOKIE";
     private static final String PWS_WEATHER_AUTH_PARAM = "PWS_WEATHER_AUTH_PARAM";
+    private static final String RP5_COOKIE = "RP5_COOKIE";
     private static final Logger LOGGER = LoggerFactory.getLogger(AppConfigService.class);
 
     @Autowired
@@ -43,6 +44,10 @@ public class AppConfigService {
 
     public String getPWSWeatherAuthParam() {
         return getConfig(PWS_WEATHER_AUTH_PARAM).getValue();
+    }
+
+    public String getRP5Cookie() {
+        return getConfig(RP5_COOKIE).getValue();
     }
 
     public String getUserAgentHeader() {

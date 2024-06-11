@@ -1,6 +1,5 @@
 package com.aes.dashboard.backend.service.aesLatestData;
 
-import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,15 +22,12 @@ public class AESDataService {
 
 
     private String url;
-    private AppConfigService appConfigService;
     private RestTemplate restTemplate;
 
     public AESDataService(
             @Value("${aes.one-drive.url}") String url,
-            RestTemplate restTemplate,
-            AppConfigService appConfigService) {
+            RestTemplate restTemplate) {
         this.url = url;
-        this.appConfigService = appConfigService;
         this.restTemplate = restTemplate;
     }
 

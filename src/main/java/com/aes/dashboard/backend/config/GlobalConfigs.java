@@ -24,6 +24,7 @@ public class GlobalConfigs {
     public static final Long DATA_ORIGIN_AES_IBU = 9L;
     public static final Long DATA_ORIGIN_WEATHERCLOUD = 10L;
     public static final Long DATA_ORIGIN_PWSWEATHER = 11L;
+    public static final Long DATA_ORIGIN_RP5 = 12L;
 
     public static final Duration REQUEST_TIMEOUT = Duration.ofSeconds(30);
 

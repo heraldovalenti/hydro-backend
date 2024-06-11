@@ -42,14 +42,16 @@ public class RP5DataService {
         this.appConfigService = appConfigService;
     }
 
-    public List<RP5Row> getObservationData() {
-        return getObservationData(LocalDateTime.now(), RP5Period.WEEK, 48);
+    public List<RP5Row> getObservationData(String stationId) {
+        return getObservationData(stationId, LocalDateTime.now(), RP5Period.WEEK, 48);
     }
 
-    public List<RP5Row> getObservationData(LocalDateTime date, RP5Period period, int hourLimitResults) {
+    public List<RP5Row> getObservationData(
+            String stationId, LocalDateTime date,
+            RP5Period period, int hourLimitResults) {
         String dateString = date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         List<RP5Row> result = new LinkedList<>();
-        Optional<Elements> observationRows = fetchRows(dateString, period.toString());
+        Optional<Elements> observationRows = fetchRows(stationId, dateString, period.toString());
         if (observationRows.isEmpty()) return result;
 
         Elements rows = observationRows.get();
@@ -73,7 +75,7 @@ public class RP5DataService {
         return result;
     }
 
-    private Optional<Elements> fetchRows(String date, String period) {
+    private Optional<Elements> fetchRows(String stationId, String date, String period) {
         String rp5Cookie = appConfigService.getRP5Cookie();
         try {
             Proxy proxy = null;
@@ -82,8 +84,9 @@ public class RP5DataService {
                 LOGGER.info("Using proxy configuration with {} and {}: {}",
                         httpProxyHost, httpProxyPort, proxy.toString());
             }
+            String requestUrl = String.format("%s/%s", url, stationId);
             Document doc = Jsoup
-                    .connect(url)
+                    .connect(requestUrl)
                     .proxy(proxy)
                     .maxBodySize(5 * 1024 * 1024) // 5MB
                     .followRedirects(true)

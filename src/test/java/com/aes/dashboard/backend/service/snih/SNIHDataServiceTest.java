@@ -37,22 +37,22 @@ class SNIHDataServiceTest {
 
     @Test
     public void heightStationsTest() {
-//        Assertions.assertFalse(service.getLatestData("10036", SNIHDataCode.HEIGHT_CODE).isEmpty()); // FRAILE PINTADO
-        Assertions.assertFalse(service.getLatestData("10646", SNIHDataCode.HEIGHT_CODE).isEmpty()); // CACHI
+        Assertions.assertFalse(service.getLatestData("10036", SNIHDataCode.HEIGHT_CODE).isEmpty()); // FRAILE PINTADO
         Assertions.assertFalse(service.getLatestData("10706", SNIHDataCode.HEIGHT_CODE).isEmpty()); // LA MAROMA
         Assertions.assertFalse(service.getLatestData("10622", SNIHDataCode.HEIGHT_CODE).isEmpty()); // CABRA CORRAL
         Assertions.assertFalse(service.getLatestData("10626", SNIHDataCode.HEIGHT_CODE).isEmpty()); // EL TUNAL
         Assertions.assertFalse(service.getLatestData("10684", SNIHDataCode.HEIGHT_CODE).isEmpty()); // FINCA AGROPECUARIA
         Assertions.assertFalse(service.getLatestData("10686", SNIHDataCode.HEIGHT_CODE).isEmpty()); // FINCA AGROPECUARIA
-        Assertions.assertFalse(service.getLatestData("10695", SNIHDataCode.HEIGHT_CODE).isEmpty()); // EL QUEBRACHAL
         Assertions.assertFalse(service.getLatestData("10696", SNIHDataCode.HEIGHT_CODE).isEmpty()); // EL QUEBRACHAL
         Assertions.assertFalse(service.getLatestData("10699", SNIHDataCode.HEIGHT_CODE).isEmpty()); // MACAPILLO
-        Assertions.assertFalse(service.getLatestData("10815", SNIHDataCode.HEIGHT_CODE).isEmpty()); // CANAL DE DIOS
         Assertions.assertFalse(service.getLatestData("10611", SNIHDataCode.HEIGHT_CODE).isEmpty()); // LA PUNILLA
-        Assertions.assertFalse(service.getLatestData("10705", SNIHDataCode.HEIGHT_CODE).isEmpty()); // DESEMBOCADURA
+        Assertions.assertFalse(service.getLatestData("10701", SNIHDataCode.HEIGHT_CODE).isEmpty()); // EL ENCON
 
         // no current data
-        Assertions.assertTrue(service.getLatestData("10701", SNIHDataCode.HEIGHT_CODE).isEmpty()); // EL ENCON
+        Assertions.assertTrue(service.getLatestData("10646", SNIHDataCode.HEIGHT_CODE).isEmpty()); // CACHI
+        Assertions.assertTrue(service.getLatestData("10695", SNIHDataCode.HEIGHT_CODE).isEmpty()); // EL QUEBRACHAL
+        Assertions.assertTrue(service.getLatestData("10815", SNIHDataCode.HEIGHT_CODE).isEmpty()); // CANAL DE DIOS
+        Assertions.assertTrue(service.getLatestData("10705", SNIHDataCode.HEIGHT_CODE).isEmpty()); // DESEMBOCADURA
     }
 
 

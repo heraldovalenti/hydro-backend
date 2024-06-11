@@ -14,6 +14,8 @@ import com.aes.dashboard.backend.service.intaData.INTASiga2DataItem;
 import com.aes.dashboard.backend.service.intaData.INTASiga2DataService;
 import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherDataService;
 import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherResult;
+import com.aes.dashboard.backend.service.rp5.RP5DataService;
+import com.aes.dashboard.backend.service.rp5.RP5Row;
 import com.aes.dashboard.backend.service.snih.SNIHDataCode;
 import com.aes.dashboard.backend.service.snih.SNIHDataService;
 import com.aes.dashboard.backend.service.snih.SNIHObservation;
@@ -88,6 +90,9 @@ public class ObservationService {
     @Autowired
     private PWSWeatherDataService pwsWeatherDataService;
 
+    @Autowired
+    private RP5DataService rp5DataService;
+
     @Transactional
     public void updateAesObservations() {
         LOGGER.info("Starting update for AES observations...");
@@ -120,6 +125,31 @@ public class ObservationService {
             updateObservationsForStationOrigin(aesStationDataOrigin, observations);
         }
         LOGGER.info("Update for AES observations completed");
+    }
+
+    @Transactional
+    public void updateRP5Observations() {
+        LOGGER.info("Starting update for RP5 observations...");
+        DataOrigin rp5DataOrigin = dataOriginService.getRP5DataOrigin();
+        List<StationDataOrigin> rp5StationDataOriginList = stationDataOriginRepository.findByDataOrigin(rp5DataOrigin);
+        for (StationDataOrigin rp5StationDataOrigin : rp5StationDataOriginList) {
+            List<RP5Row> rp5Rows = rp5DataService.getObservationData(rp5StationDataOrigin.getExternalStationId());
+            List<Observation> observations = new LinkedList<>();
+            rp5Rows.stream()
+                    .forEach(rp5Row -> {
+                        Observation observation = new Observation();
+                        observation.setDimension(rp5StationDataOrigin.getDimension());
+                        observation.setStation(rp5StationDataOrigin.getStation());
+                        observation.setDataOrigin(rp5DataOrigin);
+                        observation.setTime(rp5Row.getDateTime());
+                        observation.setValue(rp5Row.getRain());
+                        MeasurementUnit defaultUnit = rp5StationDataOrigin.getDefaultUnit();
+                        observation.setUnit(defaultUnit);
+                        observations.add(observation);
+                    });
+            updateObservationsForStationOrigin(rp5StationDataOrigin, observations, false);
+        }
+        LOGGER.info("Update for RP5 observations completed");
     }
 
     @Transactional

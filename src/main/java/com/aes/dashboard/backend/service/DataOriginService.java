@@ -53,4 +53,8 @@ public class DataOriginService {
     public DataOrigin getPWSWeatherDataOrigin() {
         return dataOriginRepository.findById(DATA_ORIGIN_PWSWEATHER).get();
     }
+
+    public DataOrigin getRP5DataOrigin() {
+        return dataOriginRepository.findById(DATA_ORIGIN_RP5).get();
+    }
 }
