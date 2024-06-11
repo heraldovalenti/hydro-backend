@@ -5,6 +5,8 @@ import com.aes.dashboard.backend.dto.WeatherLinkHealthCheckResult;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
 import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherDataService;
 import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherResult;
+import com.aes.dashboard.backend.service.rp5.RP5DataService;
+import com.aes.dashboard.backend.service.rp5.RP5Row;
 import com.aes.dashboard.backend.service.weatherCloudData.WeatherCloudDataService;
 import com.aes.dashboard.backend.service.weatherCloudData.WeatherCloudResult;
 import com.aes.dashboard.backend.service.weatherUndergroundData.WeatherUndergroundDataService;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -46,6 +49,9 @@ public class HealthCheckController {
 
     @Autowired
     private PWSWeatherDataService pwsWeatherDataService;
+
+    @Autowired
+    private RP5DataService rp5DataService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<HealthCheckResult> generalHealthCheck() {
@@ -166,6 +172,29 @@ public class HealthCheckController {
             return ResponseEntity.ok().body(result);
         } catch (RestClientException e) {
             LOGGER.warn("Exception during health check for /pwsWeather", e);
+            result.setInfo(Map.of(
+                    "errorMessage", e.getMessage()
+            ));
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(result);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/rp5")
+    public ResponseEntity<HealthCheckResult> rp5(
+            @RequestParam("stationId") String stationId) {
+        LOGGER.info("health check for RP5 (using stationId {})", stationId);
+        HealthCheckResult result = new HealthCheckResult("RP5");
+        try {
+            List<RP5Row> rp5Rows = rp5DataService.getObservationData(stationId);
+            if (rp5Rows.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(result);
+            }
+            result.setInfo(Map.of(
+                    "checkResult", rp5Rows
+            ));
+            return ResponseEntity.ok().body(result);
+        } catch (RestClientException e) {
+            LOGGER.warn("Exception during health check for /rp5", e);
             result.setInfo(Map.of(
                     "errorMessage", e.getMessage()
             ));
