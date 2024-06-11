@@ -209,4 +209,9 @@ INSERT INTO station_data_origin
 (152, 11, 3, 3, 142, 'mid_sasj'),  --PWS Weather - SASJ - La Union
 (153, 11, 3, 3, 143, 'sasj');      --PWS Weather - SASJ - Jujuy Airport
 
--- last ID: 153 (PWS Weather - SASJ - Jujuy Airport)
+-- data origin: RP5
+INSERT INTO station_data_origin
+(id,data_origin_id,dimension_id,default_unit_id,station_id,external_station_id) VALUES
+(154, 12, 3, 3, 144, 'Archivo_de_tiempo_en_Salta_(aeropuerto)');      --RP5 - Salta (aeropuerto)
+
+-- last ID: 154 (RP5 - Salta (aeropuerto))

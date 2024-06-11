@@ -164,4 +164,6 @@ INSERT INTO station (id,longitude,latitude,description,active) VALUES
 (142, -65.0800018, -24.3799991, 'PWS Weather - SASJ - La Union', true), -- "mid_sasj"
 (143, -65.1000000, -24.3666666, 'PWS Weather - SASJ - Jujuy Airport', true), -- "sasj"
 
--- last ID: 143 (PWS Weather - SASJ - Jujuy Airport)
+(144, -65.4784980, -24.8449970, 'RP5 - Salta (aeropuerto)', true), -- "Archivo_de_tiempo_en_Salta_(aeropuerto)"
+
+-- last ID: 144 (RP5 - Salta (aeropuerto))
