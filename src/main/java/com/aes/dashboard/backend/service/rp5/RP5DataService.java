@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -84,22 +85,19 @@ public class RP5DataService {
                 LOGGER.info("Using proxy configuration with {} and {}: {}",
                         httpProxyHost, httpProxyPort, proxy.toString());
             }
-            String requestUrl = String.format("%s/%s", url, stationId);
+            UriComponentsBuilder builder = UriComponentsBuilder
+                    .fromHttpUrl(this.url)
+                    .queryParam("stationId", stationId)
+                    .queryParam("date", date)
+                    .queryParam("period", period)
+                    .queryParam("rp5Cookie", rp5Cookie);
+            String requestUrl = builder.build().toUriString();
+
             Document doc = Jsoup
                     .connect(requestUrl)
                     .proxy(proxy)
                     .maxBodySize(5 * 1024 * 1024) // 5MB
-                    .followRedirects(true)
-                    .data("ArchDate", date)
-                    .data("pe", period)
-                    .data("lang", "es")
-                    .data("time_zone_add", "-3")
-                    .header("Accept-Language", "en,en-US;q=0.9,es;q=0.8")
-                    .header("Content-Type", "application/x-www-form-urlencoded")
-                    .header("Cookie", rp5Cookie)
-                    .header("Origin", "https://rp5.ru")
-                    .header("Referer", "https://rp5.ru/")
-                    .post();
+                    .get();
 
             Elements rows = doc.select("#archiveTable > tbody > tr");
             LOGGER.debug("ROWS AMOUNT {}", rows.size());
