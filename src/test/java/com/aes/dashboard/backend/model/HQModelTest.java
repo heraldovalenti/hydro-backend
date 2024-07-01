@@ -18,9 +18,9 @@ class HQModelTest {
         model.setHighPassFactor(58.566);
         model.setHighPassOffset(-0.1);
         model.setHighPassExponent(1.6666);
-        assertEquals(0, model.q(0));
-        assertEquals(0, model.q(-9999));
-        assertEquals(5.8110201, model.q(2.69 + 0.35), 0.000001);
+        assertEquals(0, model.calculateQ(0));
+        assertEquals(0, model.calculateQ(-9999));
+        assertEquals(5.8110201, model.calculateQ(2.69 + 0.35), 0.000001);
     }
 
     @Test

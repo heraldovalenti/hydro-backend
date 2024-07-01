@@ -447,7 +447,7 @@ public class ObservationService {
         measurementUnitService.normalizeMeasurementUnits(hObservations);
         return hObservations.map(o -> {
             double hValue = o.getValue();
-            double qValue = station.getHqModel().q(hValue);
+            double qValue = station.getHqModel().calculateQ(hValue);
             o.setDimension(flow);
             o.setDataOrigin(hqModelDataOrigin);
             o.setUnit(m3PerSecondMeasurementUnit);
@@ -478,7 +478,8 @@ public class ObservationService {
     public List<Observation> latestObservationsV2(MeasurementDimension dimension, LocalDateTime from, LocalDateTime to) {
         List<Observation> latestObservation = observationRepository
                     .findLatestObservationsByDimension(dimension.getId(), from, to);
-        Collections.sort(latestObservation, Comparator.comparing(Observation::getId));
+        // the following line is necessary only to compare with latestObservation V1 to get the same order
+        //        Collections.sort(latestObservation, Comparator.comparing(Observation::getId));
         measurementUnitService.normalizeMeasurementUnits(latestObservation);
         return latestObservation;
     }

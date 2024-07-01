@@ -128,9 +128,13 @@ public class HQModel {
     public void setHighPassExponent(double highPassExponent) {
         this.highPassExponent = highPassExponent;
     }
+    
+    public double calculateH(double hSensor) {
+        return hSensor + hOffset;
+    }
 
-    public double q(double hSensor) {
-        double h = hSensor + hOffset;
+    public double calculateQ(double hSensor) {
+        double h = calculateH(hSensor);
         double q = 0,
                 qFactor = lowPassFactor,
                 base = h + lowPassOffset,

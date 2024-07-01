@@ -21,7 +21,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
@@ -31,7 +30,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/observations")
-@Validated
 public class ObservationController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ObservationController.class);
