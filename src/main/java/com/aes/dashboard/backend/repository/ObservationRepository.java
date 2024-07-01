@@ -63,7 +63,7 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
     @Query("SELECT o FROM Observation o  " +
             "WHERE o.station = :station " +
             "AND o.dimension = :dimension " +
-            "AND o.value != -9999 " +
+            "AND o.value > -999 " +
             "AND o.time >= :from AND o.time <= :to")
     Page<Observation> findByStationAndDimensionAndBetweenTime(
             Station station,
@@ -76,7 +76,7 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
             "WHERE o.station = :station " +
             "AND o.dimension = :dimension " +
             "AND o.time >= :from AND o.time <= :to " +
-            "AND o.value != -9999 " +
+            "AND o.value > -999 " +
             "ORDER BY time DESC")
     List<Observation> findByStationAndDimensionAndBetweenTime(
             Station station,
@@ -102,6 +102,7 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
             "FROM observation o2 " +
             "WHERE dimension_id = ?1 " +
             "AND o2.time between ?2 and ?3 " +
+            "AND o2.value > -999 " +
             "GROUP BY o2station_id ) o2 " +
             "ON o1.station_id = o2station_id AND o1.time = o2time " +
             "WHERE o1.dimension_id = ?1 " +
