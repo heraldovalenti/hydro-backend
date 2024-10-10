@@ -69,11 +69,11 @@ public class RP5DataService {
         }
         if (hourLimitResults > 0) {
             LocalDateTime limit = date.minusHours(hourLimitResults);
-            result = result.stream()
+            return normalized.stream()
                     .filter(r -> r.getDateTime().isAfter(limit))
                     .collect(Collectors.toList());
         }
-        return result;
+        return normalized;
     }
 
     private Optional<Elements> fetchRows(String stationId, String date, String period) {
