@@ -23,7 +23,9 @@ public abstract class RainAccumulator {
             new DataOrigin(DATA_ORIGIN_INTA_SIGA), new PositiveValuesRainAccumulator(),
             new DataOrigin(DATA_ORIGIN_INTA_ANTERIOR), new PositiveValuesRainAccumulator(),
             new DataOrigin(DATA_ORIGIN_SNIH), new SimpleRainAccumulator(),
-            new DataOrigin(DATA_ORIGIN_WEATHERLINK), new WURainAccumulator()
+            new DataOrigin(DATA_ORIGIN_WEATHERLINK), new WURainAccumulator(),
+            new DataOrigin(DATA_ORIGIN_WEATHERCLOUD), new WURainAccumulator(),
+            new DataOrigin(DATA_ORIGIN_RP5), new SimpleRainAccumulator()
     );
 
     private static final Map<Station, RainAccumulator> stationAccumulatorMap = Map.of(
