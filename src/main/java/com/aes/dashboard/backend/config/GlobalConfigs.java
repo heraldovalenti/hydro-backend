@@ -8,6 +8,7 @@ public class GlobalConfigs {
     public static final String ISO_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     public static final String PWS_WEATHER_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX";
     public static final String REQUEST_PARAM_DATE_INPUT_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+    public static final String REQUEST_PARAM_DATE_SHORT_INPUT_FORMAT = "yyyy-MM-dd";
     public static final String EXPORT_FILE_NAME_DATE_OUTPUT_FORMAT = "yyyyMMdd";
     public static final String EXPORT_FILE_CONTENT_DATE_OUTPUT_FORMAT = "yyyy/MM/dd HH:mm:ss";
     public static final String SALTA_ZONE_ID = "America/Argentina/Salta";

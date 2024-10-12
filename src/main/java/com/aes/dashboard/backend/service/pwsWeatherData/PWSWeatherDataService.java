@@ -13,7 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+
+import static com.aes.dashboard.backend.config.GlobalConfigs.REQUEST_PARAM_DATE_SHORT_INPUT_FORMAT;
 
 @Service
 public class PWSWeatherDataService {
@@ -34,10 +39,23 @@ public class PWSWeatherDataService {
     }
 
     public Optional<PWSWeatherResult> getObservationData(String stationId) {
+        LocalDate now = LocalDate.now(),
+                from = now.minusDays(1),
+                to = now.plusDays(1);
+        return getObservationData(stationId, from, to);
+    }
+
+    public Optional<PWSWeatherResult> getObservationData(
+            String stationId, LocalDate from, LocalDate to) {
         String userAgentHeader = appConfigService.getUserAgentHeader();
         String authParam = this.appConfigService.getPWSWeatherAuthParam();
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(REQUEST_PARAM_DATE_SHORT_INPUT_FORMAT);
         UriComponentsBuilder builder = UriComponentsBuilder
-                .fromHttpUrl(String.format("%s/%s?%s", this.url, stationId, authParam));
+                .fromHttpUrl(String.format("%s/%s?%s", this.url, stationId, authParam))
+//                .queryParam("filter", "calcprecip%2Cprecise%2Cmetar%3Bpws%3Bmadis%3Bausbom%2Callownowksy")
+                .queryParam("from", from.format(dtf))
+                .queryParam("to", to.format(dtf));
         String stationUrl = builder.build(false).toUriString();
 
         try {

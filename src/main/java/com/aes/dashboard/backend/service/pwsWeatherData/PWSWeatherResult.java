@@ -28,28 +28,4 @@ public class PWSWeatherResult {
     public void setResponse(PWSWeatherResponse response) {
         this.response = response;
     }
-
-    @Override
-    public String toString() {
-        return "PWSWeatherResult{" +
-                "success=" + success +
-                ", response=" + response +
-                '}';
-    }
-
-    public LocalDateTime getObservationTime() {
-        if (this.getResponse() != null && this.getResponse().getObDateTime() != null) {
-            return this.getResponse().getObDateTime().withZoneSameInstant(ZoneId.of(UTC_ZONE_ID)).toLocalDateTime();
-        }
-        return LocalDateTime.now(ZoneId.of(UTC_ZONE_ID));
-    }
-
-    public Double getObservationValue() {
-        if (this.getResponse() != null
-                && this.getResponse().getOb() != null
-                && this.getResponse().getOb().getPrecipMM() != null) {
-            return this.getResponse().getOb().getPrecipMM();
-        }
-        return 0.0;
-    }
 }

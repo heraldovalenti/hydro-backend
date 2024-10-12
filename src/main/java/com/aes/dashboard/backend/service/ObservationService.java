@@ -39,6 +39,7 @@ import java.util.*;
 
 import static com.aes.dashboard.backend.config.GlobalConfigs.SALTA_ZONE_ID;
 import static com.aes.dashboard.backend.config.GlobalConfigs.UTC_ZONE_ID;
+import static com.aes.dashboard.backend.model.date.DateConversor.toUTCLocalDateTime;
 
 @Service
 public class ObservationService {
@@ -351,14 +352,18 @@ public class ObservationService {
             Optional<PWSWeatherResult> pwsWeatherResult = pwsWeatherDataService.getObservationData(
                     stationDataOrigin.getExternalStationId());
             if (pwsWeatherResult.isEmpty()) continue;
-            Observation observation = new Observation();
-            observation.setDimension(stationDataOrigin.getDimension());
-            observation.setStation(stationDataOrigin.getStation());
-            observation.setDataOrigin(pwsWeatherDataOrigin);
-            observation.setTime(pwsWeatherResult.get().getObservationTime());
-            observation.setValue(pwsWeatherResult.get().getObservationValue());
-            observation.setUnit(stationDataOrigin.getDefaultUnit());
-            this.updateOrCreateObservation(observation);
+            List<Observation> observations = new LinkedList<>();
+            for (var item : pwsWeatherResult.get().getResponse().getPeriods()) {
+                Observation observation = new Observation();
+                observation.setDimension(stationDataOrigin.getDimension());
+                observation.setStation(stationDataOrigin.getStation());
+                observation.setDataOrigin(pwsWeatherDataOrigin);
+                observation.setTime(toUTCLocalDateTime(item.getOb().getDateTimeISO()));
+                observation.setValue(item.getOb().getPrecipSinceLastObMM());
+                observation.setUnit(stationDataOrigin.getDefaultUnit());
+                observations.add(observation);
+            }
+            this.updateObservationsForStationOrigin(stationDataOrigin, observations);
         }
 
         LOGGER.info("Update for PWS Weather observations completed");

@@ -1,20 +1,24 @@
 package com.aes.dashboard.backend.service.pwsWeatherData.weatherCloudData;
 
 import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherDataService;
+import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherPeriodItem;
 import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherResult;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.text.MessageFormat;
-import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Optional;
 
-import static com.aes.dashboard.backend.config.GlobalConfigs.UTC_ZONE_ID;
+import static com.aes.dashboard.backend.config.GlobalConfigs.PWS_WEATHER_DATE_TIME_FORMAT;
+import static com.aes.dashboard.backend.config.GlobalConfigs.REQUEST_PARAM_DATE_SHORT_INPUT_FORMAT;
 
 @SpringBootTest
 public class PWSWeatherDataServiceTest {
@@ -39,20 +43,32 @@ public class PWSWeatherDataServiceTest {
         Assertions.assertEquals(place, result.getResponse().getPlace().getName());
         Assertions.assertEquals(latitude, result.getResponse().getLoc().getLatitude());
         Assertions.assertEquals(longitude, result.getResponse().getLoc().getLongitude());
+    }
 
-        Assertions.assertTrue(
-                result.getObservationValue() >= 0,
-                MessageFormat.format("result.getObservationValue() should be greater than 0, but found {0}",
-                        result.getObservationValue()));
-        LocalDateTime now = LocalDateTime.now(ZoneId.of(UTC_ZONE_ID)),
-                ldt = result.getObservationTime();
-        Duration diff = Duration.between(ldt, now);
-        long minutesDiff = diff.toMinutes();
-        int tolerance = 10;
-        Assertions.assertTrue(
-                minutesDiff <= tolerance,
-                MessageFormat.format(
-                        "observation date diff with now() should be less than {0}, but found {1} (now={2} ldt={3})",
-                        tolerance, minutesDiff, now, ldt));
+    @Test
+    void testF9219() {
+        String stationId = "mid_f9219";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(PWS_WEATHER_DATE_TIME_FORMAT);
+        LocalDate from = LocalDate.of(2024, 10, 10),
+                to = LocalDate.of(2024, 10, 11);
+        Optional<PWSWeatherResult> opt = pwsWeatherDataService.getObservationData(stationId, from, to);
+        Assertions.assertTrue(opt.isPresent());
+        PWSWeatherResult result = opt.get();
+        Assertions.assertTrue(result.getSuccess());
+        Assertions.assertEquals(186, result.getResponse().getPeriods().length);
+        Assertions.assertEquals(new Double(10.921999931335),
+                result.getResponse().getPeriods()[0].getOb().getPrecipSinceLastObMM());
+        Assertions.assertEquals(new Double(0.25399971008301),
+                result.getResponse().getPeriods()[5].getOb().getPrecipSinceLastObMM());
+
+        ZonedDateTime date3_28pm = ZonedDateTime.parse("2024-10-10T15:28:00-03:00", dtf);
+        Optional<PWSWeatherPeriodItem> obsAt3_28pm = Arrays.stream(result.getResponse().getPeriods())
+                .filter(period -> period.getOb().getDateTimeISO().isEqual(date3_28pm)).findFirst();
+        Assertions.assertTrue((obsAt3_28pm.isPresent()));
+        Assertions.assertEquals(
+                new Double(1.523998260498),
+                obsAt3_28pm.get().getOb().getPrecipSinceLastObMM()
+        );
+
     }
 }
