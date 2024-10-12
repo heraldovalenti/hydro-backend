@@ -39,9 +39,8 @@ public class PWSWeatherDataService {
     }
 
     public Optional<PWSWeatherResult> getObservationData(String stationId) {
-        LocalDate now = LocalDate.now(),
-                from = now.minusDays(1),
-                to = now.plusDays(1);
+        LocalDate from = LocalDate.now(),
+                to = from.plusDays(1);
         return getObservationData(stationId, from, to);
     }
 
