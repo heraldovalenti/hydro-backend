@@ -161,8 +161,15 @@ public class ObservationController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updatePWSWeatherObservations")
-    public void updatePWSWeatherObservations() {
-        observationService.updatePWSWeatherObservations();
+    public void updatePWSWeatherObservations(
+            @RequestParam(defaultValue = "") String from,
+            @RequestParam(defaultValue = "") String to) {
+        if (!from.isEmpty() && !to.isEmpty()) {
+            RequestTimePeriod period = RequestTimePeriod.of(from, to);
+            observationService.updatePWSWeatherObservations(period, false);
+        } else {
+            observationService.updatePWSWeatherObservations();
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateWeatherUndergroundObservations")

@@ -33,6 +33,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -342,15 +343,29 @@ public class ObservationService {
         LOGGER.info("Update for Weather Cloud observations completed");
     }
 
-    @Transactional
     public void updatePWSWeatherObservations() {
-        LOGGER.info("Starting update for PWS Weather observations");
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(SALTA_ZONE_ID));
+        RequestTimePeriod period = new RequestTimePeriod(now, now);
+        updatePWSWeatherObservations(period, true);
+    }
+    public void updatePWSWeatherObservations(RequestTimePeriod period, boolean skipPreviousObservations) {
+        LocalDate date = period.getFrom().toLocalDate();
+        do {
+            updatePWSWeatherObservations(date, skipPreviousObservations);
+            date = date.plusDays(1);
+        } while (date.isBefore(period.getTo().toLocalDate()));
+    }
+
+    @Transactional
+    public void updatePWSWeatherObservations(LocalDate date, boolean skipPreviousObservations) {
+        LOGGER.info("Starting update for PWS Weather observations (date: {})", date);
         DataOrigin pwsWeatherDataOrigin = dataOriginService.getPWSWeatherDataOrigin();
         List<StationDataOrigin> pwsWeatherStationDataOriginList = stationDataOriginRepository.findByDataOrigin(pwsWeatherDataOrigin);
 
         for (StationDataOrigin stationDataOrigin : pwsWeatherStationDataOriginList) {
+            if (!stationDataOrigin.getStation().getActive()) continue;
             Optional<PWSWeatherResult> pwsWeatherResult = pwsWeatherDataService.getObservationData(
-                    stationDataOrigin.getExternalStationId());
+                    stationDataOrigin.getExternalStationId(), date);
             if (pwsWeatherResult.isEmpty()) continue;
             List<Observation> observations = new LinkedList<>();
             for (var item : pwsWeatherResult.get().getResponse().getPeriods()) {
@@ -363,7 +378,7 @@ public class ObservationService {
                 observation.setUnit(stationDataOrigin.getDefaultUnit());
                 observations.add(observation);
             }
-            this.updateObservationsForStationOrigin(stationDataOrigin, observations);
+            this.updateObservationsForStationOrigin(stationDataOrigin, observations, skipPreviousObservations);
         }
 
         LOGGER.info("Update for PWS Weather observations completed");

@@ -38,6 +38,11 @@ public class PWSWeatherDataService {
         this.restTemplate = restTemplate;
     }
 
+    public Optional<PWSWeatherResult> getObservationData(String stationId, LocalDate date) {
+        LocalDate to = date.plusDays(1);
+        return getObservationData(stationId, date, to);
+    }
+
     public Optional<PWSWeatherResult> getObservationData(String stationId) {
         LocalDate from = LocalDate.now(),
                 to = from.plusDays(1);
@@ -52,7 +57,6 @@ public class PWSWeatherDataService {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(REQUEST_PARAM_DATE_SHORT_INPUT_FORMAT);
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromHttpUrl(String.format("%s/%s?%s", this.url, stationId, authParam))
-//                .queryParam("filter", "calcprecip%2Cprecise%2Cmetar%3Bpws%3Bmadis%3Bausbom%2Callownowksy")
                 .queryParam("from", from.format(dtf))
                 .queryParam("to", to.format(dtf));
         String stationUrl = builder.build(false).toUriString();
