@@ -149,7 +149,7 @@ INSERT INTO station (id,longitude,latitude,description,active) VALUES
 (130, -65.6049999, -24.8472222, 'Weather Cloud - Encon Beach', true), -- "9341323576"
 (131, -65.5605555, -24.8827778, 'Weather Cloud - WS Los Robles', true), -- "8418199173"
 
-(132, -64.9644444, -24.7922222, 'Weather Cloud - EMA Roberto', true), -- "9831848457"
+(132, -64.9644444, -25.7922222, 'Weather Cloud - EMA Roberto', true), -- "9831848457"
 (133, -65.515,     -25.8811111, 'Weather Cloud - daza', true), -- "7770552514"
 (134, -65.4808333, -26.2016667, 'Weather Cloud - Tako yana', true), -- "5992524282"
 
