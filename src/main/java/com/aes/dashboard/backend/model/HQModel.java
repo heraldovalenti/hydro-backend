@@ -37,6 +37,9 @@ public class HQModel {
     @Column(nullable = false)
     private double highPassExponent;
 
+    @Column(nullable = true)
+    private String streamName;
+
     public HQModel() {
         this.hOffset = 0;
         this.lowPassOffset = 0;
@@ -128,7 +131,15 @@ public class HQModel {
     public void setHighPassExponent(double highPassExponent) {
         this.highPassExponent = highPassExponent;
     }
-    
+
+    public String getStreamName() {
+        return streamName;
+    }
+
+    public void setStreamName(String streamName) {
+        this.streamName = streamName;
+    }
+
     public double calculateH(double hSensor) {
         return hSensor + hOffset;
     }

@@ -6,12 +6,15 @@ public class StreamLevel {
 
     private ObservationWithStation observation;
     private Double streamLevel;
+    private String streamName;
 
     public StreamLevel(Observation observation) {
         this.observation = ObservationWithStation.fromObservation(observation);
         if (this.observation.getStation().getHqModel() != null) {
             this.streamLevel = this.observation.getStation().getHqModel()
                     .calculateH(this.observation.getValue());
+            this.streamName = this.observation.getStation().getHqModel()
+                    .getStreamName();
         }
     }
 
@@ -21,5 +24,9 @@ public class StreamLevel {
 
     public Double getStreamLevel() {
         return streamLevel;
+    }
+
+    public String getStreamName() {
+        return streamName;
     }
 }
