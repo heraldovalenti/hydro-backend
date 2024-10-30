@@ -111,7 +111,7 @@ public class RP5Row {
         try {
             return Double.parseDouble(this.rain);
         } catch (NumberFormatException e) {
-            LOGGER.warn("Tried to parse rain from invalid value: {}", this.rain);
+            LOGGER.debug("Tried to parse rain from invalid value: {}", this.rain);
             return 0.0;
         }
     }
