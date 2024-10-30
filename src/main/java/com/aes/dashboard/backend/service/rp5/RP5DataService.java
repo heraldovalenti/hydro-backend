@@ -65,7 +65,7 @@ public class RP5DataService {
         result = result.stream().filter(r -> r.hasData()).collect(Collectors.toList());
         List<RP5Row> normalized = RP5Normalizer.normalize(result);
         for (int i = 0; i < normalized.size(); i++) {
-            LOGGER.info("{} > {} {}", result.get(i), normalized.get(i).getRain(), normalized.get(i).getPeriod());
+            LOGGER.debug("{} > {} {}", result.get(i), normalized.get(i).getRain(), normalized.get(i).getPeriod());
         }
         if (hourLimitResults > 0) {
             LocalDateTime limit = date.minusHours(hourLimitResults);
