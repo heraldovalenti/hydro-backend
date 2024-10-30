@@ -28,8 +28,10 @@ class RP5RowTest {
                 new RP5Row("2024","01","enero","09","1.0","24").hasData());
         Assertions.assertTrue(
                 new RP5Row("2024","01","enero","09","0.1","6").hasData());
-        Assertions.assertFalse(
+        Assertions.assertTrue(
                 new RP5Row("2024","01","enero","09","","").hasData());
+        Assertions.assertFalse(
+                new RP5Row("2024","01","enero","08","","").hasData());
     }
 
     @Test
@@ -38,8 +40,10 @@ class RP5RowTest {
             new RP5Row("2024","01","enero","09","1.0","24").isValidPeriod());
         Assertions.assertTrue(
                 new RP5Row("2024","01","enero","09","1.0","6").isValidPeriod());
-        Assertions.assertFalse(
+        Assertions.assertTrue(
                 new RP5Row("2024","01","enero","09","1.0","").isValidPeriod());
+        Assertions.assertFalse(
+                new RP5Row("2024","01","enero","08","1.0","").isValidPeriod());
     }
 
     @Test
@@ -64,6 +68,12 @@ class RP5RowTest {
                 new RP5Row("2024","01","enero","09","1.0","24").getPeriod());
         Assertions.assertEquals(6,
                 new RP5Row("2024","01","enero","09","1.0","6").getPeriod());
+        // periodo de 24 horas cuando la hora es 9:00am por defecto
+        Assertions.assertEquals(24,
+                new RP5Row("2024","01","enero","09","1.0","").getPeriod());
+
+        Assertions.assertEquals(0,
+                new RP5Row("2024","01","enero","08","1.0","").getPeriod());
     }
 
     @Test

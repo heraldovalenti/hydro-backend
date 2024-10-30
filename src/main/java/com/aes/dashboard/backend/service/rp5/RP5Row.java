@@ -32,42 +32,45 @@ public class RP5Row {
         this.period = period;
     }
 
+    public boolean isValidDateTime() {
+        return getDateTime() != null;
+    }
     public LocalDateTime getDateTime() {
-        Month month = null;
-        if ("enero".equals(this.month)) month = Month.JANUARY;
-        else if ("febrero".equals(this.month)) month = Month.FEBRUARY;
-        else if ("marzo".equals(this.month)) month = Month.MARCH;
-        else if ("abril".equals(this.month)) month = Month.APRIL;
-        else if ("mayo".equals(this.month)) month = Month.MAY;
-        else if ("junio".equals(this.month)) month = Month.JUNE;
-        else if ("julio".equals(this.month)) month = Month.JULY;
-        else if ("agosto".equals(this.month)) month = Month.AUGUST;
-        else if ("septiembre".equals(this.month)) month = Month.SEPTEMBER;
-        else if ("octubre".equals(this.month)) month = Month.OCTOBER;
-        else if ("noviembre".equals(this.month)) month = Month.NOVEMBER;
-        else if ("diciembre".equals(this.month)) month = Month.DECEMBER;
-        Integer year = Integer.parseInt(this.year),
-                date = Integer.parseInt(this.date),
-                hour = Integer.parseInt(this.hour);
+        try {
+            Month month = null;
+            if ("enero".equals(this.month)) month = Month.JANUARY;
+            else if ("febrero".equals(this.month)) month = Month.FEBRUARY;
+            else if ("marzo".equals(this.month)) month = Month.MARCH;
+            else if ("abril".equals(this.month)) month = Month.APRIL;
+            else if ("mayo".equals(this.month)) month = Month.MAY;
+            else if ("junio".equals(this.month)) month = Month.JUNE;
+            else if ("julio".equals(this.month)) month = Month.JULY;
+            else if ("agosto".equals(this.month)) month = Month.AUGUST;
+            else if ("septiembre".equals(this.month)) month = Month.SEPTEMBER;
+            else if ("octubre".equals(this.month)) month = Month.OCTOBER;
+            else if ("noviembre".equals(this.month)) month = Month.NOVEMBER;
+            else if ("diciembre".equals(this.month)) month = Month.DECEMBER;
+            Integer year = Integer.parseInt(this.year),
+                    date = Integer.parseInt(this.date),
+                    hour = Integer.parseInt(this.hour);
 
-        LocalDateTime result = LocalDateTime.of(year, month, date, hour, 0);
-        ZonedDateTime saltaTime = ZonedDateTime.of(result, ZoneId.of(SALTA_ZONE_ID));
-        ZonedDateTime utcTime = saltaTime.withZoneSameInstant(ZoneId.of(UTC_ZONE_ID));
-        return utcTime.toLocalDateTime();
+            LocalDateTime result = LocalDateTime.of(year, month, date, hour, 0);
+            ZonedDateTime saltaTime = ZonedDateTime.of(result, ZoneId.of(SALTA_ZONE_ID));
+            ZonedDateTime utcTime = saltaTime.withZoneSameInstant(ZoneId.of(UTC_ZONE_ID));
+            return utcTime.toLocalDateTime();
+        } catch (Exception e) {
+            LOGGER.debug("Failed to parse date for year={} month={} date={} hour={}",
+                    this.year, this.month, this.date, this.hour);
+            return null;
+        }
     }
 
     public boolean hasData() {
-        return isValidPeriod() && isValidRain();
+        return isValidDateTime() && isValidPeriod();
     }
 
     public boolean isValidPeriod() {
-        if ("tR".equals(this.period) || this.period == null || this.period.isEmpty()) return false;
-        try {
-            Integer.parseInt(this.period);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return getPeriod() == 6 || getPeriod() == 24;
     }
 
     public boolean isValidRain() {
@@ -82,12 +85,16 @@ public class RP5Row {
     }
 
     public int getPeriod() {
+        int result = 0;
         try {
             return Integer.parseInt(this.period);
         } catch (NumberFormatException e) {
-            LOGGER.warn("Tried to parse period from invalid value: {}", this.period, e);
-            return 0;
+            LOGGER.debug("Tried to parse period from invalid value: {}", this.period);
         }
+        if (isValidDateTime() && getDateTime().getHour() == 12) { // hour 12 in UTC == hour 9 in Salta/Arg
+            return 24;
+        }
+        return result;
     }
 
     public boolean is24HourPeriod() {
@@ -104,7 +111,7 @@ public class RP5Row {
         try {
             return Double.parseDouble(this.rain);
         } catch (NumberFormatException e) {
-            LOGGER.warn("Tried to parse rain from invalid value: {}", this.rain, e);
+            LOGGER.warn("Tried to parse rain from invalid value: {}", this.rain);
             return 0.0;
         }
     }
@@ -124,6 +131,6 @@ public class RP5Row {
                 ", hour='" + hour + '\'' +
                 ", rain='" + rain + '\'' +
                 ", period='" + period + '\'' +
-                '}';
+                "} getPeriod()=" + this.getPeriod();
     }
 }

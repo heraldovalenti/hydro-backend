@@ -14,7 +14,7 @@ public class RP5Normalizer {
 
     public static List<RP5Row> normalize(List<RP5Row> rows) {
         List<RP5Row> result = new LinkedList<>();
-        int last24hoursRow = 0;
+        int last24hoursRow = rows.size();
         for (int i = rows.size() - 1; i >= 0 ; i--) {
             if (rows.get(i).is24HourPeriod()) {
                 last24hoursRow = i;

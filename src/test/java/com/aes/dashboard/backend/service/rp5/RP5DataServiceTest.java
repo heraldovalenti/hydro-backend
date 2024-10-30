@@ -26,26 +26,37 @@ class RP5DataServiceTest {
     void getEOYObservationData() {
         LocalDateTime ldt = LocalDateTime.of(2024, 1, 15, 0, 0); // 15.01.2024
         List<RP5Row> result = service.getObservationData(stationId, ldt, RP5Period.MONTH, 0);
-        Assertions.assertEquals(110, result.size());
+        Assertions.assertEquals(118, result.size());
         Assertions.assertEquals(
                 LocalDateTime.of(2024, 1, 16, 0, 0),
                 result.get(0).getDateTime());
         Assertions.assertEquals(
-                LocalDateTime.of(2023, 12, 17, 6, 0),
-                result.get(109).getDateTime());
+                LocalDateTime.of(2023, 12, 17, 18, 0),
+                result.get(117).getDateTime());
     }
 
     @Test
     void getEOYObservationDataWithLimit() {
         LocalDateTime ldt = LocalDateTime.of(2024, 1, 15, 0, 0); // 15.01.2024
         List<RP5Row> result = service.getObservationData(stationId, ldt, RP5Period.MONTH, 48);
-        Assertions.assertEquals(11, result.size());
+        Assertions.assertEquals(12, result.size());
     }
 
     @Test
     void getWeekObservationData() {
         LocalDateTime ldt = LocalDateTime.of(2024, 1, 15, 0, 0); // 15.01.2024
         List<RP5Row> result = service.getObservationData(stationId, ldt, RP5Period.WEEK, 0);
-        Assertions.assertEquals(27, result.size());
+        Assertions.assertEquals(26, result.size());
+    }
+
+    @Test
+    void getOct2024ObservationData() {
+        LocalDateTime ldt = LocalDateTime.of(2024, 10, 10, 0, 0); // 15.01.2024
+        List<RP5Row> result = service.getObservationData(stationId, ldt, RP5Period.WEEK, 0);
+        Assertions.assertEquals(26, result.size());
+        Assertions.assertEquals(3.0, result.get(0).getRain());
+        Assertions.assertEquals(7.0, result.get(1).getRain());
+        Assertions.assertEquals(12.0, result.get(2).getRain());
+        Assertions.assertEquals(0.0, result.get(3).getRain());
     }
 }
