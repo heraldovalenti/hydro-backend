@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rain-accumulation")
@@ -87,6 +88,36 @@ public class RainAccumulationController {
         @RequestParam(defaultValue = "") String to) {
         RequestTimePeriod period = RequestTimePeriod.of(from, to);
         return accumulations(period);
+    }
+
+    class Aux implements IStationRainAccumulation {
+        private Long stationId;
+        private Double accumulation;
+        public Aux(Long stationId, Double accumulation) {
+            this.stationId = stationId;
+            this.accumulation = accumulation;
+        }
+
+        @Override
+        public Long getStationId() {
+            return stationId;
+        }
+
+        @Override
+        public Double getAccumulation() {
+            return accumulation;
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "adapter")
+    public List<IStationRainAccumulation> accumulationsV2Adapter(
+            @RequestParam(defaultValue = "") String from,
+            @RequestParam(defaultValue = "") String to) {
+        RequestTimePeriod period = RequestTimePeriod.of(from, to);
+        return accumulations(period).stream().map(a -> new Aux(
+                a.getStationId(),
+                a.getRainAccumulationList().isEmpty() ? 0 : a.getRainAccumulationList().get(0).getAccumulation()
+        )).sorted((a1, a2) -> a1.stationId - a2.stationId < 0 ? -1 : 1).collect(Collectors.toList());
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "v2")
