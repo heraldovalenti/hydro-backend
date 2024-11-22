@@ -35,7 +35,7 @@ public class StreamLevelService {
 
     public List<StreamLevel> streamLevels(RequestTimePeriod period) {
         MeasurementDimension levelDimension = measurementDimensionService.getLevelDimension();
-        List<Observation> observations = observationService.latestObservations(
+        List<Observation> observations = observationService.latestObservationsV2(
                 levelDimension, period.getFrom(), period.getTo());
         List<StreamLevel> streamLevels = observations.stream()
             .filter(o -> o.getStation().getHqModel() != null)
