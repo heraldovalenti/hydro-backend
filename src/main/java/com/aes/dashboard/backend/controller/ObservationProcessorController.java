@@ -26,6 +26,7 @@ public class ObservationProcessorController {
             @NotBlank(message = "Station ID is required") Long stationId,
             @RequestParam(defaultValue = "") String from,
             @RequestParam(defaultValue = "") String to) {
+        LOGGER.info("starting diff generation ( station={} from={} to={} )", stationId, from, to);
         Long start = System.currentTimeMillis();
         if (!from.isEmpty() && !to.isEmpty()) {
             RequestTimePeriod requestTimePeriod = RequestTimePeriod.of(from, to);
@@ -47,14 +48,18 @@ public class ObservationProcessorController {
             @RequestParam(defaultValue = "") String from,
             @RequestParam(defaultValue = "") String to) {
         Long start = System.currentTimeMillis();
-        RequestTimePeriod requestTimePeriod = RequestTimePeriod.of(from, to);
-        LOGGER.debug(requestTimePeriod.toString());
-        observationProcessorService.generateDiffsForPeriod(
-                requestTimePeriod.getFrom(),
-                requestTimePeriod.getTo()
-        );
+        LOGGER.info("starting diff generation ( from={} to={} )", from, to);
+        if (!from.isEmpty() && !to.isEmpty()) {
+            RequestTimePeriod requestTimePeriod = RequestTimePeriod.of(from, to);
+            observationProcessorService.generateDiffsForPeriod(
+                    requestTimePeriod.getFrom(),
+                    requestTimePeriod.getTo()
+            );
+        } else {
+            observationProcessorService.generateDiffs();
+        }
         Long end = System.currentTimeMillis();
-        LOGGER.debug("generate diffs execution time: {}", (end - start));
+        LOGGER.info("generate diffs execution time: {}", (end - start));
         return ResponseEntity.ok().build();
     }
 
