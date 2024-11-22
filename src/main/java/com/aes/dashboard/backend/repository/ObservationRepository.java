@@ -60,6 +60,17 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
             @Param("to") LocalDateTime to
     );
 
+    @Query("SELECT o.station.id as stationId " +
+            "FROM Observation o " +
+            "WHERE o.dimension = :dimension " +
+            "AND o.time >= :from AND o.time <= :to " +
+            "GROUP BY o.station.id")
+    List<Long> stationIdByDimensionAndBetweenTime(
+            MeasurementDimension dimension,
+            @Param("from") LocalDateTime from,
+            @Param("to") LocalDateTime to
+    );
+
     @Query("SELECT o FROM Observation o  " +
             "WHERE o.station = :station " +
             "AND o.dimension = :dimension " +
@@ -85,6 +96,18 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
             @Param("to") LocalDateTime to);
 
     @Query("SELECT o FROM Observation o " +
+            "WHERE o.station = :station " +
+            "AND o.dimension = :dimension " +
+            "AND o.time >= :from AND o.time <= :to " +
+            "AND o.value > -999 " +
+            "ORDER BY time ASC")
+    List<Observation> findByStationAndDimensionAndBetweenTimeOrderByTimeAsc(
+            Station station,
+            MeasurementDimension dimension,
+            @Param("from") LocalDateTime from,
+            @Param("to") LocalDateTime to);
+
+    @Query("SELECT o FROM Observation o " +
             "WHERE o.dimension = :dimension " +
             "AND o.time >= :from AND o.time <= :to")
     List<Observation> findByDimensionAndBetweenTime(
@@ -95,6 +118,8 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
     Optional<Observation> findFirstByStationAndDimensionOrderByTimeDesc(
             Station station,
             MeasurementDimension rain);
+
+    List<Observation> findByStationAndDimensionOrderByTimeAsc(Station station, MeasurementDimension rain);
 
     // idea from: https://stackoverflow.com/questions/4510185/select-max-value-of-each-group
     @Query( nativeQuery = true, value = "SELECT * FROM observation o1 " +

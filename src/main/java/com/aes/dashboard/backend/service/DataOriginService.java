@@ -1,6 +1,7 @@
 package com.aes.dashboard.backend.service;
 
 import com.aes.dashboard.backend.model.DataOrigin;
+import com.aes.dashboard.backend.model.Station;
 import com.aes.dashboard.backend.repository.DataOriginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,4 +58,47 @@ public class DataOriginService {
     public DataOrigin getRP5DataOrigin() {
         return dataOriginRepository.findById(DATA_ORIGIN_RP5).get();
     }
+
+    public boolean hasAESDataOrigin(Station station) {
+        return station.getStationDataOriginList()
+                .stream().filter(sdo -> getAesDataOrigin().equals(sdo.getDataOrigin()))
+                .findFirst().isPresent();
+    }
+
+    public boolean hasWeatherUndergroundDataOrigin(Station station) {
+        return station.getStationDataOriginList()
+                .stream().filter(sdo -> getWeatherUndergroundDataOrigin().equals(sdo.getDataOrigin()))
+                .findFirst().isPresent();
+    }
+
+    public boolean hasWeatherLinkDataOrigin(Station station) {
+        return station.getStationDataOriginList()
+                .stream().filter(sdo -> getWeatherlinkDataOrigin().equals(sdo.getDataOrigin()))
+                .findFirst().isPresent();
+    }
+
+    public boolean hasWeatherCloudDataOrigin(Station station) {
+        return station.getStationDataOriginList()
+                .stream().filter(sdo -> getWeatherCloudDataOrigin().equals(sdo.getDataOrigin()))
+                .findFirst().isPresent();
+    }
+
+    public boolean hasSNIHDataOrigin(Station station) {
+        return station.getStationDataOriginList()
+                .stream().filter(sdo -> getSNIHDataOrigin().equals(sdo.getDataOrigin()))
+                .findFirst().isPresent();
+    }
+
+    public boolean hasRP5DataOrigin(Station station) {
+        return station.getStationDataOriginList()
+                .stream().filter(sdo -> getRP5DataOrigin().equals(sdo.getDataOrigin()))
+                .findFirst().isPresent();
+    }
+
+    public boolean hasPWSDataOrigin(Station station) {
+        return station.getStationDataOriginList()
+                .stream().filter(sdo -> getPWSWeatherDataOrigin().equals(sdo.getDataOrigin()))
+                .findFirst().isPresent();
+    }
+
 }
