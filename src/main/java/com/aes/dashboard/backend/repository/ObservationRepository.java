@@ -100,8 +100,8 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
             "AND o.dimension = :dimension " +
             "AND o.time >= :from AND o.time <= :to " +
             "AND o.value > -999 " +
-            "ORDER BY time ASC")
-    List<Observation> findByStationAndDimensionAndBetweenTimeOrderByTimeAsc(
+            "ORDER BY time DESC")
+    List<Observation> findByStationAndDimensionAndBetweenTimeOrderByTimeDesc(
             Station station,
             MeasurementDimension dimension,
             @Param("from") LocalDateTime from,
@@ -119,7 +119,7 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
             Station station,
             MeasurementDimension rain);
 
-    List<Observation> findByStationAndDimensionOrderByTimeAsc(Station station, MeasurementDimension rain);
+    Page<Observation> findByStationAndDimension(Station station, MeasurementDimension rain, Pageable pageable);
 
     // idea from: https://stackoverflow.com/questions/4510185/select-max-value-of-each-group
     @Query( nativeQuery = true, value = "SELECT * FROM observation o1 " +

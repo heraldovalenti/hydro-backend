@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.model.accumulation;
 
+import com.aes.dashboard.backend.exception.WrongSortException;
 import com.aes.dashboard.backend.model.MeasurementUnitConversion;
 import com.aes.dashboard.backend.model.Observation;
 import com.aes.dashboard.backend.service.MeasurementUnitService;
@@ -24,8 +25,10 @@ public class SimpleDiffGenerator implements DiffsGenerator {
             Observation o1 = observationList.get(i);
             Observation o2 = observationList.get(i + 1);
 
-//            if (o1.getValue() > o2.getValue())
-            diff = o2.getValue() - o1.getValue();
+            if (o1.getTime().isBefore(o2.getTime())) {
+                throw new WrongSortException(o1, o2);
+            }
+            diff = o1.getValue() - o2.getValue();
 
             Optional<MeasurementUnitConversion> optConversion = measurementUnitService.getConversionForObservation(o1);
             if (optConversion.isPresent()) {

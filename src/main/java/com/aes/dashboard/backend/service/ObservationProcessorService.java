@@ -47,7 +47,7 @@ public class ObservationProcessorService {
         MeasurementDimension rainDimension = measurementDimensionService.getRainDimension();
         List<Station> stations = stationService.stationsWithDimension(rainDimension);
         for (Station station : stations) {
-            Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "time"));
+            Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "time"));
             List<Observation> observations = observationRepository.findByStation(station, pageable).toList();
             generateObservationDiffs(station, observations);
         }
@@ -56,7 +56,9 @@ public class ObservationProcessorService {
     public void generateDiffsForStation(long stationId) {
         Station station = stationService.find(stationId);
         MeasurementDimension rainDimension = measurementDimensionService.getRainDimension();
-        List<Observation> observations = observationRepository.findByStationAndDimensionOrderByTimeAsc(station, rainDimension);
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "time"));
+        List<Observation> observations = observationRepository
+                .findByStationAndDimension(station, rainDimension, pageable).toList();
         generateObservationDiffs(station, observations);
     }
 
@@ -71,7 +73,7 @@ public class ObservationProcessorService {
     public void generateDiffsForStationAndPeriod(long stationId, LocalDateTime from, LocalDateTime to) {
         MeasurementDimension rainDimension = measurementDimensionService.getRainDimension();
         Station station = stationService.find(stationId);
-        List<Observation> observations = observationRepository.findByStationAndDimensionAndBetweenTimeOrderByTimeAsc(
+        List<Observation> observations = observationRepository.findByStationAndDimensionAndBetweenTimeOrderByTimeDesc(
                 station, rainDimension, from, to
         );
         generateObservationDiffs(station, observations);
