@@ -119,7 +119,11 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
             Station station,
             MeasurementDimension rain);
 
-    Page<Observation> findByStationAndDimension(Station station, MeasurementDimension rain, Pageable pageable);
+    @Query("SELECT o FROM Observation o " +
+            "WHERE o.dimension = :dimension " +
+            "AND o.station = :station " +
+            "AND o.value > -999")
+    Page<Observation> findByStationAndDimension(Station station, MeasurementDimension dimension, Pageable pageable);
 
     // idea from: https://stackoverflow.com/questions/4510185/select-max-value-of-each-group
     @Query( nativeQuery = true, value = "SELECT * FROM observation o1 " +
