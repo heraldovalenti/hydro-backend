@@ -8,7 +8,6 @@ import com.aes.dashboard.backend.repository.ObservationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -47,9 +46,7 @@ public class ObservationProcessorService {
         MeasurementDimension rainDimension = measurementDimensionService.getRainDimension();
         List<Station> stations = stationService.stationsWithDimension(rainDimension);
         for (Station station : stations) {
-            Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "time"));
-            List<Observation> observations = observationRepository.findByStation(station, pageable).toList();
-            generateObservationDiffs(station, observations);
+            generateDiffsForStation(station.getId());
         }
     }
 
