@@ -143,6 +143,7 @@ public class ObservationController {
         observationService.updateWeatherCloudObservations();
         observationService.updatePWSWeatherObservations();
         observationService.updateRP5Observations();
+        observationService.updateAesGSheetObservations();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateAesObservations")
@@ -190,6 +191,11 @@ public class ObservationController {
     @RequestMapping(method = RequestMethod.GET, value = "/updateRP5Observations")
     public void updateRP5Observations() {
         observationService.updateRP5Observations();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/updateAesGSheetObservations")
+    public void updateAesGSheetObservations() {
+        observationService.updateAesGSheetObservations();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateSNIHObservations")

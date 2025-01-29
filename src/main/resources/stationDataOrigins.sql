@@ -214,4 +214,11 @@ INSERT INTO station_data_origin
 (id,data_origin_id,dimension_id,default_unit_id,station_id,external_station_id) VALUES
 (154, 12, 3, 3, 144, 'Archivo_de_tiempo_en_Salta_(aeropuerto)');      --RP5 - Salta (aeropuerto)
 
--- last ID: 154 (RP5 - Salta (aeropuerto))
+-- data origin: AES GSheet
+INSERT INTO station_data_origin
+(id,data_origin_id,dimension_id,default_unit_id,station_id,external_station_id) VALUES
+(155, 13, 1, 2, 38, 'miraflores'), --AES GSheet - Miraflores
+(156, 13, 1, 2, 28, 'alemania'),   --AES GSheet - Alemania
+(157, 13, 1, 2, 32, 'quijano');    --AES GSheet - Campo Quijano
+
+-- last ID: 157 (AES GSheet - Campo Quijano)

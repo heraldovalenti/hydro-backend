@@ -14,7 +14,8 @@ INSERT INTO data_origin (id, description) VALUES
 (9, 'AesIbu'),
 (10, 'WeatherCloud'),
 (11, 'PWSWeather'),
-(12, 'RP5');
+(12, 'RP5'),
+(13, 'AesGSheet');
 
 INSERT INTO measurement_dimension (id, description, preferred_unit_id) VALUES
 (1, 'nivel', 2),

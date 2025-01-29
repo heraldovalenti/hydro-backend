@@ -59,6 +59,10 @@ public class DataOriginService {
         return dataOriginRepository.findById(DATA_ORIGIN_RP5).get();
     }
 
+    public DataOrigin getAesGSheetDataOrigin() {
+        return dataOriginRepository.findById(DATA_ORIGIN_AES_GSHEET).get();
+    }
+
     public boolean hasAESDataOrigin(Station station) {
         return station.getStationDataOriginList()
                 .stream().filter(sdo -> getAesDataOrigin().equals(sdo.getDataOrigin()))

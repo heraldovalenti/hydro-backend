@@ -8,6 +8,8 @@ import com.aes.dashboard.backend.service.aesGenexLinea.AesIbuDataParts;
 import com.aes.dashboard.backend.service.aesGenexLinea.AesIbuDataService;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
 import com.aes.dashboard.backend.service.aesLatestData.DataItem;
+import com.aes.dashboard.backend.service.gsheet.GSheetDataService;
+import com.aes.dashboard.backend.service.gsheet.GSheetStation;
 import com.aes.dashboard.backend.service.intaData.INTAAnteriorDataItem;
 import com.aes.dashboard.backend.service.intaData.INTAAnteriorDataService;
 import com.aes.dashboard.backend.service.intaData.INTASiga2DataItem;
@@ -95,6 +97,9 @@ public class ObservationService {
     @Autowired
     private RP5DataService rp5DataService;
 
+    @Autowired
+    private GSheetDataService aesGSheetDataService;
+
     @Transactional
     public void updateAesObservations() {
         LOGGER.info("Starting update for AES observations...");
@@ -152,6 +157,35 @@ public class ObservationService {
             updateObservationsForStationOrigin(rp5StationDataOrigin, observations, false);
         }
         LOGGER.info("Update for RP5 observations completed");
+    }
+
+    @Transactional
+    public void updateAesGSheetObservations() {
+        LOGGER.info("Starting update for AesGSheet observations...");
+        DataOrigin aesGSheetDataOrigin = dataOriginService.getAesGSheetDataOrigin();
+        List<StationDataOrigin> aesGSheetStationDataOriginList = stationDataOriginRepository.findByDataOrigin(aesGSheetDataOrigin);
+        List<GSheetStation> gSheetStations = aesGSheetDataService.getLatestData();
+        for (StationDataOrigin aesGSheetStationDataOrigin : aesGSheetStationDataOriginList) {
+            List<Observation> observations = new LinkedList<>();
+            Optional<GSheetStation> gSheetStationData = gSheetStations.stream().filter(aesGSheetStation ->
+                    aesGSheetStationDataOrigin.getExternalStationId().equals(aesGSheetStation.getId())
+            ).findFirst();
+            if (gSheetStationData.isPresent()) {
+                gSheetStationData.get().getObservations().forEach(aesGSheetObservation -> {
+                    Observation observation = new Observation();
+                    observation.setDimension(aesGSheetStationDataOrigin.getDimension());
+                    observation.setStation(aesGSheetStationDataOrigin.getStation());
+                    observation.setDataOrigin(aesGSheetDataOrigin);
+                    observation.setTime(aesGSheetObservation.getUTCDate());
+                    observation.setValue(aesGSheetObservation.getHeight());
+                    MeasurementUnit defaultUnit = aesGSheetStationDataOrigin.getDefaultUnit();
+                    observation.setUnit(defaultUnit);
+                    observations.add(observation);
+                });
+                updateObservationsForStationOrigin(aesGSheetStationDataOrigin, observations, false);
+            }
+        }
+        LOGGER.info("Update for AesGSheet observations completed");
     }
 
     @Transactional
