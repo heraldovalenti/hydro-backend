@@ -2,6 +2,7 @@ package com.aes.dashboard.backend.service.gsheet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class GSheetDataService {
 
     public GSheetDataService(
             @Value("${aes.gsheet.url}") String url,
-            RestTemplate restTemplate) {
+            @Qualifier("sslDisablingRestTemplate") RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
     }
