@@ -171,7 +171,11 @@ INSERT INTO station_data_origin
 (124, 8, 3, 4, 116, '18e5098c-8f0c-48a7-99e9-562fd205f097'), --Weatherlink - AeroSoluciones
 (125, 8, 3, 4, 117, 'fea8cc22-e36e-4e1f-996e-bae6b49a3c16'), --Weatherlink - Ema Telescopio
 (126, 8, 3, 4, 118, '9fdda27a-1101-48d0-b3fd-827d9f2cdf35'), --Weatherlink - Process Plant
-(127, 8, 3, 4, 119, 'd238511c-6c93-48fd-859a-788eaa751e42'); --Weatherlink - Well 19
+(127, 8, 3, 4, 119, 'd238511c-6c93-48fd-859a-788eaa751e42'), --Weatherlink - Well 19
+
+(158, 8, 3, 4, 145, '7ee3725b-7f71-4997-b352-dcce9d22038e'), --Weatherlink - GL 12 - Campo Azul
+(159, 8, 3, 4, 146, '5abda403-31c0-4f3a-864c-3b3d5530d095'), --Weatherlink - GL 15 - Finca Buenaventura
+(160, 8, 3, 4, 147, 'd425063e-9483-4bad-8f6f-43a4c6c6ab4f'); --Weatherlink - Weatherlink - GL 05 - Pozo de la Espuela
 
 -- data origin: AES IBU
 INSERT INTO station_data_origin
@@ -221,4 +225,4 @@ INSERT INTO station_data_origin
 (156, 13, 1, 2, 28, 'alemania'),   --AES GSheet - Alemania
 (157, 13, 1, 2, 32, 'quijano');    --AES GSheet - Campo Quijano
 
--- last ID: 157 (AES GSheet - Campo Quijano)
+-- last ID: 160 (Weatherlink - Weatherlink - GL 05 - Pozo de la Espuela)

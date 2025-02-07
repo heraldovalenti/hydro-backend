@@ -105,6 +105,10 @@ INSERT INTO station (id,longitude,latitude,description,active) VALUES
 (118, -66.85274,  -25.36368, 'Weatherlink - Process Plant'),  -- "9fdda27a-1101-48d0-b3fd-827d9f2cdf35"
 (119, -66.894,    -25.42385, 'Weatherlink - Well 19'),        -- "d238511c-6c93-48fd-859a-788eaa751e42"
 
+(145, -64.854224, -25.439354, 'Weatherlink - GL 12 - Campo Azul', true),          -- "7ee3725b-7f71-4997-b352-dcce9d22038e"
+(146, -64.373863, -24.977676, 'Weatherlink - GL 15 - Finca Buenaventura', true),  -- "5abda403-31c0-4f3a-864c-3b3d5530d095"
+(147, -63.912975, -24.653497, 'Weatherlink - GL 05 - Pozo de la Espuela', true);  -- "d425063e-9483-4bad-8f6f-43a4c6c6ab4f"
+
 (18, -64.78, -25.45, 'Weather Underground - Sala Guanaco'), --IMETND1
 (19, -65.64, -24.91, 'Weather Underground - Campo Quijano'), --IROSARIO12
 (20, -65.4,  -24.89, 'Weather Underground - La Isla'), -- ISALTACE3
@@ -166,4 +170,4 @@ INSERT INTO station (id,longitude,latitude,description,active) VALUES
 
 (144, -65.4784980, -24.8449970, 'RP5 - Salta (aeropuerto)', true), -- "Archivo_de_tiempo_en_Salta_(aeropuerto)"
 
--- last ID: 144 (RP5 - Salta (aeropuerto))
+-- last ID: 147 (Weatherlink - GL 05 - Pozo de la Espuela)
