@@ -36,6 +36,7 @@ INSERT INTO station (id,longitude,latitude,description,active) VALUES
 (39, -65.33,         -25.27,         'AES - CC' ),
 (47, -66.1589,       -25.1203,       'AES - Cachi'),
 (82, -65.47,         -25.27,         'AES - Escuela Moldes'),
+(148, -65.422,       -25.155888,     'AES - Maroma', true),
 
 (104, -65.329, -25.265, 'AES (IBU) - Cabra Corral'), -- "AES IBU CC"
 (105, -65.291, -25.297, 'AES (IBU) - PB'), -- "AES IBU PB"
@@ -170,4 +171,4 @@ INSERT INTO station (id,longitude,latitude,description,active) VALUES
 
 (144, -65.4784980, -24.8449970, 'RP5 - Salta (aeropuerto)', true), -- "Archivo_de_tiempo_en_Salta_(aeropuerto)"
 
--- last ID: 147 (Weatherlink - GL 05 - Pozo de la Espuela)
+-- last ID: 148 (AES - Maroma)

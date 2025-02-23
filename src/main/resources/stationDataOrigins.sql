@@ -221,8 +221,10 @@ INSERT INTO station_data_origin
 -- data origin: AES GSheet
 INSERT INTO station_data_origin
 (id,data_origin_id,dimension_id,default_unit_id,station_id,external_station_id) VALUES
-(155, 13, 1, 2, 38, 'miraflores'), --AES GSheet - Miraflores
-(156, 13, 1, 2, 28, 'alemania'),   --AES GSheet - Alemania
-(157, 13, 1, 2, 32, 'quijano');    --AES GSheet - Campo Quijano
+(155, 13, 1, 2, 38,  'miraflores'), --AES GSheet - Miraflores
+(156, 13, 1, 2, 28,  'alemania'),   --AES GSheet - Alemania
+(157, 13, 1, 2, 32,  'quijano'),    --AES GSheet - Campo Quijano
+(161, 13, 1, 2, 148, 'maroma'),     --AES GSheet - Maroma
+(162, 13, 1, 2, 36,  'medina');     --AES GSheet - Medina
 
--- last ID: 160 (Weatherlink - Weatherlink - GL 05 - Pozo de la Espuela)
+-- last ID: 162 (AES GSheet - Medina)
