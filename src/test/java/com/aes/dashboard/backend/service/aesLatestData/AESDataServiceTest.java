@@ -15,7 +15,7 @@ class AESDataServiceTest {
 
     @Test
     public void basicTest() {
-        List<DataItem> result = service.getLatestData(true);
+        List<DataItem> result = service.getLatestData();
         for (DataItem item : result) {
             System.out.println(item.toString());
         }

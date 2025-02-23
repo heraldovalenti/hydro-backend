@@ -32,10 +32,6 @@ public class AESDataService {
     }
 
     public List<DataItem> getLatestData() {
-        return getLatestData(false);
-    }
-
-    public List<DataItem> getLatestData(boolean healthCheck) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(this.url);
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory();
         defaultUriBuilderFactory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
