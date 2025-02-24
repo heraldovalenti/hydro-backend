@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+import static com.aes.dashboard.backend.model.date.DateConversor.toUTCLocalDateTime;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GSheetObservationTest {
@@ -19,6 +20,6 @@ class GSheetObservationTest {
         LocalDateTime threeAM = LocalDateTime.of(2025,1,1,3,0);
         GSheetObservation observation = new GSheetObservation();
         observation.setDate(midnight);
-        assertEquals(threeAM, observation.getUTCDate());
+        assertEquals(threeAM, toUTCLocalDateTime(observation.getDate()));
     }
 }

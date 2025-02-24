@@ -176,7 +176,7 @@ public class ObservationService {
                     observation.setDimension(aesGSheetStationDataOrigin.getDimension());
                     observation.setStation(aesGSheetStationDataOrigin.getStation());
                     observation.setDataOrigin(aesGSheetDataOrigin);
-                    observation.setTime(aesGSheetObservation.getUTCDate());
+                    observation.setTime(toUTCLocalDateTime(aesGSheetObservation.getDate()));
                     observation.setValue(aesGSheetObservation.getHeight());
                     MeasurementUnit defaultUnit = aesGSheetStationDataOrigin.getDefaultUnit();
                     observation.setUnit(defaultUnit);

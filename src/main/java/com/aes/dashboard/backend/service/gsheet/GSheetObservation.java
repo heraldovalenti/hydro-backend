@@ -3,8 +3,6 @@ package com.aes.dashboard.backend.service.gsheet;
 import com.aes.dashboard.backend.config.GlobalConfigs;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 public class GSheetObservation {
@@ -22,11 +20,6 @@ public class GSheetObservation {
 
     public ZonedDateTime getDate() {
         return date;
-    }
-
-    public LocalDateTime getUTCDate() {
-        ZoneId utcZone = ZoneId.of(GlobalConfigs.UTC_ZONE_ID);
-        return this.date.withZoneSameInstant(utcZone).toLocalDateTime();
     }
 
     public void setDate(ZonedDateTime date) {

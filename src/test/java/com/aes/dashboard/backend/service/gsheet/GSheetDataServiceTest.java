@@ -23,10 +23,13 @@ class GSheetDataServiceTest {
     @ParameterizedTest
     @CsvSource({"miraflores,2025-01-29 14:44:06",
             "alemania,2025-01-24 20:59:24",
-            "quijano,2025-01-03 0:01:09"})
+            "quijano,2025-01-03 0:01:09",
+            "maroma,2025-01-03 0:01:09",
+            "medina,2025-01-03 0:01:09",
+    })
     public void lastDataTest(String stationId, String dateString) {
         List<GSheetStation> result = service.getLatestData();
-        assertEquals(3, result.size());
+        assertEquals(5, result.size());
         GSheetStation station = result.stream().filter(r -> stationId.equals(r.getId())).findFirst().get();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(AES_GSHEET_DATE_TIME_FORMAT)
                 .withZone(ZoneId.of(GlobalConfigs.SALTA_ZONE_ID));
