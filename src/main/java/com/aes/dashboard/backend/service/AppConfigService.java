@@ -20,6 +20,7 @@ public class AppConfigService {
     private static final String WEATHERCLOUD_COOKIE = "WEATHERCLOUD_COOKIE";
     private static final String PWS_WEATHER_AUTH_PARAM = "PWS_WEATHER_AUTH_PARAM";
     private static final String RP5_COOKIE = "RP5_COOKIE";
+    private static final String AES_GSHEET_AUTH_TOKEN = "AES_GSHEET_AUTH_TOKEN";
     private static final Logger LOGGER = LoggerFactory.getLogger(AppConfigService.class);
 
     @Autowired
@@ -52,6 +53,10 @@ public class AppConfigService {
 
     public String getUserAgentHeader() {
         return getConfig(USER_AGENT_HEADER).getValue();
+    }
+
+    public String getAesGsheetAuthParam() {
+        return getConfig(AES_GSHEET_AUTH_TOKEN).getValue();
     }
 
     @Transactional
