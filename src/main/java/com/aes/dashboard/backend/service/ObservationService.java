@@ -167,6 +167,9 @@ public class ObservationService {
     @Transactional
     public void updateAesGSheetObservations(Optional<RequestTimePeriod> period) {
         LOGGER.info("Starting update for AesGSheet observations...");
+        if (period.isPresent()) {
+            LOGGER.info("from={} to={}", period.get().getFrom(), period.get().getTo());
+        }
         DataOrigin aesGSheetDataOrigin = dataOriginService.getAesGSheetDataOrigin();
         List<StationDataOrigin> aesGSheetStationDataOriginList = stationDataOriginRepository.findByDataOrigin(aesGSheetDataOrigin);
         List<GSheetStation> gSheetStations = aesGSheetDataService.getLatestData(period);
