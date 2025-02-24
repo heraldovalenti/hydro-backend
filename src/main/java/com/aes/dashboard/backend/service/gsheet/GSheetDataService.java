@@ -1,5 +1,6 @@
 package com.aes.dashboard.backend.service.gsheet;
 
+import com.aes.dashboard.backend.dto.RequestTimePeriod;
 import com.aes.dashboard.backend.service.AppConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,13 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+
+import static com.aes.dashboard.backend.config.GlobalConfigs.REQUEST_PARAM_DATE_INPUT_FORMAT;
 
 @Service
 public class GSheetDataService {
@@ -37,10 +42,21 @@ public class GSheetDataService {
     }
 
     public List<GSheetStation> getLatestData() {
+        return getLatestData(Optional.empty());
+    }
+
+    public List<GSheetStation> getLatestData(Optional<RequestTimePeriod> period) {
         List<GSheetStation> result = new LinkedList<>();
         String authToken = appConfigService.getAesGsheetAuthParam();
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromHttpUrl(this.url);
+        if (period.isPresent()) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(REQUEST_PARAM_DATE_INPUT_FORMAT);
+            builder = builder
+                    .queryParam("from", period.get().getFrom().format(dtf))
+                    .queryParam("to", period.get().getTo().format(dtf));
+        }
+
         DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory();
         defaultUriBuilderFactory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
         this.restTemplate.setUriTemplateHandler(defaultUriBuilderFactory);

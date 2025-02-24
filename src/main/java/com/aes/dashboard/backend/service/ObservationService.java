@@ -15,6 +15,7 @@ import com.aes.dashboard.backend.service.intaData.INTAAnteriorDataService;
 import com.aes.dashboard.backend.service.intaData.INTASiga2DataItem;
 import com.aes.dashboard.backend.service.intaData.INTASiga2DataService;
 import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherDataService;
+import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherPeriodItem;
 import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherResult;
 import com.aes.dashboard.backend.service.rp5.RP5DataService;
 import com.aes.dashboard.backend.service.rp5.RP5Row;
@@ -159,12 +160,16 @@ public class ObservationService {
         LOGGER.info("Update for RP5 observations completed");
     }
 
-    @Transactional
     public void updateAesGSheetObservations() {
+        updateAesGSheetObservations(Optional.empty());
+    }
+
+    @Transactional
+    public void updateAesGSheetObservations(Optional<RequestTimePeriod> period) {
         LOGGER.info("Starting update for AesGSheet observations...");
         DataOrigin aesGSheetDataOrigin = dataOriginService.getAesGSheetDataOrigin();
         List<StationDataOrigin> aesGSheetStationDataOriginList = stationDataOriginRepository.findByDataOrigin(aesGSheetDataOrigin);
-        List<GSheetStation> gSheetStations = aesGSheetDataService.getLatestData();
+        List<GSheetStation> gSheetStations = aesGSheetDataService.getLatestData(period);
         for (StationDataOrigin aesGSheetStationDataOrigin : aesGSheetStationDataOriginList) {
             List<Observation> observations = new LinkedList<>();
             Optional<GSheetStation> gSheetStationData = gSheetStations.stream().filter(aesGSheetStation ->
@@ -402,7 +407,7 @@ public class ObservationService {
                     stationDataOrigin.getExternalStationId(), date);
             if (pwsWeatherResult.isEmpty()) continue;
             List<Observation> observations = new LinkedList<>();
-            for (var item : pwsWeatherResult.get().getResponse().getPeriods()) {
+            for (PWSWeatherPeriodItem item : pwsWeatherResult.get().getResponse().getPeriods()) {
                 Observation observation = new Observation();
                 observation.setDimension(stationDataOrigin.getDimension());
                 observation.setStation(stationDataOrigin.getStation());

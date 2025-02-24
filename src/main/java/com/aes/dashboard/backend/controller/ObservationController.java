@@ -194,8 +194,14 @@ public class ObservationController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateAesGSheetObservations")
-    public void updateAesGSheetObservations() {
-        observationService.updateAesGSheetObservations();
+    public void updateAesGSheetObservations(
+            @RequestParam(defaultValue = "") String from,
+            @RequestParam(defaultValue = "") String to) {
+        Optional<RequestTimePeriod> period = Optional.empty();
+        if (!from.isEmpty() && !to.isEmpty()) {
+            period = Optional.of(RequestTimePeriod.of(from, to));
+        }
+        observationService.updateAesGSheetObservations(period);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateSNIHObservations")
