@@ -3,6 +3,8 @@ package com.aes.dashboard.backend.controller;
 import com.aes.dashboard.backend.dto.HealthCheckResult;
 import com.aes.dashboard.backend.dto.WeatherLinkHealthCheckResult;
 import com.aes.dashboard.backend.service.aesLatestData.AESDataService;
+import com.aes.dashboard.backend.service.gsheet.GSheetDataService;
+import com.aes.dashboard.backend.service.gsheet.GSheetStation;
 import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherDataService;
 import com.aes.dashboard.backend.service.pwsWeatherData.PWSWeatherResult;
 import com.aes.dashboard.backend.service.rp5.RP5DataService;
@@ -52,6 +54,9 @@ public class HealthCheckController {
 
     @Autowired
     private RP5DataService rp5DataService;
+
+    @Autowired
+    private GSheetDataService aesGsheetDataService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<HealthCheckResult> generalHealthCheck() {
@@ -195,6 +200,28 @@ public class HealthCheckController {
             return ResponseEntity.ok().body(result);
         } catch (RestClientException e) {
             LOGGER.warn("Exception during health check for /rp5", e);
+            result.setInfo(Map.of(
+                    "errorMessage", e.getMessage()
+            ));
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(result);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/aesGsheet")
+    public ResponseEntity<HealthCheckResult> aesGsheet() {
+        LOGGER.info("health check for AES GSheet");
+        HealthCheckResult result = new HealthCheckResult("AES Gsheet");
+        try {
+            List<GSheetStation> latestData = aesGsheetDataService.getLatestData();
+            if (latestData.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(result);
+            }
+            result.setInfo(Map.of(
+                    "checkResult", latestData
+            ));
+            return ResponseEntity.ok().body(result);
+        } catch (RestClientException e) {
+            LOGGER.warn("Exception during health check for /aesGsheet", e);
             result.setInfo(Map.of(
                     "errorMessage", e.getMessage()
             ));
