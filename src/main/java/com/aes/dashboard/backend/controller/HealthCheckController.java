@@ -70,7 +70,7 @@ public class HealthCheckController {
         LOGGER.info("health check for latestData");
         HealthCheckResult result = new HealthCheckResult("latestData");
         try {
-            int latestDataSize = aesDataService.getLatestData().size();
+            int latestDataSize = aesDataService.getLatestData(true).size();
             result.setInfo(
                     Map.of(
                             "latestDataCheck", "ok",
