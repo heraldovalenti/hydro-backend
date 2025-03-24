@@ -40,6 +40,7 @@ public class StreamLevelService {
         List<StreamLevel> streamLevels = observations.stream()
             .filter(o -> o.getStation().getHqModel() != null)
             .map(o -> new StreamLevel(o))
+            .filter(sl -> sl.isValid())
             .collect(Collectors.toList());
         return streamLevels;
     }

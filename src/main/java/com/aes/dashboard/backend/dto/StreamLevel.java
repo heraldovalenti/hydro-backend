@@ -1,6 +1,7 @@
 package com.aes.dashboard.backend.dto;
 
 import com.aes.dashboard.backend.model.Observation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class StreamLevel {
 
@@ -28,5 +29,10 @@ public class StreamLevel {
 
     public String getStreamName() {
         return streamName;
+    }
+
+    @JsonIgnore
+    public boolean isValid() {
+        return this.getStreamName() != null;
     }
 }
