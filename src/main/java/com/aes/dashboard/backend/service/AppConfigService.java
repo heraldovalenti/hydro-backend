@@ -60,17 +60,17 @@ public class AppConfigService {
     }
 
     @Transactional
-    private void updateAuthToken(String authTokenName, String authTokenValue) {
-        AppConfig authTokenConfig = getConfig(authTokenName);
-        if (authTokenConfig.getValue().equals(authTokenValue)) {
+    public void updateConfig(String configName, String configValue) {
+        AppConfig appConfig = getConfig(configName);
+        if (appConfig.getValue().equals(configValue)) {
             LOGGER.info("Skipping {} update as it is still the same token value ({})",
-                    authTokenName, authTokenValue);
+                    configName, configValue);
         } else {
-            String oldValue = authTokenConfig.getValue();
-            authTokenConfig.setValue(authTokenValue);
-            appConfigRepository.save(authTokenConfig);
+            String oldValue = appConfig.getValue();
+            appConfig.setValue(configValue);
+            appConfigRepository.save(appConfig);
             LOGGER.info("{} was updated: was {} and now is {}",
-                    authTokenName, oldValue, authTokenValue);
+                    configName, oldValue, configValue);
         }
     }
 
