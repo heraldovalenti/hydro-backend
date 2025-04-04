@@ -1,14 +1,13 @@
 package com.aes.dashboard.backend.service.pwsWeatherData;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
-import static com.aes.dashboard.backend.config.GlobalConfigs.UTC_ZONE_ID;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class PWSWeatherResult {
 
     private Boolean success;
+    @JsonDeserialize(using = PWSWeatherResponseDeserializer.class)
     private PWSWeatherResponse response;
+    private PWSWeatherError error;
 
     public PWSWeatherResult() {
     }
@@ -27,5 +26,13 @@ public class PWSWeatherResult {
 
     public void setResponse(PWSWeatherResponse response) {
         this.response = response;
+    }
+
+    public PWSWeatherError getError() {
+        return error;
+    }
+
+    public void setError(PWSWeatherError error) {
+        this.error = error;
     }
 }

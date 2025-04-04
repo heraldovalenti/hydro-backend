@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -72,7 +71,7 @@ public class PWSWeatherDataService {
                     entity,
                     PWSWeatherResult.class);
             PWSWeatherResult result = response.getBody();
-            if (!response.hasBody() || result == null) {
+            if (!response.hasBody() || result == null || result.getResponse() == null) {
                 return Optional.empty();
             }
             return Optional.of(result);
